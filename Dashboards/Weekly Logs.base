@@ -1,0 +1,18 @@
+filters:
+  and:
+    - type == "weekly-log"
+views:
+  - type: table
+    name: Weekly Logs
+    order:
+      - file.name
+      - date
+      - year
+      - quarter
+      - organization
+      - status
+      - related
+      - file.folder
+    sort:
+      - property: date
+        direction: DESC

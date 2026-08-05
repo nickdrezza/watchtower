@@ -1,0 +1,12 @@
+filters:
+  and:
+    - type == "interview"
+views:
+  - type: table
+    name: Interviews
+    order:
+      - file.name
+      - status
+      - area
+      - related
+      - file.folder
