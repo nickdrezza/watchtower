@@ -127,10 +127,14 @@ back. The rule is deliberately bounded so it's cheap to follow:
 
 ## Team knowledge
 
-A personal vault is not a team wiki. This template pairs with a companion for the shared half —
-strict, documentation-heavy, filed by document type, no PII — and three skills manage the boundary:
-`knowledge-router` decides which one owns a topic, and `shared-vault-promote` / `-ingest` carry material
-across as a rewrite, never a paste.
+A personal vault is not a team wiki. The companion template for the shared half is
+**[`nickdrezza/dev-wiki`](https://github.com/nickdrezza/dev-wiki)** — strict, documentation-heavy, filed
+by document type, no PII. Run both and you have a complete personal + team knowledge system.
+
+Three skills manage the boundary: `knowledge-router` decides which base owns a topic, and
+`shared-vault-promote` / `shared-vault-ingest` carry material across **as a rewrite, never a paste** —
+the team vault stays the source of truth for team facts, and your vault holds the constraint plus a
+pointer.
 
 ## License
 
