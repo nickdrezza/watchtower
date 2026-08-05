@@ -1,0 +1,44 @@
+# Local Obsidian state
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/cache/
+.obsidian/graph.json
+_Vault Maintenance/Nested Obsidian Config Snapshot/
+
+# Community plugin bundles are reinstallable and noisy in git.
+.obsidian/plugins/
+.obsidian/snippets/
+
+# Code/styling don't belong in a text-first notes repo.
+# (.agents/ is exempt: skills may ship small runnable helpers under .agents/skills/*/scripts/.)
+*.js
+*.css
+!.agents/**/*.js
+
+# Generated mirror of .agents/skills for Claude Code (built by .agents/scripts/install-skills.sh).
+# The canonical skills live in .agents/skills/ — edit those, never this copy.
+.claude/skills/
+
+# Keep this repo text-first.
+Images/
+Attachments/
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.webp
+*.svg
+*.pdf
+
+# Secrets and local environment files
+*.pem
+*.key
+*.p8
+*.p12
+*.env
+.env*
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+desktop.ini

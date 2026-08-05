@@ -1,0 +1,20 @@
+filters:
+  and:
+    - type == "project"
+views:
+  - type: table
+    name: Active Projects
+    filters:
+      and:
+        - status != "done"
+    order:
+      - file.name
+      - status
+      - domain
+      - workspace
+      - organization
+      - area
+      - quarter
+      - jira
+      - related
+      - file.folder

@@ -1,0 +1,12 @@
+filters:
+  and:
+    - type == "training"
+views:
+  - type: table
+    name: Training
+    order:
+      - file.name
+      - area
+      - status
+      - related
+      - file.folder

@@ -1,0 +1,11 @@
+filters:
+  and:
+    - type == "reference"
+views:
+  - type: table
+    name: Reference Notes
+    order:
+      - file.name
+      - status
+      - related
+      - file.folder

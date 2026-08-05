@@ -1,0 +1,60 @@
+# Verification
+
+How an agent knows it's done. Companion to [`operating-model.md`](operating-model.md): that file says
+how to gather context, this one says how to earn a claim.
+
+**"It should work" is not a result.** Neither is "the code looks correct."
+
+## The rule
+
+Every claim in a deliverable traces to something checkable — a command's output, a merged PR, a
+ticket, a query result, an email, or his own words. This is the standing instruction in
+[`../memory/working-preferences.md`](../memory/working-preferences.md) → *Verify; never fabricate*;
+it has gotten work rejected before.
+
+## What counts as evidence
+
+| Strong | Weak | Not evidence |
+|---|---|---|
+| Command output you ran and read | "The tests exist" | "This should pass" |
+| A row count from the actual query | A count from a similar query | An estimated count |
+| A merged PR / a ticket transition | An open PR | An intention to open one |
+| A screenshot or DOM read of the real page | The component's source | The component's props |
+
+**Numbers earn trust.** "397 of 404 rows" convinces in one line where prose takes five — see
+`working-preferences.md` → *Writing about code*.
+
+## Test the thing, not a model of the thing
+
+- **Prefer the real system over a mock.** A mock proves your mock works.
+- **Prefer the real data shape.** Empty and single-row cases pass almost anything.
+- **Scale-only bugs slip past small supervised tests.** This is a lesson already paid for — the
+  the enrichment vendor `personIds` cap only showed up above the tested batch size
+  ([`../memory/warehouse.md`](../memory/warehouse.md)). If behavior can change with volume,
+  concurrency, or time, say so explicitly rather than implying the small run generalizes.
+- **Run it twice** when a script is meant to be idempotent or scheduled. Most re-run bugs are invisible
+  on the first pass.
+
+## Browser testing
+
+Warranted when the thing being changed is user-visible behavior — uploads, downloads, forms,
+navigation, responsive layout, or a multi-step flow. Reading the source is not a substitute for
+loading the page.
+
+The executable arm is the **`playwright-testing`** skill: reusable tests that live in the repo, not
+one-off manual clicks. Platform-specific auth and iframe constraints are in
+[`../memory/connectors.md`](../memory/connectors.md) — check it before concluding an app can't be tested.
+
+## Before saying it's done
+
+- [ ] The thing was actually run, not just written.
+- [ ] The failure case was tried, not only the happy path.
+- [ ] Anything that could differ at scale, on a re-run, or on another machine is named.
+- [ ] Numbers in the report came from output you read, not from inference.
+- [ ] Steps you skipped are stated as skipped.
+
+## Reporting
+
+State what happened. If tests failed, show the output. If a step was skipped, say which. **Don't take
+a subagent's or a tool's summary at face value** — the "0 bugs, all clean" report has been wrong
+before. Full rule: `working-preferences.md` → *Reporting*.
