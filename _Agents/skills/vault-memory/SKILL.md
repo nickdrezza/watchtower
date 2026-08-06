@@ -46,7 +46,9 @@ git log -1 --format=%cI -- _Agents/memory/
 Use that, or the user's stated window. If nothing has ever been committed, ask how far back to go
 rather than scanning everything. State the window you're using before you scan.
 
-## 2. Gather**. Sources, in
+## 2. Gather
+
+Per-source queries, tool bindings, and fallbacks: **[`reference.md`](reference.md)**. Sources, in
 descending value:
 
 | Source | Where | Yields |
@@ -59,12 +61,12 @@ descending value:
 | **GitHub** | `gh` — merged + open PRs (on Windows, from WSL) | What actually shipped |
 | **Drive** | Drive MCP — Gemini meeting notes | Decisions and follow-ups |
 
-**Both laptops are live** — the Mac and the Windows box each hold their own Claude and Codex history, and
-you can only see the one you're running on. Scan it, then **say in the report which machine you covered**;
-the other one's sessions are a known blind spot, not an empty set. Paths per target are in
-`reference.md`; WSL `~/.claude` and `~/.codex` are the one stale pair — skip them. Continue, Copilot,
-Antigravity, and Zed stores are deliberately **not** scanned
-(VS Code-style sqlite, undocumented schemas, brittle); if the user wants them, treat it as new work.
+**Every machine is live** — each one holds its own Claude and Codex history, and you can only see the
+one you're running on. Scan it, then **say in the report which machine you covered**; the others are a
+known blind spot, not an empty set. Paths per target come from the `machines/` profile, never from
+memory of another machine. Continue, Copilot, Antigravity, and Zed stores are deliberately **not**
+scanned (VS Code-style sqlite, undocumented schemas, brittle); if the user wants them, treat it as new
+work.
 
 Titles and metadata first. Only pull full transcripts for sessions that look like they carry a durable
 fact — transcript reads are expensive and most sessions carry nothing.
