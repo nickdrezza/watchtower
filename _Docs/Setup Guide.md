@@ -18,7 +18,7 @@ related:
 Standing this up on a new machine, or for the first time. Day-to-day work is [[Usage Guide]]; the
 model behind it is [[AI Agents]].
 
-Budget 15 minutes. Steps 1–4 are the whole thing; 5–7 are what make it *yours*.
+Budget 15 minutes. Steps 1–4 are the whole thing; 5–8 are what make it *yours*.
 
 ## 1. Clone it
 
@@ -86,7 +86,20 @@ Add MCP connectors for the systems you actually work in, then record what each o
 for — and where it lies — in `_Agents/memory/connectors.md`. That file is what stops an agent trusting
 a stale number instead of querying the source.
 
-## 8. Optional — Obsidian
+## 8. Know the pre-push check
+
+This vault is meant to be one **private** repo. Before pushing, confirm no binary or key slipped in —
+both of these should print nothing:
+
+```bash
+git ls-files | grep -Ei '\.(png|jpe?g|gif|webp|svg|pdf|pem|key|p8|p12|env|js|css)$'
+find . -path ./.git -prune -o -type f \( -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.webp' -o -iname '*.gif' -o -iname '*.svg' -o -iname '*.pdf' -o -iname '*.pem' -o -iname '*.key' -o -iname '*.p8' -o -iname '*.env' -o -iname '*.js' -o -iname '*.css' \) -print
+```
+
+**This is extension-matching only — it cannot see a secret pasted into a note.** That's on you, and
+it's the repo's first hard rule. `vault-sync` runs the value-level scan; see `AGENTS.md`.
+
+## 9. Optional — Obsidian
 
 Open the repo as a vault. `_Agents/` sits alongside `_Docs/` and `_Templates/`, and you also see
 only your notes. Dashboards are `.base` files and filter on `type ==`, so keep frontmatter honest.
