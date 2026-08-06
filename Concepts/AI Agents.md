@@ -16,7 +16,7 @@ related:
 # AI Agents
 
 How I actually use AI agents day to day. The rules agents *follow* are in [`AGENTS.md`](../AGENTS.md)
-and `.agents/docs/operating-model.md`; this note is the human version — what the model is and why it
+and `_Agents/docs/operating-model.md`; this note is the human version — what the model is and why it
 beats the alternative.
 
 ## The model: one brain, many disposable agents
@@ -40,13 +40,13 @@ Subagents still earn their place on large work — roughly one per feature or co
 
 ## What makes it work
 
-**Memory that gets written.** `.agents/memory/` is the sub-vault agents dump durable facts into — how
+**Memory that gets written.** `_Agents/memory/` is the sub-vault agents dump durable facts into — how
 a platform connects, where a credential lives, the gotcha that cost hours. Without it every chat
 re-derives the same things. The rule for *when* it gets written is in that folder's `README.md`; the
 short version is that a single durable fact goes in the moment it's learned, and everything larger
 waits for a reviewed pass. See [[Agent Memory]].
 
-**Skills that live here, not in a tool.** `.agents/skills/` is shared by every platform, so a
+**Skills that live here, not in a tool.** `_Agents/skills/` is shared by every platform, so a
 capability written once works everywhere — no per-tool copies to drift apart. See [[Skills Repo]].
 
 **Connectors for anything live.** The vault holds durable facts; the tracker, the warehouse, Gmail, Drive, and

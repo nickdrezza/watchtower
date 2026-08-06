@@ -5,7 +5,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Docs: Markdown](https://img.shields.io/badge/docs-Markdown-blue.svg)](#whats-in-here)
-[![Works with](https://img.shields.io/badge/works%20with-Claude%20Code%20·%20Codex%20·%20Cursor%20·%20Gemini%20·%20Copilot-8A2BE2.svg)](.agents/docs/platforms.md)
+[![Works with](https://img.shields.io/badge/works%20with-Claude%20Code%20·%20Codex%20·%20Cursor%20·%20Gemini%20·%20Copilot-8A2BE2.svg)](_Agents/docs/platforms.md)
 
 This is a **template**. Generate your own repo from it, run one skill, and start working.
 
@@ -39,7 +39,7 @@ gh repo create my-vault --template <you>/watchtower --private
 cd my-vault
 ```
 
-Then open it in any agent and say **"set me up"** — the [`bootstrap`](.agents/skills/bootstrap/) skill
+Then open it in any agent and say **"set me up"** — the [`bootstrap`](_Agents/skills/bootstrap/) skill
 installs the skills, wires the global instruction bridge, writes your machine profile, seeds the
 credential and connector maps, and deletes the example content.
 
@@ -56,7 +56,7 @@ AGENTS.md                authoritative rules for every agent  ← the entrance
 CLAUDE.md, GEMINI.md,    stubs -> AGENTS.md, so no harness gets different rules
   .github/copilot-instructions.md
 
-.agents/                 the agent layer (a dot-dir, so Obsidian ignores it)
+_Agents/                 the agent layer (also .agents/, a symlink for tool auto-discovery)
   docs/
     operating-model.md   HOW TO BEHAVE — the model above, as instructions
     verification.md      how to know you're done; what counts as evidence
@@ -86,19 +86,19 @@ doing memory's job.
 
 | Skill | What it does |
 |---|---|
-| [`watchtower`](.agents/skills/watchtower/) | **The primary context. Loaded first, every session.** |
-| [`bootstrap`](.agents/skills/bootstrap/) | Sets up a new user or machine, and teaches the model |
-| [`vault-memory`](.agents/skills/vault-memory/) | Refreshes memory from prior sessions and your connectors |
-| [`vault-sync`](.agents/skills/vault-sync/) | Pull → refresh → commit → PR → merge → summary |
-| [`vault-doctor`](.agents/skills/vault-doctor/) | Mechanical integrity checks. Read-only, script-backed |
-| [`vault-prune`](.agents/skills/vault-prune/) | Finds slop, duplicates, bloat, stale claims, gaps |
-| [`vault-edit`](.agents/skills/vault-edit/) | Safe CRUD — and what must move with the file |
-| [`knowledge-router`](.agents/skills/knowledge-router/) | Personal vault vs shared team vault |
-| [`shared-vault-sync`](.agents/skills/shared-vault-sync/) | Both directions with a team wiki, drift check first |
-| [`shared-vault-promote`](.agents/skills/shared-vault-promote/) · [`-ingest`](.agents/skills/shared-vault-ingest/) | The two one-way halves |
-| [`secrets`](.agents/skills/secrets/) | Get, store, rotate, inject — never surfacing a value |
-| [`playwright-testing`](.agents/skills/playwright-testing/) | Real-browser tests for user-visible behavior |
-| [`personal-vault`](.agents/skills/personal-vault/) + 5 siblings | Routes personal material and preserves your voice |
+| [`watchtower`](_Agents/skills/watchtower/) | **The primary context. Loaded first, every session.** |
+| [`bootstrap`](_Agents/skills/bootstrap/) | Sets up a new user or machine, and teaches the model |
+| [`vault-memory`](_Agents/skills/vault-memory/) | Refreshes memory from prior sessions and your connectors |
+| [`vault-sync`](_Agents/skills/vault-sync/) | Pull → refresh → commit → PR → merge → summary |
+| [`vault-doctor`](_Agents/skills/vault-doctor/) | Mechanical integrity checks. Read-only, script-backed |
+| [`vault-prune`](_Agents/skills/vault-prune/) | Finds slop, duplicates, bloat, stale claims, gaps |
+| [`vault-edit`](_Agents/skills/vault-edit/) | Safe CRUD — and what must move with the file |
+| [`knowledge-router`](_Agents/skills/knowledge-router/) | Personal vault vs shared team vault |
+| [`shared-vault-sync`](_Agents/skills/shared-vault-sync/) | Both directions with a team wiki, drift check first |
+| [`shared-vault-promote`](_Agents/skills/shared-vault-promote/) · [`-ingest`](_Agents/skills/shared-vault-ingest/) | The two one-way halves |
+| [`secrets`](_Agents/skills/secrets/) | Get, store, rotate, inject — never surfacing a value |
+| [`playwright-testing`](_Agents/skills/playwright-testing/) | Real-browser tests for user-visible behavior |
+| [`personal-vault`](_Agents/skills/personal-vault/) + 5 siblings | Routes personal material and preserves your voice |
 
 ## The rules that make it work
 
@@ -123,7 +123,7 @@ see these rules when opened *on* this repo — which is not where you work most 
 
 **Never building the memory habit.** The vault only makes chats disposable if facts actually get written
 back. The rule is deliberately bounded so it's cheap to follow:
-[`.agents/memory/README.md`](.agents/memory/README.md) → *When to write memory*.
+[`_Agents/memory/README.md`](_Agents/memory/README.md) → *When to write memory*.
 
 ## Team knowledge
 

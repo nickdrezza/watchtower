@@ -20,8 +20,8 @@ related:
 In July 2026 that repo was merged into the vault so one repo carries both the knowledge and the
 skills that operate on it. Treat the old repo as archived.
 
-Canonical location: **`.agents/`** — a dot-directory, so Obsidian ignores it completely while every
-coding agent can read it. Its own map is `.agents/README.md`.
+Canonical location: **`_Agents/`**, with a `.agents` symlink beside it so every coding agent finds
+the universal path. Its own map is `_Agents/README.md`.
 
 ## Why merge them
 
@@ -32,9 +32,9 @@ repo, one `AGENTS.md`, one skills path.
 
 ## The division of labor
 
-- **Skill *behavior* lives in `.agents/skills/`.** How an AI should read/write the vault, route a
+- **Skill *behavior* lives in `_Agents/skills/`.** How an AI should read/write the vault, route a
   question, run a catch-up, write the weekly log, SSH the EC2 box — that's a skill.
-- **Environment *facts* live in `.agents/memory/`.** Which shell has the SSH key, where a credential
+- **Environment *facts* live in `_Agents/memory/`.** Which shell has the SSH key, where a credential
   lives, which the warehouse role to use, what a table's grain is. A skill that hard-codes an account id or
   a path is doing memory's job. See [[Agent Memory]].
 - **Vault *content and governance* live in the vault half.** The notes themselves, plus the
@@ -44,7 +44,7 @@ repo, one `AGENTS.md`, one skills path.
 ## Layout
 
 ```text
-.agents/
+_Agents/
   README.md                 map of the agent layer
   CONVENTIONS.md            the SKILL.md authoring spec + pre-commit checklist
   memory/                   operational memory — see [[Agent Memory]]
@@ -61,17 +61,17 @@ Repo root: `AGENTS.md` is authoritative for all agents; `CLAUDE.md`, `GEMINI.md`
 
 ## How it ships
 
-`.agents/skills/` **is** the universal project-level location — Codex, Cursor, Gemini CLI, Copilot,
+`_Agents/skills/` **is** the universal project-level location — Codex, Cursor, Gemini CLI, Copilot,
 and Antigravity read it natively with no setup when opened on this repo. Claude Code reads
 `.claude/skills/`, so mirror once:
 
 ```bash
-.agents/scripts/install-skills.sh --here      # -> ./.claude/skills (gitignored copy)
-.agents/scripts/install-skills.sh             # or global: ~/.agents/skills + ~/.claude/skills
+_Agents/scripts/install-skills.sh --here      # -> ./.claude/skills (gitignored copy)
+_Agents/scripts/install-skills.sh             # or global: ~/.agents/skills + ~/.claude/skills
 ```
 
 Same `SKILL.md` read byte-for-byte by every tool — no per-tool conversion. And if a harness discovers
-nothing, an agent can simply read `.agents/skills/<name>/SKILL.md`; `AGENTS.md` says so explicitly.
+nothing, an agent can simply read `_Agents/skills/<name>/SKILL.md`; `AGENTS.md` says so explicitly.
 
 ## The skills
 
@@ -80,7 +80,7 @@ nothing, an agent can simply read `.agents/skills/<name>/SKILL.md`; `AGENTS.md` 
 | `watchtower` | **The primary context. Load it first, every session.** Layout, hard rules, how to write here, the employer-scope tag, the memory index. |
 | `bootstrap` | Sets up a new user or machine, seeds the memory maps, and teaches the operating model. |
 | `weekly-work-log` | Writes or updates the weekly manager-facing work log, from evidence only, in the house format. |
-| `vault-memory` | Refreshes `.agents/memory/` from prior sessions and your connectors. |
+| `vault-memory` | Refreshes `_Agents/memory/` from prior sessions and your connectors. |
 | `vault-sync` | Pull → refresh → commit → PR → merge → concise summary. The single entry point for "sync my vault". |
 | `vault-doctor` | Mechanical integrity checks — links, tags, frontmatter, skill-index drift, stale mirror. Read-only, script-backed. |
 | `vault-prune` | Quality pass — slop, near-duplicates, bloat, stale claims, orphans, gaps. Per-item approval; never deletes unasked. |
@@ -110,7 +110,7 @@ a file.
 ## Related knowledge bases
 
 - **shared-vault** (team repo `Acme-Healthcare/shared-vault`; clone path per machine in
-  `.agents/memory/git-and-tickets.md`) — the Acme team "how it works" wiki. Kept fully separate.
+  `_Agents/memory/git-and-tickets.md`) — the Acme team "how it works" wiki. Kept fully separate.
   `knowledge-router` decides which repo a task belongs to; `shared-vault-promote` carries material
   across when it should travel. Team-relevant, non-personal material goes there (or its
   `notebooks/<you>/` scratch), never private vault content from here — and never as a paste.

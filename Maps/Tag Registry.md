@@ -28,7 +28,7 @@ worse to work in, because every fetch drags unrelated material along with it.
 
 So the discipline is the point, not the bureaucracy: one tag per concept, a concept note behind every
 `topic/*`, and no tag that merely restates a property. See
-[`.agents/docs/operating-model.md`](../.agents/docs/operating-model.md) → *Structure exists to make
+[`_Agents/docs/operating-model.md`](../_Agents/docs/operating-model.md) → *Structure exists to make
 retrieval cheap*.
 
 Live counts are in Obsidian's **Tags** pane; they're deliberately not duplicated here, so this page
@@ -79,7 +79,7 @@ alone; don't add new ones without a reason this concrete.
 | Tag | Meaning |
 |---|---|
 | `excalidraw` | **Required by the Excalidraw plugin to render the file — never strip it.** Not a vault convention and not subject to this policy. |
-| `repo/docs` | Agent-layer only (`.agents/README.md`). The agent layer is a dot-dir Obsidian never indexes, so it sits outside the vault's tag policy. |
+| `repo/docs` | Agent-layer only (`_Agents/README.md`). The agent layer is written for agents, not for the graph, so it sits outside the vault's tag and frontmatter policy even though Obsidian indexes it. |
 
 ## People are notes, not tags
 
