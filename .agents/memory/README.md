@@ -76,4 +76,6 @@ non-reusable material if you change jobs, and the rest of the vault survives.
    the key material.
 2. **Point-in-time.** Environment facts are stable; code and data facts drift — verify before
    asserting, and date anything that will age.
-3. **Machine-specific facts go in a `machines/` profile**, never in a topic file or a skill.
+3. **If a skill and a memory file disagree about a *system*, verify.** If they disagree about *this
+   machine*, memory wins — it's the more specific claim.
+4. **Machine-specific facts go in a `machines/` profile**, never in a topic file or a skill.

@@ -150,11 +150,29 @@ The vault's value is being scannable in two years. Verbosity is the failure mode
 - **Say it once, plainly.** No preamble, no restating the question, no summarizing what you just wrote.
 - **Nothing adjacent.** No recommendations or "you might also consider" unless the note's subject *is*
   that decision. Off-topic suggestions are the main source of clutter.
-- **Don't overexplain.** Assume a competent reader. One line beats a paragraph.
+- **Don't overexplain — but don't presume.** One line still beats a paragraph. "Competent reader"
+  means someone fluent in the craft who has *never seen this code*: they know what a lint rule or a
+  migration is; they do not know what your `roster-base.ts` or your "persona bucket" is. Cut words,
+  never the reader's footing.
 - **Keep every nuance that changes an outcome** — the gotcha, the exact id, why a decision went that
   way, the thing that cost hours. Cut words, never facts.
 - **Prefer structure to prose.** A table or labelled list carries more per line and ages better.
 - Aim for elegance: the shortest form a future agent can act on with no follow-up questions.
+
+### Plain first, then the names
+
+Compression into jargon reads as expertise and lands as noise. A reader who can't tell what broke
+can't check whether you fixed it.
+
+- **Say what the thing is and what goes wrong in ordinary words, before naming a file, symbol, or
+  ticket.** "The score that ranks who to invite was defined in three separate files, so retuning it
+  made two screens disagree about the same person" — *then* name the constant.
+- **Spell out an acronym or internal term the first time it appears.** One clause is enough.
+- **Lead each item with the consequence; the mechanism is the second sentence.**
+- **Never let a file path or a symbol name do the explaining.** It identifies. It does not inform.
+
+This is not licence to pad (hard rule 7). Orientation is the fact the reader needs *most*; filler is
+the sentence carrying none. Same word budget, spent on meaning rather than shorthand.
 
 ### Objectivity
 
@@ -182,13 +200,16 @@ Applies to notes, memory files, PR bodies, commit messages, and task reports in 
 | Three bullets stating obvious things | One line, or nothing |
 | A section header over one sentence | Merge it upward |
 | "This is a critical/key/essential part of…" | Say why it matters, once, concretely |
-| Explaining what a well-named thing does | Nothing |
+| Glossing what a well-named function obviously does | Nothing — but do say what an unfamiliar *concept* is (see **Plain first, then the names**) |
 | Praising the user's idea before doing it | Do it |
 
 ### The test, before you save or send
 
 For each paragraph: **would a competent reader six weeks from now be worse off without this?** If no,
 delete it.
+
+Then once over the whole thing: **could a teammate who has never opened this code say what broke and
+why it matters?** If not, you compressed into jargon — fix that before trimming another word.
 
 Apply it to the task report in chat too. **A wall of text after a small change is the most common form
 of this failure** — it trains him to stop reading, which costs more than the words did. Report what
@@ -345,6 +366,7 @@ didn't auto-load it.
 |---|---|
 | `watchtower` | **The primary context. Load it first, every session.** Layout, hard rules, how to write here, the employer-scope tag, the memory index. |
 | `bootstrap` | Sets up a new user or machine, seeds the memory maps, and teaches the operating model. |
+| `weekly-work-log` | The weekly manager-facing work log, gathered from real evidence and kept short. |
 | `vault-memory` | Refreshes `.agents/memory/` from prior sessions and your connectors. |
 | `vault-sync` | Pull → refresh → commit → PR → merge → concise summary. The single entry point for "sync my vault". |
 | `vault-doctor` | Mechanical integrity checks — links, tags, frontmatter, skill-index drift, stale mirror. Read-only, script-backed. |
