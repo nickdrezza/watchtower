@@ -42,8 +42,8 @@ Rules:
 - Do not add images or binary files.
 - Verify no content from the dump was lost.
 - Before writing, show a `vault preview` here with the exact Markdown, paths, frontmatter,
-  links, tags, and index changes. An explicit `full permissions`, `auto merge`, `just merge`, or clear
-  equivalent in the current request may bypass that preview.
+  links, tags, and index changes. An explicit `full perms` or clear equivalent
+  in the current request may bypass that preview.
 
 Date range:
 YYYY-MM-DD to YYYY-MM-DD

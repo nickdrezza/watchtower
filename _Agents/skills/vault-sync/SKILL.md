@@ -25,9 +25,8 @@ already uncommitted edits, ask which they want.
 
 The weekly log, memory, and any other vault Markdown written during sync follow the universal
 `vault preview` gate. By default, show the exact proposed Markdown and index/diff changes in chat
-before writing. An explicit current-request phrase such as `full permissions`, `auto merge`, `just
-merge`, `skip verification`, or `write it directly` bypasses that human preview and approval. It does
-not bypass secret, binary, space-boundary, factual-integrity, branch, or PR safety rules.
+before writing. An explicit current-request phrase such as `full perms`, `skip verification`, or
+`write it directly` bypasses that human preview and approval. It does not bypass secret, binary, space-boundary, factual-integrity, branch, or PR safety rules.
 
 ## Environment
 

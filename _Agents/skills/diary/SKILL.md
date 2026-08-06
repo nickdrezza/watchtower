@@ -18,8 +18,7 @@ personal thoughts.
 ## Preview before saving
 
 Follow the vault-wide verification preview. Unless the current request contains an explicit,
-positive bypass such as `full permissions`, `auto merge`, `just merge`, `skip verification`, or
-`write it directly`, show the complete proposed diary Markdown and all landing-page changes here before
+positive bypass such as `full perms`, `skip verification`, or `write it directly`, show the complete proposed diary Markdown and all landing-page changes here before
 writing. The bypass skips only the human preview; preserve the hard rules and do not guess.
 
 ## Workflow

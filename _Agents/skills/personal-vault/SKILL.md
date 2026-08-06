@@ -34,8 +34,7 @@ Choose one primary narrative note. Link secondary people, locations, and pets th
 ## Preview before saving
 
 Follow the vault-wide verification preview. Unless the current request contains an explicit,
-positive bypass such as `full permissions`, `auto merge`, `just merge`, `skip verification`, or
-`write it directly`, show every destination and the exact proposed Markdown plus frontmatter, links,
+positive bypass such as `full perms`, `skip verification`, or `write it directly`, show every destination and the exact proposed Markdown plus frontmatter, links,
 tags, and landing-page changes here before writing. The bypass skips only the human preview; preserve
 the hard rules and do not guess.
 

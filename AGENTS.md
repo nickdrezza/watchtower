@@ -129,10 +129,14 @@ that may never come. Conditions and what stays behind the gate:
 - Wait for approval after the preview. A plain confirmation approves only the complete set shown in
   that preview. Do not partially write an unapproved set.
 - An explicit, positive bypass instruction in the current request skips this human preview and
-  approval. Recognize case-insensitive phrases such as `full permissions`, `auto merge`, `automerge`,
-  `auto-merge`, `just merge`, `skip the preview`, `skip verification`, `write it directly`, `save it
-  without asking`, or `merge it now`. Clear equivalents are valid; vague requests such as “organize
-  this” are not. A negated phrase such as “do not auto merge” never bypasses the gate.
+  approval. **The canonical phrase is `full perms`** — `full permissions` is the same thing. Also
+  recognize, case-insensitively, `skip the preview`, `skip verification`, `write it directly`, and
+  `save it without asking`. Clear equivalents are valid; vague requests such as “organize this” are
+  not. A negated phrase such as “do not use full perms” never bypasses the gate.
+- **Merge phrases are not a bypass.** “auto merge”, “automerge”, “just merge”, and “merge it now” mean
+  the git operation — merge the PR — and nothing more. Don't add them as bypass aliases: they collide
+  with GitHub's own auto-merge setting, so a request to merge a PR would read as blanket write
+  permission. Name the bypass after the permission it grants, not after a git command.
 - A bypass applies only to the preview/approval gate. It never permits secrets, binaries, broken space
   boundaries, a direct push to `main`, or writing an uncertain claim as fact. Preserve unresolved
   material as an open question or staging entry instead of guessing.

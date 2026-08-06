@@ -17,8 +17,7 @@ a stub for every incidental mention.
 ## Preview before saving
 
 Follow the vault-wide verification preview. Unless the current request contains an explicit,
-positive bypass such as `full permissions`, `auto merge`, `just merge`, `skip verification`, or
-`write it directly`, show every entity path and the exact proposed Markdown or diff for each entity,
+positive bypass such as `full perms`, `skip verification`, or `write it directly`, show every entity path and the exact proposed Markdown or diff for each entity,
 index, and narrative-link change before writing. The bypass skips only the human preview; do not guess.
 
 ## People

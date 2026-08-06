@@ -61,8 +61,8 @@ sources, and the one place they're documented.
 
 Follow the vault-wide verification preview before creating or updating the weekly Markdown file or the
 index. By default, show the complete proposed work-log Markdown and the exact index changes in chat
-before writing. An explicit current-request bypass such as `full permissions`, `auto merge`, `just
-merge`, `skip verification`, or `write it directly` skips that human preview and approval. It does not
+before writing. An explicit current-request bypass such as `full perms`, `skip verification`, or
+`write it directly` skips that human preview and approval. It does not
 permit invented work, unsupported claims, secrets, or a direct push to `main`.
 
 ## Format

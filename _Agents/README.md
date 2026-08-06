@@ -121,10 +121,11 @@ _Agents/scripts/new-skill.sh my-skill-name
 _Agents/scripts/install-skills.sh --here      # refresh the Claude Code mirror (it's a copy)
 ```
 
-Then **register it in the three index tables** — the Skills table above,
-[`skills/watchtower/SKILL.md`](skills/watchtower/SKILL.md), and
-[`../_Docs/Skills Repo.md`](../_Docs/Skills%20Repo.md). They're hand-maintained, so a new skill is
-invisible to a reader until they're updated.
+Then **register it in the four index tables** — the Skills table above,
+[`skills/watchtower/SKILL.md`](skills/watchtower/SKILL.md),
+[`../_Docs/Skills Repo.md`](../_Docs/Skills%20Repo.md), and [`../AGENTS.md`](../AGENTS.md). They're
+hand-maintained, so a new skill is invisible to a reader until they're updated — and `vault-doctor`
+checks all four.
 
 Rules of thumb (full flow and checklist in [`CONVENTIONS.md`](CONVENTIONS.md)):
 
