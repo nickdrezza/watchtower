@@ -79,6 +79,7 @@ nothing, an agent can simply read `.agents/skills/<name>/SKILL.md`; `AGENTS.md` 
 |---|---|
 | `watchtower` | **The primary context. Load it first, every session.** Layout, hard rules, how to write here, the employer-scope tag, the memory index. |
 | `bootstrap` | Sets up a new user or machine, seeds the memory maps, and teaches the operating model. |
+| `weekly-work-log` | Writes or updates the weekly manager-facing work log, from evidence only, in the house format. |
 | `vault-memory` | Refreshes `.agents/memory/` from prior sessions and your connectors. |
 | `vault-sync` | Pull → refresh → commit → PR → merge → concise summary. The single entry point for "sync my vault". |
 | `vault-doctor` | Mechanical integrity checks — links, tags, frontmatter, skill-index drift, stale mirror. Read-only, script-backed. |

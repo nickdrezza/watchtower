@@ -181,9 +181,14 @@ def check_skill_descriptions():
 
 def check_hardcoded_paths():
     """Skills describe HOW; machine facts belong in .agents/memory/. See CONVENTIONS.md."""
-    # Add your own usernames and checkout roots here — the point is to catch a path that only works
-    # on one machine. A skill needing a path should read it from .agents/memory/machines/.
-    pat = re.compile(r"/mnt/c/|[A-Z]:\\Users\\|/Users/[a-z]|/home/[a-z]|~/\.claude/skills")
+    # Add your own usernames and checkout roots to USERS below — the point is to catch a path that
+    # only works on one machine. A skill needing a path reads it from .agents/memory/machines/.
+    # Bare /Users/ and /home/ are deliberately NOT matched: they appear in generic examples, and
+    # flagging every one of them trains you to ignore this check.
+    USERS = r"alice|bob"  # ← your account names, pipe-separated
+    pat = re.compile(
+        rf"/mnt/c/|[A-Z]:\\Users\\|/(?:Users|home)/(?:{USERS})\b|~/\.claude/skills"
+    )
     for p in FILES:
         if not p.startswith(".agents/skills/"):
             continue

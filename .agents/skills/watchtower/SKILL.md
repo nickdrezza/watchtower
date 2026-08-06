@@ -98,7 +98,12 @@ The vault's value is being scannable in two years. Verbosity is the failure mode
 - **Say it once, plainly.** No preamble, no restating the question, no summarizing what you just wrote.
 - **Nothing adjacent.** No recommendations, next steps, or "you might also consider" unless the note's
   subject *is* that decision. Off-topic suggestions are the main source of clutter.
-- **Don't overexplain.** Assume a competent reader. One line beats a paragraph.
+- **Don't overexplain — but don't presume.** One line still beats a paragraph. A "competent reader" is
+  fluent in the craft and has *never seen this code* — they know what a lint rule is, not what your
+  `roster-base.ts` is. Cut words, never the reader's footing.
+- **Plain first, then the names.** Say what the thing is and what goes wrong in ordinary words before
+  naming a file, symbol, or ticket; lead each item with the consequence, not the mechanism. A path or
+  symbol name identifies, it does not inform. Orientation isn't padding — it's the fact needed most.
 - **Keep every nuance that changes an outcome** — the gotcha, the exact id, the reason a decision went
   the way it did, the thing that cost hours. Brevity is not omission; cut words, never facts.
 - **Prefer structure to prose.** A table, a labelled list, or a short code block carries more per line
@@ -108,9 +113,11 @@ The vault's value is being scannable in two years. Verbosity is the failure mode
   (`robust`, `comprehensive`, `seamless`, `significantly`), no hedging frames ("it's worth noting
   that"), no enthusiasm. Attribute every claim or mark it inferred.
 
-**Hard rule 7 in root `AGENTS.md`** carries the full banned-patterns table and the test — *would a
-competent reader six weeks from now be worse off without this?* It applies to your task report in chat
-exactly as much as to a note; a wall of text after a small change is the most common way this breaks.
+**Hard rule 7 in root `AGENTS.md`** carries the full banned-patterns table and both tests — *would a
+competent reader six weeks from now be worse off without this?* and *could a teammate who has never
+opened this code say what broke and why it matters?* Both apply to your task report in chat exactly as
+much as to a note; a wall of text after a small change is the most common way this breaks, and
+compressing into jargon is the second.
 
 ## Tagging
 
@@ -210,6 +217,7 @@ Never report a skill unavailable because your harness didn't load it.
 |---|---|
 | `watchtower` | **The primary context. Load it first, every session.** Layout, hard rules, how to write here, the employer-scope tag, the memory index. |
 | `bootstrap` | Sets up a new user or machine, seeds the memory maps, and teaches the operating model. |
+| `weekly-work-log` | The weekly manager-facing work log, from evidence only, in the house format. |
 | `vault-memory` | Refreshes `.agents/memory/` from prior sessions and your connectors. |
 | `vault-sync` | Pull → refresh → commit → PR → merge → concise summary. The single entry point for "sync my vault". |
 | `vault-doctor` | Mechanical integrity checks — links, tags, frontmatter, skill-index drift, stale mirror. Read-only, script-backed. |
