@@ -96,8 +96,7 @@ path is for a single fact captured mid-session in some other context; conditions
 
 After the candidate facts are settled, follow the vault-wide verification preview. By default,
 show the exact proposed Markdown or diff for every `_Agents/memory/*.md` change here before writing.
-An explicit current-request bypass such as `full permissions`, `auto merge`, `just merge`, `skip
-verification`, or `write it directly` skips that human preview and approval. The bypass does not allow
+An explicit current-request bypass such as `full perms`, `skip verification`, or `write it directly` skips that human preview and approval. The bypass does not allow
 invented facts or secret values; unresolved facts remain open questions.
 
 ## 5. Write

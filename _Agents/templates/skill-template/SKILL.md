@@ -7,7 +7,7 @@ description: >
   pull tabular data, convert a PDF table to a spreadsheet, or scrape figures from a report."
 # --- optional, tool-specific fields below (safe to delete; ignored by tools that don't support them) ---
 # allowed-tools: [Read, Write, Bash]
-# model: claude-opus-4-8
+# model: claude-opus-5
 # user-invocable: true
 # argument-hint: "<arg>"
 ---

@@ -10,6 +10,7 @@ Usage:
 
 Exit 0 = clean, 1 = findings, 2 = could not run.
 """
+import hashlib
 import json
 import os
 import re
@@ -198,18 +199,34 @@ def check_hardcoded_paths():
 
 
 def check_mirror_stale():
+    """The mirror is what Claude Code reads, so compare CONTENT, not just filenames.
+
+    Matching filenames with drifted bodies is the failure this catches: an agent silently runs an
+    older copy of a skill.
+    """
     m = ".claude/skills"
     if not os.path.isdir(m) or os.path.islink(m):
         return
-    src, dst = [], []
+    src, dst = {}, {}
     for base, store in (("_Agents/skills", src), (m, dst)):
         for r, _, fs in os.walk(base):
             for f in fs:
-                store.append(os.path.relpath(os.path.join(r, f), base))
-    if set(src) != set(dst):
+                q = os.path.join(r, f)
+                rel = os.path.relpath(q, base)
+                try:
+                    with open(q, "rb") as fh:
+                        store[rel] = hashlib.sha256(fh.read()).hexdigest()
+                except OSError:
+                    store[rel] = None
+    missing = set(src) ^ set(dst)
+    drifted = {k for k in set(src) & set(dst) if src[k] != dst[k]}
+    if missing or drifted:
         findings["stale-skills-mirror"].append(
-            f"{len(set(src) ^ set(dst))} file(s) differ — run install-skills.sh --here"
+            f"{len(missing)} file(s) added/removed, {len(drifted)} with changed content "
+            f"— run install-skills.sh --here"
         )
+        for k in sorted(drifted):
+            findings["stale-skills-mirror"].append(f"  content drift: {k}")
 
 
 CHECKS = {
