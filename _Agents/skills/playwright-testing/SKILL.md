@@ -88,17 +88,17 @@ Report what journeys passed and any browser, codec, authentication, or platform 
 
 ## the vendor platform applications
 
-the vendor platform data apps build on this workflow but cannot use an ordinary standalone localhost page.
+Vendor-hosted data apps build on this workflow but cannot use an ordinary standalone localhost page.
 Before testing one, read `_Agents/memory/vendor-platform.md` and the app host’s `tests/README.md`.
 
-The the vendor platform layer adds:
+The vendor-platform layer adds:
 
-- a saved authenticated the vendor platform session;
+- a saved authenticated vendor-platform session;
 - `/api/open/<appSlug>` as the supported entry;
 - local-network permission for the localhost iframe;
 - selection of the iframe by exact host and port;
 - the filtered app-host development command;
 - status-code classification for unregistered hosts.
 
-Keep those platform constraints in the the vendor platform documentation. Keep the reusable browser-testing
+Keep those platform constraints in the vendor-platform documentation. Keep the reusable browser-testing
 workflow here.

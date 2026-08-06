@@ -116,9 +116,9 @@ Both modes, non-negotiable. Low confidence is fine; **presenting low confidence 
   one-liners, and not a post-hoc "let me know if that's wrong."
 - **Approval is per item.** "Add this to the PR?" for each candidate. Silence is not approval.
 - **State your understanding and ask if it's right.** Spell the mechanism out concretely enough to be
-  falsifiable — *"my understanding: the the networking app mapping's 'the networking app Type ID' column is really a per-event
-  the events platform registration-type id, so it changes every event. Correct?"* — not *"is my understanding of
-  the the networking app mapping correct?"*, which he can't answer.
+  falsifiable — *"my understanding: that mapping's 'Type ID' column is really a per-event registration-type
+  id, so it changes every event. Correct?"* — not *"is my understanding of the mapping correct?"*, which
+  can't be answered.
 - **Mark the seams.** Every claim is either verified (name the source) or inferred (ask). Never
   bridge a gap with a plausible-sounding mechanism.
 - **If he doesn't know either**, don't invent and don't quietly drop it: leave it out of the doc and

@@ -13,7 +13,7 @@ _Agents/
 ├── memory/                   operational knowledge — the environment, credentials, platforms
 │   ├── README.md             the memory index + WHEN TO WRITE MEMORY
 │   ├── connectors.md         the live systems: who owns what, and where each one lies
-│   └── machines/             one profile per target: macos, windows-wsl, ec2, mobile
+│   └── machines/             one profile per target — add one per machine you work on
 ├── skills/                   the skills — one folder per skill, canonical source of truth
 │   └── <name>/
 │       ├── SKILL.md          required: frontmatter (name + description) + Markdown body
@@ -41,13 +41,13 @@ memory so a chat can be thrown away.
 ## Memory
 
 [`memory/`](memory/) is the operational half: which machine we're on, **where every credential lives**,
-how to connect to the warehouse / dbt Cloud / AWS+EC2 / the events platform / the CRM / Google Workspace / GitHub / the tracker,
-how the the warehouse project is shaped, who's who, what's in flight, and how you wants agents to work.
+how to connect to each platform you work in, who's who, what's in flight, and how you want agents to
+work.
 
 **Read [`memory/environment.md`](memory/environment.md) and
 [`memory/credentials.md`](memory/credentials.md) before any hands-on task.** `environment.md` routes you
-to one profile in [`memory/machines/`](memory/machines/README.md) — four targets (Mac, Windows+WSL, the
-EC2 box, phone) that share almost no paths. Full index: [`memory/README.md`](memory/README.md).
+to one profile in [`memory/machines/`](memory/machines/README.md) — targets that share almost no
+paths. Full index: [`memory/README.md`](memory/README.md).
 
 Skills say *how to perform a task*; memory says *what is true about this environment*. Keep the facts in
 memory and have skills point at them. **Locations, never values** — the path or env-var name, never the
@@ -139,7 +139,6 @@ Rules of thumb (full flow and checklist in [`CONVENTIONS.md`](CONVENTIONS.md)):
 
 ## History
 
-These skills were a separate private repo, `<you>/skills` (clone at `~/Linux Dev/skills` in
-WSL). They were merged into the vault in July 2026 so one repo carries both the knowledge and
-the skills that operate on it — see [`../_Docs/Skills Repo.md`](../_Docs/Skills%20Repo.md). Treat
+These skills were a separate private repo, `<you>/skills`. They were merged into the vault so one
+repo carries both the knowledge and the skills that operate on it — see [`../_Docs/Skills Repo.md`](../_Docs/Skills%20Repo.md). Treat
 the old repo as archived; this folder is the source of truth.
