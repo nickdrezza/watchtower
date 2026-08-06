@@ -3,14 +3,9 @@ type: "concept"
 status: "active"
 tags:
   - "topic/agents"
-  - "topic/data-quality"
-  - "topic/segmentation"
 related:
-  - "AI Prompts"
   - "[[Agent Memory]]"
   - "[[Skills Repo]]"
-  - "Data Quality"
-  - "Segmentation"
 ---
 
 # AI Agents
@@ -49,8 +44,8 @@ waits for a reviewed pass. See [[Agent Memory]].
 **Skills that live here, not in a tool.** `_Agents/skills/` is shared by every platform, so a
 capability written once works everywhere — no per-tool copies to drift apart. See [[Skills Repo]].
 
-**Connectors for anything live.** The vault holds durable facts; the tracker, the warehouse, Gmail, Drive, and
-the rest hold current state. Agents query those rather than trusting a number written down months ago.
+**Connectors for anything live.** The vault holds durable facts; the tracker, the warehouse, email,
+Drive, and the rest hold current state. Agents query those rather than trusting a number written down months ago.
 
 **Organization, which matters more than it looks.** The tag registry, the properties, the folder
 boundaries — that discipline is what lets a model fetch precisely instead of dragging in unrelated

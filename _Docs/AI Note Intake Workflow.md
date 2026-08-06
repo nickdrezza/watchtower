@@ -4,17 +4,7 @@ status: active
 domain: system
 workspace: vault
 tags:
-  - "ACME"
   - "topic/agents"
-  - "topic/aws"
-  - "topic/warehouse"
-  - "topic/data-quality"
-  - "topic/transform"
-  - "topic/crm"
-  - "topic/tickets"
-  - "topic/segmentation"
-  - "topic/warehouse-db"
-  - "topic/events"
 related:
   - "[[Home]]"
   - "[[Spaces Index]]"
@@ -87,17 +77,8 @@ Use the content to choose the right space:
 2. Keep rough bullets if they are useful.
 3. Add headings only where they make the note easier to scan.
 4. Add properties that include `domain`, `workspace`, and `organization` when applicable.
-5. Link recurring concepts:
-   - the warehouse project
-   - Data Quality
-   - dbt
-   - the warehouse
-   - AWS
-   - the events platform
-   - the CRM
-   - [[AI Agents]]
-   - Segmentation
-   - Tickets
+5. Link recurring concepts — every note in [[Concept Index]] that the dump actually touches, and its
+   `topic/*` tag alongside. Ships with one, [[AI Agents]]; the list grows as you add concepts.
 6. If a project note already exists, append or merge under a dated heading instead of creating a duplicate.
 7. If the dump contains tasks, keep them as Markdown checkboxes.
 8. If anything is ambiguous, add `## Open questions` rather than inventing context.

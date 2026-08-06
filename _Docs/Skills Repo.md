@@ -16,9 +16,8 @@ related:
 # Skills Repo
 
 **The skills now live in this repo.** They used to be a separate private repo,
-[`<you>/skills`](https://github.com/<you>/skills) (clone at `~/Linux Dev/skills` in WSL).
-In July 2026 that repo was merged into the vault so one repo carries both the knowledge and the
-skills that operate on it. Treat the old repo as archived.
+[`<you>/skills`](https://github.com/<you>/skills). That repo was merged into the vault so one repo
+carries both the knowledge and the skills that operate on it. Treat the old repo as archived.
 
 Canonical location: **`_Agents/`**, with a `.agents` symlink beside it so every coding agent finds
 the universal path. Its own map is `_Agents/README.md`.
@@ -33,9 +32,9 @@ repo, one `AGENTS.md`, one skills path.
 ## The division of labor
 
 - **Skill *behavior* lives in `_Agents/skills/`.** How an AI should read/write the vault, route a
-  question, run a catch-up, write the weekly log, SSH the EC2 box — that's a skill.
+  question, run a catch-up, write the weekly log, SSH a server — that's a skill.
 - **Environment *facts* live in `_Agents/memory/`.** Which shell has the SSH key, where a credential
-  lives, which the warehouse role to use, what a table's grain is. A skill that hard-codes an account id or
+  lives, which warehouse role to use, what a table's grain is. A skill that hard-codes an account id or
   a path is doing memory's job. See [[Agent Memory]].
 - **Vault *content and governance* live in the vault half.** The notes themselves, plus the
   authoritative rules in `AGENTS.md` and `_Docs/`. The skills distill these; if they ever disagree,
