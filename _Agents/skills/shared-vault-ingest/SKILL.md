@@ -146,9 +146,8 @@ Root `AGENTS.md` → **Ask instead of assuming** is the rule; this is what the q
 
 When this skill writes an index, concept/reference note, or `_Agents/memory` file, follow the
 vault-wide preview protocol: show the exact Markdown, paths, links, tags, and index changes in
-chat before writing unless the current request explicitly says `full permissions`, `auto merge`,
-`just merge`, `skip verification`, `write it directly`, or a clear equivalent. Those phrases skip
-only the human preview; they do not permit invented facts, secrets, binaries, or broken boundaries.
+chat before writing unless the current request explicitly says `full perms`, `skip verification`,
+`write it directly`, or a clear equivalent. Those phrases skip only the human preview; they do not permit invented facts, secrets, binaries, or broken boundaries.
 
 ## Before you open the PR
 

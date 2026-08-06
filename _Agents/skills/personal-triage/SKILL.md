@@ -17,8 +17,7 @@ first. Triage is a later classification pass, not permission to rewrite or disca
 ## Preview before saving
 
 Follow the vault-wide verification preview. Unless the current request contains an explicit,
-positive bypass such as `full permissions`, `auto merge`, `just merge`, `skip verification`, or
-`write it directly`, show each source and destination path plus the exact proposed Markdown or diff
+positive bypass such as `full perms`, `skip verification`, or `write it directly`, show each source and destination path plus the exact proposed Markdown or diff
 for moves, splits, merges, landing-page changes, and entity links before writing. The bypass skips
 only the human preview; do not guess.
 

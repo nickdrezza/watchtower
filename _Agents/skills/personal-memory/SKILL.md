@@ -16,8 +16,7 @@ the user's intent is a past event or life-history record, not an ordinary entry 
 ## Preview before saving
 
 Follow the vault-wide verification preview. Unless the current request contains an explicit,
-positive bypass such as `full permissions`, `auto merge`, `just merge`, `skip verification`, or
-`write it directly`, show every path and the exact proposed Markdown or diff, including frontmatter,
+positive bypass such as `full perms`, `skip verification`, or `write it directly`, show every path and the exact proposed Markdown or diff, including frontmatter,
 body, links, tags, and landing-page changes, before writing. The bypass skips only the human preview;
 do not guess.
 

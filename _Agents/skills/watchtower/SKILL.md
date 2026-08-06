@@ -77,11 +77,14 @@ notes, Inbox items, indexes and landing pages, and `_Agents/memory/*.md`.
   open the local vault to know what will be saved.
 - Wait for approval after the preview. A confirmation approves only the complete set shown; never
   partially apply an unapproved set.
-- An explicit, positive bypass in the current request skips this human preview and approval. Recognize
-  case-insensitive phrases such as `full permissions`, `auto merge`, `automerge`, `auto-merge`, `just
-  merge`, `skip the preview`, `skip verification`, `write it directly`, `save it without asking`, or
-  `merge it now`. Clear equivalents are valid; vague requests such as “organize this” are not. A
-  negated phrase such as “do not auto merge” never bypasses the gate.
+- An explicit, positive bypass in the current request skips this human preview and approval. **The
+  canonical phrase is `full perms`** — `full permissions` is the same thing. Also recognize,
+  case-insensitively, `skip the preview`, `skip verification`, `write it directly`, and `save it
+  without asking`. Clear equivalents are valid; vague requests such as “organize this” are not. A
+  negated phrase such as “do not use full perms” never bypasses the gate.
+- **Merge phrases are not a bypass.** “auto merge”, “just merge”, “merge it now” mean the git
+  operation and nothing more. They collide with GitHub's own auto-merge setting — asking to merge a
+  PR is not permission to skip the preview.
 - The bypass does not waive the hard rules: no secrets or binaries, no space-boundary violations, no
   direct push to `main`, and no uncertain claim written as fact. Preserve unresolved material as an
   open question or staging entry instead of guessing.
@@ -247,10 +250,11 @@ New skills belong here, at `_Agents/skills/<name>/SKILL.md`. Edit there, never t
 mirror. Full flow and checklist: `_Agents/CONVENTIONS.md`. Short version:
 
 1. Skill or memory? Mostly-facts → memory.
-2. `_Agents/scripts/new-skill.sh <name>` (bash — run from WSL or Git Bash).
+2. `_Agents/scripts/new-skill.sh <name>` — needs a POSIX shell. On Windows use WSL or Git Bash;
+   check your `memory/machines/` profile.
 3. Write the `description` first; it's the trigger every platform reads.
-4. Register it in the three hand-maintained index tables: this file's table above,
-   `_Agents/README.md`, `_Docs/Skills Repo.md`. Otherwise it's invisible.
+4. Register it in the four hand-maintained index tables: this file's table above,
+   `_Agents/README.md`, `_Docs/Skills Repo.md`, root `AGENTS.md`. Miss one and `vault-doctor` fails.
 5. `_Agents/scripts/install-skills.sh --here` — the mirror is a copy, not a link.
 6. Branch `feat/<slug>` + PR.
 
