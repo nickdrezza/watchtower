@@ -23,7 +23,7 @@ it auto-discovers. You can also read it in an editor, on
 GitHub, or ask an agent. This note is the human-facing index.
 
 Kept current by the **`vault-memory`** skill — it scans local AI-platform history (Claude Code sessions,
-Codex sessions and its own memory store) plus the tracker, Gmail, GitHub, and Drive meeting notes since memory
+Codex sessions and its own memory store) plus the tracker, email, GitHub, and Drive meeting notes since memory
 was last committed, proposes a candidate table, asks, then writes. `vault-sync` runs it as part of a
 full sync.
 
@@ -32,25 +32,18 @@ full sync.
 | File | Covers |
 |---|---|
 | `README.md` | The index and the rules for writing memory. |
-| `environment.md` | **Start here.** How to tell which of the four targets you're on, what's true on all of them, and what must be looked up per-machine. |
-| `machines/` | One profile per target — `macos`, `windows-wsl`, `ec2`, `mobile`: paths, shells, installed tooling, and what's deliberately *not* installed. |
+| `environment.md` | **Start here.** How to tell which target you're on, what's true on all of them, and what must be looked up per-machine. |
+| `machines/` | One profile per target — paths, shells, installed tooling, and what's deliberately *not* installed. |
 | `credentials.md` | The credential map — every key, token, and profile, what it authenticates, and **where it lives**. |
 | `connectors.md` | The live systems — which connector is authoritative for what, the limit that will bite you, and where cross-chat session history lives. |
-| `warehouse.md` | Account, databases, roles, warehouses, key-pair auth, the read-only MCP limit and the way around it. |
-| `transform.md` | dbt Cloud ids and MCP config, why local `dbt build` fails, slow-CI diagnosis. |
-| `cloud-and-servers.md` | AWS accounts and profiles, SSO re-auth, the EC2 automation server, cron, CloudWatch, the DR kit. |
-| `workspace.md` | Sheets/Drive/Gmail: the service account, the Editor-share gotcha, key sheet ids. |
-| `crm.md` | The two the warehouse→the CRM mechanisms, object ids, association types, token gotchas. |
-| `events-platform.md` | the events platform_API subprojects, cron cadence, adding a custom field, field-id discovery. |
-| `newsletter.md` | The data share, the SFTP jobs, the CC-email mapping job, email validity, subscription classes, sending domains. |
-| `messaging.md` | The three the messaging platform pipelines, and why its open rates are overstated. |
-| `git-and-tickets.md` | Which `gh` identity each shell has, the repo inventory, the tracker, shared-vault write access. |
-| `warehouse-project.md` | Layers, key table grains, and the gotchas that have cost hours. |
-| `vendor-platform.md` | The vendor integration: personas, the filter UDF, the recurring CI failure. |
-| `internal-apps.md` | the pipeline dashboard and the list-builder app, and the Streamlit-in-the warehouse gotchas. |
-| `people.md` | Who's who and what each person owns. |
+| `warehouse.md` | **The worked example of a platform file** — how to connect, the roles, the limit you'll hit, and the way around it. |
 | `working-preferences.md` | Standing instructions — the PR rule, verify-don't-fabricate, comment-don't-edit. |
 | `projects.md` | Active and recent work, one compact block each. |
+
+**Add one file per platform you actually work in**, named for it, and a `people.md` once more than a
+couple of names matter. `warehouse.md` is the shape to copy. The set ships small on purpose — a
+pre-filled folder describing systems you don't use is worse than an empty one, because an agent
+believes it.
 
 ## When it gets written
 
@@ -68,7 +61,8 @@ needed. Everything larger (multi-fact runs, contradictions, pruning, new files) 
 3. **`#ACME` on the employer-specific files.** All but `README.md`, `environment.md`,
    `working-preferences.md`, and the portable `machines/` profiles carry `ACME` in their frontmatter
    `tags:`, so the non-reusable material can be archived in one query if I change jobs. Those files mark
-   their few Acme rows inline; `machines/ec2.md` is fully tagged, since that box is Acme-only.
+   their few Acme rows inline. A profile for a machine that exists only for work — a shared build or
+   automation box — is fully tagged.
 
 ## Relationship to the vault's own notes
 

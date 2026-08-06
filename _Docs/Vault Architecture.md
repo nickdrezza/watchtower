@@ -16,7 +16,8 @@ the vault is one vault with multiple clearly separated spaces.
 ## Top-Level Folders
 
 - `Spaces`: domain-specific content.
-- `Concepts`: reusable topic notes such as `Data Quality`, `the warehouse`, `dbt`, and `AI Agents`.
+- `Concepts`: reusable topic notes, one per durable subject. Ships with [[AI Agents]]; add yours as
+  the vault grows. Every one is listed in [[Concept Index]] and owns a `topic/*` tag.
 - `Maps`: navigation notes and indexes.
 - `Dashboards`: Obsidian Bases for database-style views.
 - `Inbox`: raw note dumps and processed intake notes.

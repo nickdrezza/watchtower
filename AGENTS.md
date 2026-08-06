@@ -77,8 +77,8 @@ Then, if your harness didn't auto-load skills, read `_Agents/skills/` yourself �
 ## Ask instead of assuming
 
 Being uncertain is fine. Presenting uncertainty as fact is the failure this repo cares most about —
-a wrong claim written down gets read as true for years, and it has cost real hours (the shared-vault's
-misreading of the the networking app "Type ID" column is the standing example).
+a wrong claim written down gets read as true for years, and it costs real hours. The classic shape:
+an id column whose name implies it is stable, documented as stable, and actually re-issued per event.
 
 - **Verify first, ask second, assume never.** If the code, the PR, the ticket, or the email can settle
   it, go read them. Ask only about what evidence can't answer.
@@ -241,8 +241,8 @@ restate `type:`, `domain:`, or `workspace:`.
 - **Never tag what a property already says just to duplicate it.** `type: weekly-log` needs no
   `work/log`; scope tags are the intentional exception because they enable cross-folder Graph view
   filters. The Dashboards filter on `type ==`, so properties still drive views.
-- **A `topic/*` tag follows a link.** Tag `topic/transform` when the note links `dbt` — the tag and the
-  `related:` entry go in together. Don't invent a topic with no concept note behind it; add the
+- **A `topic/*` tag follows a link.** Tag `topic/agents` when the note links [[AI Agents]] — the tag
+  and the `related:` entry go in together. Don't invent a topic with no concept note behind it; add the
   concept note first, list it in [[Concept Index]], and register the tag in [[Tag Registry]].
 - **Index notes (`type: index`) get no `topic/*` tags.** They link to everything, so topics on them are
   noise.
@@ -304,8 +304,8 @@ work area.
 ## Memory
 
 **`_Agents/memory/`** holds the operational knowledge the skills assume: the machine, where every
-credential lives, how to reach each platform, how the the warehouse project is shaped, what's in flight, and how
-you wants agents to work. This is the part that makes every harness behave the same — connecting
+credential lives, how to reach each platform, how your data is shaped, what's in flight, and how you
+want agents to work. This is the part that makes every harness behave the same — connecting
 to a system is never left to whatever a particular tool happens to have configured.
 
 Index: `_Agents/memory/README.md`. **Read `environment.md` and `credentials.md` before any hands-on
@@ -313,9 +313,9 @@ task** — they're short, and nearly every failure mode here is in one of them: 
 is Git Bash on Windows, *not* WSL), wrong AWS profile, expired SSO session, read-only SQL MCP, symlinks
 across the WSL boundary, a Sheet not shared with the service account.
 
-**Work happens on four targets and they share almost no paths** — the Mac, the Windows laptop (real work
-inside WSL), the EC2 automation box, and the phone (no filesystem at all). `environment.md` holds what's
-true everywhere and routes you to one profile in `_Agents/memory/machines/`. Read that profile before
+**Work happens on several targets and they share almost no paths** — a laptop or two, maybe a server,
+maybe a phone with no filesystem at all. `environment.md` holds what's true everywhere and routes you
+to one profile in `_Agents/memory/machines/`. Read that profile before
 running anything; a command written for the other laptop is the most common failure here. Never
 hard-code one machine's path into a skill — put the fact in its profile and point at it.
 
@@ -406,14 +406,15 @@ Authoring a new skill: `_Agents/scripts/new-skill.sh <name>`, then follow
   `git diff | grep -nEi 'private key|password|client_secret|AKIA|api[_-]?key|ghp_|pat-na1|xox'`
 - **Touched a tag? `Maps/Tag Registry.md` is in the same commit.** Added, renamed, retired, or changed
   what a tag means — the registry moves with it, or the vocabulary drifts.
-- **Where the vault sits and how `git` must be invoked are per-machine** — check
-  `_Agents/memory/machines/`. On the **Mac** it's `~/Development/watchtower` and `git`/`gh` work
-  directly. On the **Windows laptop** the vault is `C:\Users\youBusato\Obsidian Vault` =
-  `/mnt/c/Users/youBusato/Obsidian Vault`, and **`git`/`gh` must run from WSL**
-  (`wsl.exe -d ubuntu -e bash -lc '...'`) — the SSH key and `gh` auth live there; Windows git-bash
-  fails with `Permission denied (publickey)`. Spell out `youBusato` (the `GUILHE~1` 8.3 name
-  won't resolve in WSL) and quote the path. Through that wrapper, write commit messages and PR bodies
-  to a **file** and use `-F` / `--body-file`; inline `-m` mangles multi-line text and backticks.
+- **Where the vault sits and how `git` must be invoked are per-machine** — never assume either. Read
+  the one `_Agents/memory/machines/` profile for the target you're on. On a Unix machine `git`/`gh`
+  normally work directly; on Windows the vault usually lives on the Windows filesystem while the SSH
+  key and `gh` auth live in WSL, so both must run through a WSL wrapper
+  (`wsl.exe -d <distro> -e bash -lc '...'`) or git-bash fails with `Permission denied (publickey)`.
+  Quote the path, spell the user directory out in full — an 8.3 short name won't resolve in WSL — and
+  record the exact invocation in the profile so the next agent doesn't rediscover it.
+- **Through any shell wrapper, write commit messages and PR bodies to a file** and use `-F` /
+  `--body-file`. Inline `-m` mangles multi-line text and backticks.
 
 ## Preferred properties
 
@@ -458,7 +459,7 @@ tags:
   - topic/…
 related:
   - "[[Project Index]]"
-jira: []
+tickets: []
 ```
 
 Personal note:

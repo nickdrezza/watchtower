@@ -50,18 +50,19 @@ Tag and link go in together or neither does. Full concept list: [[Concept Index]
 | Tag | Concept | What it marks |
 |---|---|---|
 | `topic/agents` | [[AI Agents]] | AI agents, prompts, and the agent layer that operates this vault — skills, memory, intake workflow. |
-| `topic/aws` | AWS | AWS work of any kind: the EC2 automation server, CloudWatch, DR, and the AWS training material. |
-| `topic/warehouse` | the warehouse project | The Acme the warehouse project — its layers, table grains, and the models that build it. |
-| `topic/data-quality` | Data Quality | DQ scores, rules, drift, coverage, and the remediation epics against them. |
-| `topic/transform` | dbt | dbt models, tests, and dbt Cloud jobs and CI. |
-| `topic/networking-app` | the networking app | the networking app, the event networking platform fed from the events platform registration data. |
-| `topic/crm` | the CRM | the CRM objects, properties, associations, and the syncs into and out of it. |
-| `topic/tickets` | Tickets | Ticket-level work — issues, sprints, epics, and the roadmap. |
-| `topic/segmentation` | Segmentation | The events Matching & Sorting process: client personas, priority lists, and the matching logic. |
-| `topic/newsletter` | the newsletter platform | the newsletter platform — the newsletter/subscriber platform, its share, SFTP, and ad stats. |
-| `topic/warehouse-db` | the warehouse | the warehouse itself: accounts, roles, warehouses, and SQL run against it. |
-| `topic/events` | the events platform | the events platform — events, registrations, registrant types, and the `the events platform_API` jobs. |
-| `topic/vendor` | the vendor platform | the vendor platform, the vendor integration with write access into the the warehouse project. |
+
+**One row ships, deliberately.** `topic/agents` is the worked example; the vocabulary is meant to grow
+out of your notes, not to arrive pre-filled with someone else's subjects. Expect a handful within a
+month — the systems you actually work in, one row each.
+
+Adding one is three steps in one commit, in this order:
+
+1. Write the concept note in `Concepts/`.
+2. List it in [[Concept Index]].
+3. Add the row here.
+
+Do it in the other order and you get a tag with nothing behind it, which is the failure this registry
+exists to prevent — `vault-doctor` flags any tag used but not registered.
 
 ## Provenance
 

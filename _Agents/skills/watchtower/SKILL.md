@@ -2,12 +2,12 @@
 name: watchtower
 description: >
   Primary operating context for "the vault" — your private Obsidian vault plus the agent
-  skills and memory that run his work. Load FIRST, every session, before reading or writing anything
+  skills and memory that run your work. Load FIRST, every session, before reading or writing anything
   in that repo. Use for: filing raw notes, meeting notes, interview notes, or work logs; creating or
   updating project/reference notes; answering personal, career, or Acme work-context questions from
   the vault; adding or editing a skill; and as the entry point to _Agents/memory/ — this machine, where
-  credentials live, and how to connect to the warehouse, dbt Cloud, AWS/EC2, the events platform, the CRM, Google
-  Workspace, GitHub, and the tracker. Triggers: "organize this into my vault", "add to the vault", "file
+  credentials live, and how to connect to every platform you work in — the warehouse, the cloud
+  account, the CRM, GitHub, the tracker. Triggers: "organize this into my vault", "add to the vault", "file
   these notes", "update my project note", "what does my vault say about…", "add a skill", "how do I
   connect to…", "where do the credentials live". Team "how does X work" questions → shared-vault instead
   (see knowledge-router).
@@ -184,25 +184,14 @@ shared with the service account.
 | Need | File |
 |---|---|
 | Which target am I on, and what's true everywhere | `environment.md` |
-| This machine's paths, shells, and missing CLIs | `machines/{macos,windows-wsl,ec2,mobile}.md` |
+| This machine's paths, shells, and missing CLIs | the matching `machines/` profile |
 | Where a key / token / profile lives | `credentials.md` |
 | Which connector owns a question, and where each one lies | `connectors.md` |
 | **When to write memory** — the fast path vs the reviewed pass | `README.md` |
-| the warehouse account, roles, read-only MCP + how to run DDL anyway | `warehouse.md` |
-| dbt Cloud ids, why local `dbt build` fails, slow CI | `transform.md` |
-| AWS accounts, EC2 automation server, cron, CloudWatch, DR | `cloud-and-servers.md` |
-| Sheets/Drive/email, the service account + Editor-share gotcha | `workspace.md` |
-| the CRM sync mechanisms, object ids, association types | `crm.md` |
-| events-api subprojects, cron cadence, custom fields | `events-platform.md` |
-| the newsletter platform share, SFTP, the CC-email job, validity codes, subscription classes, sending domains | `newsletter.md` |
-| The three the messaging platform pipelines, and why its open rates are overstated | `messaging-platform.md` |
-| `gh` identities per shell, repos, the tracker, shared-vault access | `git-and-tickets.md` |
-| the warehouse project layers, table grains, costly gotchas | `warehouse.md` |
-| the vendor platform personas, the filter UDF, the recurring CI failure | `vendor-platform.md` |
-| the pipeline dashboard / the list-builder app, Streamlit-in-the warehouse gotchas | `internal-apps.md` |
-| Who's who and what they own | `people.md` |
+| Warehouse account, roles, read-only MCP + how to run DDL anyway | `warehouse.md` |
 | Standing instructions from the user | `working-preferences.md` |
 | Active project state and pointers | `projects.md` |
+| Anything about a platform not listed above | its own file — add one per system you work in, shaped like `warehouse.md` |
 
 Memory is **point-in-time**. Environment facts (paths, accounts, which shell holds the SSH key) are
 stable — act on them. Code and data facts drift — verify first. `vault-memory` keeps this current.
