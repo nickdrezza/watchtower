@@ -16,7 +16,7 @@ related:
 # Usage Guide
 
 Day-to-day use once [[Setup Guide]] is done. The model is [[AI Agents]]; the agent-side rules are
-`.agents/docs/operating-model.md`.
+`_Agents/docs/operating-model.md`.
 
 ## Starting work
 
@@ -70,7 +70,7 @@ Ending a session costs nothing that was written down. Resuming next month is a *
 excavation.
 
 This only works if memory actually gets written, which is why the rule is bounded rather than
-aspirational — `.agents/memory/README.md` → *When to write memory*:
+aspirational — `_Agents/memory/README.md` → *When to write memory*:
 
 - **A single durable fact** gets appended the moment it's learned. No preview, no ceremony.
 - **Anything larger** — multiple facts, a contradiction, pruning — goes through `vault-memory` with the
@@ -101,7 +101,7 @@ read, which is the failure this whole setup exists to avoid.
 - **One fact, one home.** A fact that fits two files goes in the more specific one with a pointer from
   the other. Never duplicate the body.
 - **Prune while you're in there.** Memory that grows without pruning stops being readable.
-- **Verify before believing a report.** Including one from an agent — `.agents/docs/verification.md`.
+- **Verify before believing a report.** Including one from an agent — `_Agents/docs/verification.md`.
 
 ## When something goes wrong
 

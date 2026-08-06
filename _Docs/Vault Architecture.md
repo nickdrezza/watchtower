@@ -115,13 +115,14 @@ The vault should be easy for both Obsidian and coding agents to operate on:
 and the memory index are not housekeeping — they are what lets an agent load exactly what a task needs
 and nothing else. That is what makes it affordable to load context aggressively rather than
 sparingly, and it matters more as the vault grows. The agent-side statement of this is
-`.agents/docs/operating-model.md`.
+`_Agents/docs/operating-model.md`.
 
 ### Two `docs` folders, on purpose
 
 - **`_Docs/`** — human and vault governance, indexed by Obsidian. Architecture, intake workflow,
   ledgers, and the vault-side windows into the agent layer ([[Skills Repo]], [[Agent Memory]]).
-- **`.agents/docs/`** — agent doctrine, invisible to Obsidian. How to behave (`operating-model.md`),
+- **`_Agents/docs/`** — agent doctrine. Visible in Obsidian since the folder has no dot, but written
+  for agents, not for the graph. How to behave (`operating-model.md`),
   how to know you're done (`verification.md`), where each harness reads from (`platforms.md`), and how
   skills travel (`portability.md`).
 

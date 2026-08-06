@@ -10,13 +10,13 @@ _Vault Maintenance/Nested Obsidian Config Snapshot/
 .obsidian/snippets/
 
 # Code/styling don't belong in a text-first notes repo.
-# (.agents/ is exempt: skills may ship small runnable helpers under .agents/skills/*/scripts/.)
+# (_Agents/ is exempt: skills may ship small runnable helpers under _Agents/skills/*/scripts/.)
 *.js
 *.css
-!.agents/**/*.js
+!_Agents/**/*.js
 
-# Generated mirror of .agents/skills for Claude Code (built by .agents/scripts/install-skills.sh).
-# The canonical skills live in .agents/skills/ — edit those, never this copy.
+# Generated mirror of _Agents/skills for Claude Code (built by _Agents/scripts/install-skills.sh).
+# The canonical skills live in _Agents/skills/ — edit those, never this copy.
 .claude/skills/
 
 # Keep this repo text-first.
