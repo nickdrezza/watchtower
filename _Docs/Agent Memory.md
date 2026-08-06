@@ -13,11 +13,13 @@ related:
 
 # Agent Memory
 
-the vault carries an **operational memory layer** for AI agents at **`.agents/memory/`**. It is the
+the vault carries an **operational memory layer** for AI agents at **`_Agents/memory/`**. It is the
 answer to "why does my agent know how to connect to the warehouse in one session and not the next" — the
 facts live in the repo instead of in whichever tool happened to be configured.
 
-Like `.agents/skills/`, it's a dot-directory, so **Obsidian does not index it**. Read it in an editor, on
+**Obsidian indexes it**, because the folder has no leading dot — that is why it is `_Agents/` and not
+`.agents/`. A committed `.agents` symlink points at it so every harness still finds the universal path
+it auto-discovers. You can also read it in an editor, on
 GitHub, or ask an agent. This note is the human-facing index.
 
 Kept current by the **`vault-memory`** skill — it scans local AI-platform history (Claude Code sessions,
@@ -75,4 +77,4 @@ Memory is written **for agents**: terse, operational, "run this, watch for that.
 cover the same systems from different angles; neither replaces the other. Deep project narrative belongs
 in `Projects/` notes and the tracker — `projects.md` holds only the pointer plus what's needed to resume.
 
-See also [[Skills Repo]] for the skills half of `.agents/`.
+See also [[Skills Repo]] for the skills half of `_Agents/`.

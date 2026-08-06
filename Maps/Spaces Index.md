@@ -18,5 +18,5 @@ Four spaces, one rule each. Mixing them is hard rule 4.
 | `Spaces/Personal` | Personal notes, diary, memories, reflections, people, places | [[Personal Home]] |
 | `Spaces/Shared` | Deliberately cross-domain material | [[Shared Home]] |
 
-`Concepts/`, `Maps/`, `Dashboards/`, `_Templates/`, `_Docs/`, and `.agents/` are **infrastructure**, not
+`Concepts/`, `Maps/`, `Dashboards/`, `_Templates/`, `_Docs/`, and `_Agents/` are **infrastructure**, not
 a work area. Mixed or uncertain raw dumps go to `Inbox/Processed/`.

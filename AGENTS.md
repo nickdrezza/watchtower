@@ -13,41 +13,41 @@ agent knowledge needed to run his work. Two halves, one repo:
 | Half | Lives in | Audience |
 |---|---|---|
 | **The vault** — notes, projects, meetings, work logs, career, personal | `Spaces/`, `Concepts/`, `Maps/`, `Dashboards/`, `Inbox/`, `Daily Notes/`, `_Templates/`, `_Docs/` | Obsidian (a human) + agents |
-| **The agent layer** — skills, operational memory, conventions, platform docs | `.agents/` | agents only (dot-dir, invisible to Obsidian) |
+| **The agent layer** — skills, operational memory, conventions, platform docs | `_Agents/` | agents, and visible in Obsidian |
 
 ## First move, every session
 
-**Load `.agents/skills/watchtower/SKILL.md` before you read or write anything here.** It is the
+**Load `_Agents/skills/watchtower/SKILL.md` before you read or write anything here.** It is the
 primary, always-applicable context for this repo — hard rules, layout, filing workflow, the memory
 index, and the verification gate. Everything below is a summary of it; the skill (plus its
 `reference.md`) is the detail. If this file and that skill ever disagree, they should be fixed — treat
 the vault's own governance (`AGENTS.md`, `_Docs/`) as authoritative and say so.
 
-Then, if your harness didn't auto-load skills, read `.agents/skills/` yourself — see
+Then, if your harness didn't auto-load skills, read `_Agents/skills/` yourself — see
 **Skills** below.
 
-**Before running anything hands-on, read `.agents/memory/environment.md` and
-`.agents/memory/credentials.md`** — see **Memory** below.
+**Before running anything hands-on, read `_Agents/memory/environment.md` and
+`_Agents/memory/credentials.md`** — see **Memory** below.
 
 ## How agents work here
 
 **One brain, many disposable agents.** This vault is the memory; the agents are not. Full model:
-[`.agents/docs/operating-model.md`](.agents/docs/operating-model.md).
+[`_Agents/docs/operating-model.md`](_Agents/docs/operating-model.md).
 
 - **No hierarchy.** Every agent reads this same vault. No manager thread, no per-agent private memory.
   Subagents are for parallel *work* — never for holding context.
 - **Fetch before asking.** Search this vault, then prior sessions across chats, then the connectors
-  ([`.agents/memory/connectors.md`](.agents/memory/connectors.md)). Making him re-explain something
+  ([`_Agents/memory/connectors.md`](_Agents/memory/connectors.md)). Making him re-explain something
   already answerable from history is the most common waste here.
 - **Decide what's yours to decide.** Reversible, conventional, cheap to undo, or answerable from the
   repo → decide. Irreversible, expensive, or a matter of his taste → ask. See **Ask instead of
   assuming** below.
 - **Chats are disposable** — but only because memory gets written. See
-  [`.agents/memory/README.md`](.agents/memory/README.md) → *When to write memory*.
+  [`_Agents/memory/README.md`](_Agents/memory/README.md) → *When to write memory*.
 - **Load context aggressively.** Reading the memory file and the note first is cheaper than one wrong
   assumption. Affordable only because the structure below makes retrieval precise.
 - **Connectors are peers, not memory.** Durable facts live here; live state is queried, never cached.
-- **Verify before reporting.** [`.agents/docs/verification.md`](.agents/docs/verification.md).
+- **Verify before reporting.** [`_Agents/docs/verification.md`](_Agents/docs/verification.md).
 
 ## Hard rules (never violate)
 
@@ -106,20 +106,20 @@ everything.
   the repo. Make the call, state the assumption in one line, and keep going.
 - **Ask** when it's irreversible or expensive, when being wrong can't be recovered from, when it's a
   matter of his taste rather than correctness, or when it's business-side and genuinely his to do
-  (see `.agents/memory/working-preferences.md` → *Scope discipline*).
+  (see `_Agents/memory/working-preferences.md` → *Scope discipline*).
 - **Never spend his attention on a lookup.** If evidence can settle it, go get the evidence — that's
   the first bullet above, and it is the most common way this rule gets misapplied.
 
 ## Verification preview before any vault write
 
 This gate applies to every vault entry: personal notes, work logs, projects, reference notes,
-meeting notes, Inbox items, indexes and landing pages, and `.agents/memory/*.md`.
+meeting notes, Inbox items, indexes and landing pages, and `_Agents/memory/*.md`.
 
 **One standing carve-out:** the memory **fast path** — a single durable fact appended to an existing
-`.agents/memory/` file, locations-only, rewriting nothing and contradicting nothing — is
+`_Agents/memory/` file, locations-only, rewriting nothing and contradicting nothing — is
 pre-authorized and needs no preview. It exists so a fact learned mid-session doesn't wait for a sync
 that may never come. Conditions and what stays behind the gate:
-[`.agents/memory/README.md`](.agents/memory/README.md) → *When to write memory*.
+[`_Agents/memory/README.md`](_Agents/memory/README.md) → *When to write memory*.
 
 - By default, prepare the content in conversation without writing files or indexes. Show a
   `vault preview` here before saving: every destination path, the complete proposed Markdown
@@ -140,7 +140,7 @@ that may never come. Conditions and what stays behind the gate:
 The preview is a chat handoff, not a request to make the user review the PR. The PR remains the
 delivery mechanism; this is the content verification step before the write.
 
-Standing instruction, in `.agents/memory/working-preferences.md`; over-reaching here has gotten work
+Standing instruction, in `_Agents/memory/working-preferences.md`; over-reaching here has gotten work
 rejected. It applies to every deliverable, not just the weekly log.
 
 ## How to write here
@@ -294,24 +294,24 @@ and former, Acme and external. Index: `Maps/People Index.md`.
 - Cross-domain reusable → `Spaces/Shared`
 - Mixed or uncertain raw dumps → `Inbox/Processed`
 
-`Concepts/`, `Maps/`, `Dashboards/`, `_Templates/`, `_Docs/`, `.agents/` are infrastructure, not a
+`Concepts/`, `Maps/`, `Dashboards/`, `_Templates/`, `_Docs/`, `_Agents/` are infrastructure, not a
 work area.
 
 ## Memory
 
-**`.agents/memory/`** holds the operational knowledge the skills assume: the machine, where every
+**`_Agents/memory/`** holds the operational knowledge the skills assume: the machine, where every
 credential lives, how to reach each platform, how the the warehouse project is shaped, what's in flight, and how
 you wants agents to work. This is the part that makes every harness behave the same — connecting
 to a system is never left to whatever a particular tool happens to have configured.
 
-Index: `.agents/memory/README.md`. **Read `environment.md` and `credentials.md` before any hands-on
+Index: `_Agents/memory/README.md`. **Read `environment.md` and `credentials.md` before any hands-on
 task** — they're short, and nearly every failure mode here is in one of them: wrong shell (the Bash tool
 is Git Bash on Windows, *not* WSL), wrong AWS profile, expired SSO session, read-only SQL MCP, symlinks
 across the WSL boundary, a Sheet not shared with the service account.
 
 **Work happens on four targets and they share almost no paths** — the Mac, the Windows laptop (real work
 inside WSL), the EC2 automation box, and the phone (no filesystem at all). `environment.md` holds what's
-true everywhere and routes you to one profile in `.agents/memory/machines/`. Read that profile before
+true everywhere and routes you to one profile in `_Agents/memory/machines/`. Read that profile before
 running anything; a command written for the other laptop is the most common failure here. Never
 hard-code one machine's path into a skill — put the fact in its profile and point at it.
 
@@ -327,7 +327,7 @@ Two rules for writing memory:
   and date anything that will age.
 
 A skill that hard-codes an account id, a path, or a cron expression is doing memory's job. Put the fact
-in `.agents/memory/` and have the skill point at it.
+in `_Agents/memory/` and have the skill point at it.
 
 ## When organizing a raw dump
 
@@ -347,19 +347,19 @@ Follow `_Docs/AI Note Intake Workflow.md`. In short:
 
 ## Skills
 
-Skills live in **`.agents/skills/<name>/SKILL.md`** — the universal project-level location that
+Skills live in **`_Agents/skills/<name>/SKILL.md`** — the universal project-level location that
 Codex, Cursor, Gemini CLI, Copilot, and Antigravity discover natively with no setup.
 
-**Claude Code reads `.claude/skills/` instead.** It will not auto-discover `.agents/skills/`. Two
+**Claude Code reads `.claude/skills/` instead.** It will not auto-discover `_Agents/skills/`. Two
 ways to fix that, both fine:
 
 ```bash
-.agents/scripts/install-skills.sh --here      # mirror into ./.claude/skills (this repo only)
-.agents/scripts/install-skills.sh             # or install globally to ~/.agents/skills + ~/.claude/skills
+_Agents/scripts/install-skills.sh --here      # mirror into ./.claude/skills (this repo only)
+_Agents/scripts/install-skills.sh             # or install globally to ~/.agents/skills + ~/.claude/skills
 ```
 
 **If neither has been run, just read the files.** `SKILL.md` is plain Markdown; open
-`.agents/skills/<name>/SKILL.md` directly. Never claim a skill is unavailable because your harness
+`_Agents/skills/<name>/SKILL.md` directly. Never claim a skill is unavailable because your harness
 didn't auto-load it.
 
 | Skill | Use it for |
@@ -367,7 +367,7 @@ didn't auto-load it.
 | `watchtower` | **The primary context. Load it first, every session.** Layout, hard rules, how to write here, the employer-scope tag, the memory index. |
 | `bootstrap` | Sets up a new user or machine, seeds the memory maps, and teaches the operating model. |
 | `weekly-work-log` | The weekly manager-facing work log, gathered from real evidence and kept short. |
-| `vault-memory` | Refreshes `.agents/memory/` from prior sessions and your connectors. |
+| `vault-memory` | Refreshes `_Agents/memory/` from prior sessions and your connectors. |
 | `vault-sync` | Pull → refresh → commit → PR → merge → concise summary. The single entry point for "sync my vault". |
 | `vault-doctor` | Mechanical integrity checks — links, tags, frontmatter, skill-index drift, stale mirror. Read-only, script-backed. |
 | `vault-prune` | Quality pass — slop, near-duplicates, bloat, stale claims, orphans, gaps. Per-item approval; never deletes unasked. |
@@ -385,9 +385,9 @@ didn't auto-load it.
 | `personal-triage` | Classifies personal material staged in Uncategorized. |
 | `diary` | Lightly cleaned daily entries that preserve your voice. |
 
-Authoring a new skill: `.agents/scripts/new-skill.sh <name>`, then follow
-`.agents/CONVENTIONS.md`. Per-tool paths: `.agents/docs/platforms.md`. Portability model:
-`.agents/docs/portability.md`.
+Authoring a new skill: `_Agents/scripts/new-skill.sh <name>`, then follow
+`_Agents/CONVENTIONS.md`. Per-tool paths: `_Agents/docs/platforms.md`. Portability model:
+`_Agents/docs/portability.md`.
 
 ## Git
 
@@ -403,7 +403,7 @@ Authoring a new skill: `.agents/scripts/new-skill.sh <name>`, then follow
 - **Touched a tag? `Maps/Tag Registry.md` is in the same commit.** Added, renamed, retired, or changed
   what a tag means — the registry moves with it, or the vocabulary drifts.
 - **Where the vault sits and how `git` must be invoked are per-machine** — check
-  `.agents/memory/machines/`. On the **Mac** it's `~/Development/watchtower` and `git`/`gh` work
+  `_Agents/memory/machines/`. On the **Mac** it's `~/Development/watchtower` and `git`/`gh` work
   directly. On the **Windows laptop** the vault is `C:\Users\youBusato\Obsidian Vault` =
   `/mnt/c/Users/youBusato/Obsidian Vault`, and **`git`/`gh` must run from WSL**
   (`wsl.exe -d ubuntu -e bash -lc '...'`) — the SSH key and `gh` auth live there; Windows git-bash
@@ -482,5 +482,5 @@ a folder wins.
 - `_Docs/Setup Guide.md` (new machine) · `_Docs/Usage Guide.md` (day to day)
 - `_Docs/AI Note Intake Workflow.md`, `_Docs/Vault Architecture.md`, `_Docs/Skills Repo.md`,
   `_Docs/Agent Memory.md`
-- `.agents/README.md` — the agent layer's own map
-- `.agents/memory/README.md` — the memory index
+- `_Agents/README.md` — the agent layer's own map
+- `_Agents/memory/README.md` — the memory index
