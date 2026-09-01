@@ -74,28 +74,15 @@ nothing, an agent can simply read `_Agents/skills/<name>/SKILL.md`; `AGENTS.md` 
 
 ## The skills
 
-| Skill | What it does |
-|---|---|
-| `watchtower` | **The primary context. Load it first, every session.** Layout, hard rules, how to write here, the employer-scope tag, the memory index. |
-| `bootstrap` | Sets up a new user or machine, seeds the memory maps, and teaches the operating model. |
-| `weekly-work-log` | Writes or updates the weekly manager-facing work log, from evidence only, in the house format. |
-| `vault-memory` | Refreshes `_Agents/memory/` from prior sessions and your connectors. |
-| `vault-sync` | Pull → refresh → commit → PR → merge → concise summary. The single entry point for "sync my vault". |
-| `vault-doctor` | Mechanical integrity checks — links, tags, frontmatter, skill-index drift, stale mirror. Read-only, script-backed. |
-| `vault-prune` | Quality pass — slop, near-duplicates, bloat, stale claims, orphans, gaps. Per-item approval; never deletes unasked. |
-| `vault-edit` | Safe create / move / rename / merge / split / archive / delete, and what must move with the file. |
-| `knowledge-router` | Decides which knowledge base owns a task — this vault or the team's shared one. |
-| `shared-vault-sync` | Both directions with the team vault in one command, drift check first. |
-| `shared-vault-promote` | Outbound: what the team should have, rewritten for a team audience and stripped of anything private. |
-| `shared-vault-ingest` | Inbound: indexes the team vault and absorbs its gotchas and constraints into memory. Never copies it. |
-| `secrets` | Get, store, rotate, and inject credentials. **Never surfaces a value.** |
-| `playwright-testing` | Real-browser tests for user-visible behavior — uploads, downloads, forms, navigation, responsive layout. |
-| `personal-vault` | The front door for personal material; routes to the right section. |
-| `personal-memory` | Past events, milestones, and life-history notes. |
-| `personal-reflection` | Opinions, values, identity questions, and rambles. |
-| `personal-entities` | People, pet, and location notes, and the links to them. |
-| `personal-triage` | Classifies personal material staged in Uncategorized. |
-| `diary` | Lightly cleaned daily entries that preserve your voice. |
+**The index is `_Agents/README.md`** — one table, one place to update. It used to be duplicated here and
+in the `watchtower` skill; `vault-doctor` now checks only the one.
+
+`vault-sync` is the entry point to the **vault family** — it calls `weekly-work-log` and `vault-memory`,
+so "sync my vault" brings the log, the memory directory, and the remote current in one pass.
+
+Marketplace and plugin skills are deliberately **not** copied in here — they're managed by their
+marketplaces and would go stale. If you publish skills *out* to one, `skills-sync` owns that direction
+and [Skill Exports](Skill%20Exports.md) is its ledger.
 
 ## The `#ACME` convention
 

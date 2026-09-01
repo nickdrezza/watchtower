@@ -27,33 +27,17 @@ Every edit gets committed, so treat it that way.
 that applies to the target you're on. The path is the only thing that changes between machines;
 everything else here is true everywhere. Some targets (a phone) have no clone at all.
 
-## The model, in one line
-
-**One brain, many disposable agents.** This vault is the memory; you are not. Search it — and prior
-sessions across chats — before asking him to re-explain anything, and write durable facts back so the
-next chat doesn't re-derive them. Full model: `_Agents/docs/operating-model.md`. How to know you're
-done: `_Agents/docs/verification.md`.
-
 ## Hard rules
 
-1. **No secret values.** Not in a note, a code block, or a pasted log. Found one in a dump? Strip it,
-   say so, point at where it belongs. **Recording where a credential lives is required** — path,
-   env-var name, your secret manager item, the warehouse user/role. That's `memory/credentials.md`'s whole job. The
-   repo's extension-based check misses inline secrets; you are the backstop.
-2. **No binaries.** No images, PDFs, plugin bundles, JS, CSS. Images → a `> Image removed:` callout +
-   an entry in `_Docs/Image Descriptions.md`. PDFs → text-extracted `.md`.
-3. **Never delete notes or rewrite his wording.** Add structure around rough notes. Explicit
-   consolidation is fine — carry the original wording across.
-4. **Respect space boundaries.** Never mix Acme material into personal or future-work spaces.
-5. **Never push to `main`.** Branch → PR. Use `vault-sync`.
-6. **Never write a low-confidence inference as fact.** Ask. See below.
-7. **No filler, no editorializing.** Every sentence carries a fact a future reader needs — in a note
-   *and* in your task report. Banned patterns and the test: root `AGENTS.md` hard rule 7.
-8. **Build the smallest maintainable change that fully solves the request.** Keep implementation,
-   abstraction, documentation, and testing proportional to the behavior and risk. Reuse sound
-   patterns, but consider a focused redesign when the existing path creates more complexity or
-   maintenance burden. Add machinery only for a concrete benefit. Full rule: root `AGENTS.md`
-   hard rule 8.
+The eight hard rules live in root `AGENTS.md` and are not restated here. Three carry vault-specific
+mechanics worth having in front of you:
+
+1. **Secrets.** The repo's extension-based check misses inline secrets — **you are the backstop**.
+   Recording *where* a credential lives is required, and that is `memory/credentials.md`'s job.
+2. **Binaries.** Images → a `> Image removed:` callout plus an entry in `_Docs/Image Descriptions.md`.
+   PDFs → text-extracted `.md`.
+3. **The user's wording.** Add structure around rough notes; never rewrite them. Explicit
+   consolidation is fine and carries the original wording across.
 
 ## Ask instead of assuming
 
@@ -72,32 +56,18 @@ years. Verify first (the code, the PR, the ticket, the email), ask second, assum
 
 ## Verification preview before any vault write
 
-Apply this gate to every entry in the repo: personal notes, work logs, projects, reference and meeting
-notes, Inbox items, indexes and landing pages, and `_Agents/memory/*.md`.
+`AGENTS.md` → **Vault writes** is the rule; this is the phrase list it refers to. The gate covers every
+entry in the repo — notes, indexes, landing pages, `_Agents/memory/*.md`. Show a `vault preview` with
+every destination path and the complete proposed Markdown or exact diff, then wait. A confirmation
+approves only the set shown.
 
-- By default, prepare the content in conversation without writing files or indexes. Show a
-  `vault preview` with every destination path, the complete proposed Markdown for each new or
-  short file, and the exact changed Markdown or diff for each existing file. Include frontmatter,
-  body text, links, tags, and landing-page/index changes so the user does not need to inspect a PR or
-  open the local vault to know what will be saved.
-- Wait for approval after the preview. A confirmation approves only the complete set shown; never
-  partially apply an unapproved set.
-- An explicit, positive bypass in the current request skips this human preview and approval. **The
-  canonical phrase is `full perms`** — `full permissions` is the same thing. Also recognize,
-  case-insensitively, `skip the preview`, `skip verification`, `write it directly`, and `save it
-  without asking`. Clear equivalents are valid; vague requests such as “organize this” are not. A
-  negated phrase such as “do not use full perms” never bypasses the gate.
-- **Merge phrases are not a bypass.** “auto merge”, “just merge”, “merge it now” mean the git
-  operation and nothing more. They collide with GitHub's own auto-merge setting — asking to merge a
-  PR is not permission to skip the preview.
-- The bypass does not waive the hard rules: no secrets or binaries, no space-boundary violations, no
-  direct push to `main`, and no uncertain claim written as fact. Preserve unresolved material as an
-  open question or staging entry instead of guessing.
+Bypass, current-request only and case-insensitive: **`full perms`** is canonical; `full permissions`,
+`skip the preview`, `skip verification`, `write it directly`, `save it without asking` are equivalent.
+Clear equivalents count; vague requests like "organize this" do not, and a negated phrase never
+bypasses. **Merge phrases are not a bypass** — `auto merge` / `just merge` mean the git operation and
+nothing else; they collide with GitHub's own auto-merge setting.
 
-This is a chat content handoff, not a request for the user to review the PR. The PR remains the
-delivery mechanism; this preview is the content verification step before the write.
-
-Full rule in root `AGENTS.md`; standing instruction in `memory/working-preferences.md`.
+A bypass skips the human preview. It never waives the hard rules.
 
 ## How to write here
 
@@ -180,22 +150,11 @@ Wiki-links resolve by **note name**, not path — moving a note into `Archive/` 
 The operational knowledge these skills assume. **This is what makes an agent behave the same in every
 harness** — connecting to a system is never left to whatever a tool happens to have configured.
 
-Do not preload this folder. Shell commands or machine-dependent paths/tooling require
-`environment.md` and exactly one matching `machines/` profile. Authentication, profiles, secret
-locations, or connection failures require `credentials.md` plus the relevant platform file. Topic
-work requires only the matching topic memory. Live state comes from its connector.
-
-| Need | File |
-|---|---|
-| Which target am I on, and what's true everywhere | `environment.md` |
-| This machine's paths, shells, and missing CLIs | the matching `machines/` profile |
-| Where a key / token / profile lives | `credentials.md` |
-| Which connector owns a question, and where each one lies | `connectors.md` |
-| **When to write memory** — the fast path vs the reviewed pass | `README.md` |
-| Warehouse account, roles, read-only MCP + how to run DDL anyway | `warehouse.md` |
-| Standing instructions from the user | `working-preferences.md` |
-| Active project state and pointers | `projects.md` |
-| Anything about a platform not listed above | its own file — add one per system you work in, shaped like `warehouse.md` |
+Do not preload this folder; the index is [`memory/README.md`](../../memory/README.md). Shell commands
+or machine-dependent paths/tooling require `environment.md` and exactly one matching `machines/`
+profile. Authentication, profiles, secret locations, or connection failures require `credentials.md`
+plus the relevant platform file. Topic work requires only the matching topic memory. Live state comes
+from its connector.
 
 Memory is **point-in-time**. Environment facts (paths, accounts, which shell holds the SSH key) are
 stable — act on them. Code and data facts drift — verify first. `vault-memory` keeps this current.
@@ -209,30 +168,8 @@ Copilot, and Antigravity read natively.
 `_Agents/scripts/install-skills.sh --here` once, or **just read the files** — they're plain Markdown.
 Never report a skill unavailable because your harness didn't load it.
 
-| Skill | Use for |
-|---|---|
-| `watchtower` | Vault-specific context: layout, writing, preview gate, employer scope, filing, and memory routing. |
-| `bootstrap` | Sets up a new user or machine, seeds the memory maps, and teaches the operating model. |
-| `weekly-work-log` | The weekly manager-facing work log, from evidence only, in the house format. |
-| `vault-memory` | Refreshes `_Agents/memory/` from prior sessions and your connectors. |
-| `vault-sync` | Pull → refresh → commit → PR → merge → concise summary. The single entry point for "sync my vault". |
-| `vault-doctor` | Mechanical integrity checks — links, tags, frontmatter, skill-index drift, stale mirror. Read-only, script-backed. |
-| `vault-prune` | Quality pass — slop, near-duplicates, bloat, stale claims, orphans, gaps. Per-item approval; never deletes unasked. |
-| `vault-edit` | Safe create / move / rename / merge / split / archive / delete, and what must move with the file. |
-| `knowledge-router` | Decides which knowledge base owns a task — this vault or the team's shared one. |
-| `shared-vault-sync` | Both directions with the team vault in one command, drift check first. |
-| `shared-vault-promote` | Outbound: what the team should have, rewritten for a team audience and stripped of anything private. |
-| `shared-vault-ingest` | Inbound: indexes the team vault and absorbs its gotchas and constraints into memory. Never copies it. |
-| `secrets` | Get, store, rotate, and inject credentials. **Never surfaces a value.** |
-| `playwright-testing` | Real-browser tests for user-visible behavior — uploads, downloads, forms, navigation, responsive layout. |
-| `personal-vault` | The front door for personal material; routes to the right section. |
-| `personal-memory` | Past events, milestones, and life-history notes. |
-| `personal-reflection` | Opinions, values, identity questions, and rambles. |
-| `personal-entities` | People, pet, and location notes, and the links to them. |
-| `personal-triage` | Classifies personal material staged in Uncategorized. |
-| `diary` | Lightly cleaned daily entries that preserve your voice. |
-
-employer-specific skills carry `ACME` in their frontmatter `tags:`, same convention as notes and memory.
+**The skill index is [`_Agents/README.md`](../../README.md)** — one table, one place to update.
+Employer-specific skills carry `ACME` in their frontmatter `tags:`, same convention as notes and memory.
 
 **Skills vs memory:** a skill is *how to perform a task*; memory is *what is true about this
 environment*. A skill hard-coding an account id, path, or cron expression is doing memory's job.
@@ -246,8 +183,7 @@ mirror. Full flow and checklist: `_Agents/CONVENTIONS.md`. Short version:
 2. `_Agents/scripts/new-skill.sh <name>` — needs a POSIX shell. On Windows use WSL or Git Bash;
    check your `memory/machines/` profile.
 3. Write the `description` first; it's the trigger every platform reads.
-4. Register it in the three hand-maintained index tables: this file's table above,
-   `_Agents/README.md`, and `_Docs/Skills Repo.md`. Miss one and `vault-doctor` fails.
+4. Add a row to `_Agents/README.md`'s Skills table. `vault-doctor` fails if you miss it.
 5. `_Agents/scripts/install-skills.sh --here` — the mirror is a copy, not a link.
 6. Branch `feat/<slug>` + PR.
 

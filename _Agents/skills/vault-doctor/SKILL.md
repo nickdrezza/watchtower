@@ -3,7 +3,7 @@ name: vault-doctor
 description: >
   Runs the vault's mechanical integrity checks and reports what is objectively broken — dead relative
   and wiki links, tags missing from the Tag Registry, notes without frontmatter, skills missing from
-  the three hand-maintained index tables, skill name/folder mismatches, thin skill descriptions, machine
+  the hand-maintained index table, skill name/folder mismatches, thin skill descriptions, machine
   paths hardcoded into skills, and a stale .claude/skills mirror. Use when the user says "check my
   vault", "vault health", "is anything broken", "run the integrity checks", "did I break any links",
   "audit the skills", or before shipping a large structural change. Read-only and safe to run anytime.
