@@ -29,14 +29,14 @@ _Agents/
     ├── new-skill.sh          scaffold a new skill
     ├── install-skills.sh     deploy skills/ to where a harness will find them
     ├── install-instructions.sh  point each harness's GLOBAL instruction file at this repo
+    ├── wt-search.sh          return prompt-relevant pointers without loading file bodies
     └── check_vault.py         mechanical integrity checks (backs vault-doctor)
 ```
 
 ## Start here
 
-[`docs/operating-model.md`](docs/operating-model.md) is the one to read first — it's the model
-everything else assumes: one brain, many disposable agents, fetch context before asking, and write
-memory so a chat can be thrown away.
+Root [`AGENTS.md`](../AGENTS.md) is the small always-on bootstrap. Use this map after prompt-specific
+search points into the agent layer; do not read it or its linked files wholesale at session start.
 
 ## Memory
 
@@ -44,10 +44,10 @@ memory so a chat can be thrown away.
 how to connect to each platform you work in, who's who, what's in flight, and how you want agents to
 work.
 
-**Read [`memory/environment.md`](memory/environment.md) and
-[`memory/credentials.md`](memory/credentials.md) before any hands-on task.** `environment.md` routes you
-to one profile in [`memory/machines/`](memory/machines/README.md) — targets that share almost no
-paths. Full index: [`memory/README.md`](memory/README.md).
+Read [`memory/environment.md`](memory/environment.md) plus exactly one machine profile before
+machine-dependent commands. Read [`memory/credentials.md`](memory/credentials.md) only for
+authentication, profiles, secret locations, or connection failures. Full routing index:
+[`memory/README.md`](memory/README.md).
 
 Skills say *how to perform a task*; memory says *what is true about this environment*. Keep the facts in
 memory and have skills point at them. **Locations, never values** — the path or env-var name, never the
@@ -58,7 +58,7 @@ one query if you changes jobs; `vault-memory` keeps the folder current.
 
 | Skill | What it does |
 |---|---|
-| [`watchtower`](skills/watchtower/) | **The primary context. Load it first, every session.** Layout, hard rules, how to write here, the employer-scope tag, the memory index. |
+| [`watchtower`](skills/watchtower/) | Vault-specific context: layout, writing, preview gate, employer scope, filing, and memory routing. |
 | [`bootstrap`](skills/bootstrap/) | Sets up a new user or machine, seeds the memory maps, and teaches the operating model. |
 | [`weekly-work-log`](skills/weekly-work-log/) | Writes or updates the weekly manager-facing work log, from evidence only, in the house format. |
 | [`vault-memory`](skills/vault-memory/) | Refreshes `_Agents/memory/` from prior sessions and your connectors. |
@@ -121,11 +121,11 @@ _Agents/scripts/new-skill.sh my-skill-name
 _Agents/scripts/install-skills.sh --here      # refresh the Claude Code mirror (it's a copy)
 ```
 
-Then **register it in the four index tables** — the Skills table above,
+Then **register it in the three index tables** — the Skills table above,
 [`skills/watchtower/SKILL.md`](skills/watchtower/SKILL.md),
-[`../_Docs/Skills Repo.md`](../_Docs/Skills%20Repo.md), and [`../AGENTS.md`](../AGENTS.md). They're
+and [`../_Docs/Skills Repo.md`](../_Docs/Skills%20Repo.md). They're
 hand-maintained, so a new skill is invisible to a reader until they're updated — and `vault-doctor`
-checks all four.
+checks all three.
 
 Rules of thumb (full flow and checklist in [`CONVENTIONS.md`](CONVENTIONS.md)):
 
