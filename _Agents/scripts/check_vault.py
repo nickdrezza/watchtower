@@ -143,7 +143,6 @@ def check_skill_indexes():
         "_Agents/README.md",
         "_Agents/skills/watchtower/SKILL.md",
         "_Docs/Skills Repo.md",
-        "AGENTS.md",
     ]
     for idx in indexes:
         text = read(idx)

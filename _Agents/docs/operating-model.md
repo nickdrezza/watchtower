@@ -60,15 +60,13 @@ This only holds if memory actually gets written. The duty is in
 [`../memory/README.md`](../memory/README.md) → **When to write memory** — the fast path exists so a
 fact learned mid-session doesn't wait for a sync that may never come.
 
-## Load context aggressively
+## Load context precisely
 
-Spend input tokens deliberately. Reading `environment.md`, the topic memory file, and the relevant
-note before starting is cheaper than one wrong assumption.
-
-**Why this is safe (assessed 2026-08-05):** current frontier models hold long contexts and survive
-compaction well enough that a heavily-loaded thread still produces good output. This was *not* true
-before roughly Opus 4.6 — threads degraded after a few compactions, which is why older habits favored
-short, fresh chats. This is a judgement about model capability, not a law; re-assess when models change.
+Spend input tokens deliberately. Start from the prompt, search for precise terms, and open only the
+matching skill, memory file, note, or prior-session evidence. `environment.md` plus one machine profile
+is required only for machine-dependent actions; `credentials.md` is required only for authentication,
+secret-location, profile, or connection work. Retrieval should expand when evidence points outward,
+not because a file is adjacent or linked.
 
 ## Structure exists to make retrieval cheap
 

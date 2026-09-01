@@ -91,5 +91,5 @@ usually to dump a week of context in and let it get filed — that's the fastest
 ## Related
 
 - `vault-doctor` — the integrity checks. Run at the end.
-- `watchtower` — the primary context, loaded every session after this.
+- `watchtower` — vault-specific context, loaded only for vault work.
 - `_Docs/Setup Guide.md` — the human version of steps 1–4.
