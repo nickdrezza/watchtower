@@ -55,6 +55,12 @@ search it for prompt-specific context before acting or asking the user to re-exp
 Load skills, machine context, credentials, and topic memory only when the request requires them;
 \`$REPO_ROOT/AGENTS.md\` defines that routing.
 
+**If a skill name exists twice, use the unprefixed one.** Skills are authored in the repo above and may
+also be installed from a marketplace or shared repo, so the same name can appear as \`foo\` and as
+\`some-plugin:foo\`. The unprefixed copy is the source of truth; the prefixed one is a published build
+artifact that may be behind. Only reach for \`plugin:skill\` when there is no unprefixed skill of that
+name.
+
 ## Working style
 
 - Be pragmatic, direct, warm, and collaborative. Optimize for completing the user's actual goal, not

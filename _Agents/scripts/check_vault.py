@@ -134,16 +134,16 @@ def check_frontmatter():
 
 
 def check_skill_indexes():
-    """Every skill dir appears in each hand-maintained index, and vice versa."""
+    """Every skill dir appears in the hand-maintained index, and vice versa.
+
+    One index, not three: _Agents/README.md is authoritative. watchtower/SKILL.md and
+    _Docs/Skills Repo.md used to carry their own copies of the same table; they point at it now.
+    """
     skills = sorted(
         d for d in os.listdir("_Agents/skills")
         if os.path.isfile(f"_Agents/skills/{d}/SKILL.md")
     ) if os.path.isdir("_Agents/skills") else []
-    indexes = [
-        "_Agents/README.md",
-        "_Agents/skills/watchtower/SKILL.md",
-        "_Docs/Skills Repo.md",
-    ]
+    indexes = ["_Agents/README.md"]
     for idx in indexes:
         text = read(idx)
         if not text:

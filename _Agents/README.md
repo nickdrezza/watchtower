@@ -66,6 +66,7 @@ one query if you changes jobs; `vault-memory` keeps the folder current.
 | [`vault-doctor`](skills/vault-doctor/) | Mechanical integrity checks — links, tags, frontmatter, skill-index drift, stale mirror. Read-only, script-backed. |
 | [`vault-prune`](skills/vault-prune/) | Quality pass — slop, near-duplicates, bloat, stale claims, orphans, gaps. Per-item approval; never deletes unasked. |
 | [`vault-edit`](skills/vault-edit/) | Safe create / move / rename / merge / split / archive / delete, and what must move with the file. |
+| [`skills-sync`](skills/skills-sync/) | Publishes selected skills to an external destination — a plugin marketplace, a shared skills repo — reformatted to that destination's own layout and sanitized of anything machine-bound. Requires the user to name every skill explicitly; also reports drift and shadowing between the two copies. Ledger: [`_Docs/Skill Exports.md`](../_Docs/Skill%20Exports.md). |
 | [`knowledge-router`](skills/knowledge-router/) | Decides which knowledge base owns a task — this vault or the team's shared one. |
 | [`shared-vault-sync`](skills/shared-vault-sync/) | Both directions with the team vault in one command, drift check first. |
 | [`shared-vault-promote`](skills/shared-vault-promote/) | Outbound: what the team should have, rewritten for a team audience and stripped of anything private. |
@@ -121,11 +122,10 @@ _Agents/scripts/new-skill.sh my-skill-name
 _Agents/scripts/install-skills.sh --here      # refresh the Claude Code mirror (it's a copy)
 ```
 
-Then **register it in the three index tables** — the Skills table above,
-[`skills/watchtower/SKILL.md`](skills/watchtower/SKILL.md),
-and [`../_Docs/Skills Repo.md`](../_Docs/Skills%20Repo.md). They're
-hand-maintained, so a new skill is invisible to a reader until they're updated — and `vault-doctor`
-checks all three.
+Then **add a row to the Skills table above** — this file is the one hand-maintained skill index, so a
+new skill is invisible to a reader until it's there, and `vault-doctor` fails without it. The
+`watchtower` skill and `_Docs/Skills Repo.md` used to carry duplicate copies of this table and now
+point here; don't reintroduce them.
 
 Rules of thumb (full flow and checklist in [`CONVENTIONS.md`](CONVENTIONS.md)):
 
