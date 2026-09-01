@@ -49,6 +49,11 @@ done: `_Agents/docs/verification.md`.
 6. **Never write a low-confidence inference as fact.** Ask. See below.
 7. **No filler, no editorializing.** Every sentence carries a fact a future reader needs — in a note
    *and* in your task report. Banned patterns and the test: root `AGENTS.md` hard rule 7.
+8. **Build the smallest maintainable change that fully solves the request.** Keep implementation,
+   abstraction, documentation, and testing proportional to the behavior and risk. Reuse sound
+   patterns, but consider a focused redesign when the existing path creates more complexity or
+   maintenance burden. Add machinery only for a concrete benefit. Full rule: root `AGENTS.md`
+   hard rule 8.
 
 ## Ask instead of assuming
 
