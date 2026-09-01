@@ -61,6 +61,24 @@ A merged branch's worktree is a trap as much as it is disk: a later agent finds 
 `main` nor in flight and works from it. `git worktree prune` will not help — it only clears entries
 whose directory is already gone.
 
+## Your copy of a skill wins over any published copy
+
+**When the same skill name is available twice, every agent uses the vault's version.** In practice that
+means the unprefixed name: `weekly-work-log`, not `workflow:weekly-work-log`.
+
+Why the vault copy and not the published one: `_Agents/skills/` is where skills are authored, and the
+global install (`~/.claude/skills` → `~/.agents/skills`) points at it, so it is current by
+construction. A published copy is a build artifact — cut at some revision, possibly edited by someone
+else afterwards, and on an auto-syncing marketplace it changes without you doing anything. Two copies
+of an executable instruction that silently disagree is the failure mode; this decides it in advance
+rather than per session.
+
+Reach for a `plugin:skill` name only when there is **no** unprefixed skill of that name.
+
+The rule lives in `AGENTS.md` → *Context loading* and in the generated global stub, so it applies in
+any repo. What is published and currently duplicated: `_Docs/Skill Exports.md`. Drift between the two
+copies is `skills-sync`'s job.
+
 ## Verify; never fabricate
 
 Every claim in a deliverable traces to a merged PR, a ticket, an email, a command's output, or my own

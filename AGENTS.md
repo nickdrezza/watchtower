@@ -15,6 +15,12 @@ small; the vault holds the rest as searchable skills, memory, notes, and prior-s
 3. **Load skills on demand.** Read a skill's complete `SKILL.md` when the request names it or matches
    its description. Load `_Agents/skills/watchtower/SKILL.md` only for vault work: reading, filing,
    editing, restructuring, governing, or answering from this vault.
+   **When a skill name exists twice, this repo's copy wins — always.** Skills published from here to a
+   marketplace or a shared repo come back as installed copies, so a name can appear both unprefixed
+   (`my-skill` — this repo, deployed to `~/.agents/skills`) and prefixed (`some-plugin:my-skill`).
+   **Invoke the unprefixed one.** This repo is the source; a prefixed copy is a build artifact that may
+   be behind or edited by someone else. Use a `plugin:skill` name only when no unprefixed skill of that
+   name exists. Ledger of what is published and currently duplicated: `_Docs/Skill Exports.md`.
 4. **Load operational context only when the action needs it:**
    - Shell commands or machine-dependent paths/tooling → `_Agents/memory/environment.md`, then exactly
      one matching `_Agents/memory/machines/` profile.
