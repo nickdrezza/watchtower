@@ -73,6 +73,18 @@ Then, if your harness didn't auto-load skills, read `_Agents/skills/` yourself �
    degrades the vault directly, because retrieval gets worse as the signal-to-noise ratio falls, and
    a vault of bloated notes is slower and *worse* to work in than a smaller one. See **How to write
    here** for the banned patterns and the test.
+8. **Build the smallest maintainable change that fully solves the request.** Keep scope, abstraction,
+   documentation, and testing proportional to the behavior and risk. Reuse existing patterns when
+   they are sound; existing code is evidence, not a constraint. If the current path is materially
+   brittle, inefficient, confusing, or costly to extend, consider a focused redesign and choose the
+   approach with the lowest total complexity and maintenance burden. New layers, helpers,
+   dependencies, frameworks, compatibility shims, or generalized infrastructure require a concrete
+   benefit—not merely the possibility of future reuse. Optimize measured or obvious hot paths without
+   sacrificing clarity. Document non-obvious behavior and decisions; test changed behavior,
+   regressions, and outcome-changing edge cases without duplicating implementation details or
+   constructing unrelated suites. Remove speculative branches, redundant scaffolding, generated
+   boilerplate, and repetition before finishing. A human maintainer should be able to understand and
+   safely change the result without reconstructing the agent's reasoning.
 
 ## Ask instead of assuming
 
@@ -162,6 +174,13 @@ The vault's value is being scannable in two years. Verbosity is the failure mode
   way, the thing that cost hours. Cut words, never facts.
 - **Prefer structure to prose.** A table or labelled list carries more per line and ages better.
 - Aim for elegance: the shortest form a future agent can act on with no follow-up questions.
+- **Documentation and code comments are atomic, short, and complete.** Include the context, behavior,
+  constraints, and non-obvious implementation nuance needed to understand or safely change the code.
+  Omit tangents, repetition, obvious mechanics, and unrelated background.
+- **Testing handoffs are minimal but complete.** Cover every distinct user-visible use case and
+  outcome-changing edge case once. Assume the tester does not know where the feature lives: name
+  the starting screen, the control to use, and the expected visible result. Write each item as
+  specific navigation → action → verification steps without adding implementation detail.
 
 ### Plain first, then the names
 

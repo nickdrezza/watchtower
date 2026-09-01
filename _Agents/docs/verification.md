@@ -35,6 +35,13 @@ it has gotten work rejected before.
 - **Run it twice** when a script is meant to be idempotent or scheduled. Most re-run bugs are invisible
   on the first pass.
 
+## Test design
+
+Tests should be the smallest set that completely covers the behavior. Test each distinct use case,
+failure mode, and outcome-changing edge case once at the lowest reliable level. Do not add multiple
+tests that prove the same behavior unless a different layer, integration, or regression risk requires
+it.
+
 ## Browser testing
 
 Warranted when the thing being changed is user-visible behavior — uploads, downloads, forms,
@@ -52,6 +59,14 @@ one-off manual clicks. Platform-specific auth and iframe constraints are in
 - [ ] Anything that could differ at scale, on a re-run, or on another machine is named.
 - [ ] Numbers in the report came from output you read, not from inference.
 - [ ] Steps you skipped are stated as skipped.
+
+## Testing checklists
+
+When handing off a new feature for human testing, provide the shortest checklist that covers every
+user-visible use case and outcome-changing edge case. Assume the tester is unfamiliar with the
+feature: identify where to start, the exact control to use, and the visible result that proves the
+behavior. Under each feature or ticket heading, use numbered navigation → action → verification
+steps. Omit implementation detail, repeated setup, and checks already covered by another item.
 
 ## Reporting
 
