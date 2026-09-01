@@ -3,8 +3,7 @@
 **Read [`AGENTS.md`](AGENTS.md).** It is the single source of instructions for every agent working
 in this repo and applies to you unchanged.
 
-Then load **`_Agents/skills/watchtower/SKILL.md`** — the primary context for how to interact
-with this repo. Do this before reading or writing anything here.
+Load skills and vault context only when the request matches them; `AGENTS.md` defines routing.
 
 Claude-Code-specific notes (everything else is in `AGENTS.md`):
 

@@ -7,8 +7,9 @@ Skills say *how to perform a task*. Memory says *what is true about this environ
 hard-codes an account id or a file path is doing memory's job — put the fact here and let the skill
 point at it.
 
-**Read `environment.md` and `credentials.md` at the start of any hands-on task.** They're short, and
-almost every failure mode (wrong machine, wrong shell, expired session, read-only MCP) is in one of them.
+Load memory by task. Read `environment.md` and exactly one machine profile before machine-dependent
+commands. Read `credentials.md` only for authentication, secret locations, profiles, or connection
+failures. Read a platform file only when the prompt or search results point to that platform.
 
 ## Files
 

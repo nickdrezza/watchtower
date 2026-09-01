@@ -3,7 +3,7 @@ name: vault-doctor
 description: >
   Runs the vault's mechanical integrity checks and reports what is objectively broken — dead relative
   and wiki links, tags missing from the Tag Registry, notes without frontmatter, skills missing from
-  the hand-maintained index tables, skill name/folder mismatches, thin skill descriptions, machine
+  the three hand-maintained index tables, skill name/folder mismatches, thin skill descriptions, machine
   paths hardcoded into skills, and a stale .claude/skills mirror. Use when the user says "check my
   vault", "vault health", "is anything broken", "run the integrity checks", "did I break any links",
   "audit the skills", or before shipping a large structural change. Read-only and safe to run anytime.
@@ -39,7 +39,7 @@ Exit `0` clean, `1` findings, `2` couldn't run. Checks available: `relative-link
 | `broken-wiki-link` | Obsidian shows it dead; the graph loses a node | Create the note, fix the name, or drop the link. Wiki-links resolve by **note name**, not path |
 | `unregistered-tag` | Vocabulary drift — the thing that makes a big vault slow to search | Register it in `Maps/Tag Registry.md` **in the same commit**, or remove it |
 | `missing-frontmatter` | Dashboards filter on `type ==`, so the note is invisible to every view | Add frontmatter from `_Templates/` |
-| `skill-not-indexed` | Four index tables are hand-maintained; an unlisted skill is invisible to a reader | Add the row. This has already happened once |
+| `skill-not-indexed` | Three index tables are hand-maintained; an unlisted skill is invisible to a reader | Add the row. |
 | `skill-name-mismatch` | Folder name must equal the `name:` field | Rename one to match |
 | `thin-skill-description` | **The description is the trigger.** Under ~200 chars it silently fails to load | Rewrite it with real phrases the user would type |
 | `hardcoded-machine-path` | `CONVENTIONS.md`: skills say *how*, memory says *what is true*. A baked path breaks on the other machine | Move the fact to `_Agents/memory/machines/` and point at it |

@@ -83,13 +83,12 @@ Document any reliance on these in the body so a reader on another platform knows
    `_Agents/memory/machines/` for the target you're on.
 3. **Write it**, starting with the `description` — that field is the trigger. Then the body, per the
    sections above.
-4. **Register it in the four index tables.** These are hand-maintained; a new skill is invisible to a
+4. **Register it in the three index tables.** These are hand-maintained; a new skill is invisible to a
    reader (and to an agent that didn't auto-discover it) until they're updated. `vault-doctor` checks
-   all four and fails if any one is missing the skill — none of them is optional:
+   all three and fails if any one is missing the skill — none of them is optional:
    - `_Agents/skills/watchtower/SKILL.md` → the skills table under "The agent layer"
    - `_Agents/README.md` → the Skills table
    - `../_Docs/Skills Repo.md` → "The skills" table (the vault-visible index)
-   - `../AGENTS.md` → the skills table
 5. **Refresh the Claude Code mirror**, or Claude Code won't see the new skill — `.claude/skills/` is a
    **copy**, not a live link:
 
@@ -118,4 +117,4 @@ Document any reliance on these in the body so a reader on another platform knows
       question set *before* the write, and state its understanding concretely enough to be
       contradicted. Root `AGENTS.md` → **Ask instead of assuming** is the rule; don't restate it, point
       at it and say what the questions are for this task.
-- [ ] Registered in the four index tables (step 4 above), and the `.claude/skills/` mirror refreshed.
+- [ ] Registered in the three index tables (step 4 above), and the `.claude/skills/` mirror refreshed.

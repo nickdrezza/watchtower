@@ -2,8 +2,8 @@
 name: watchtower
 description: >
   Primary operating context for "the vault" — your private Obsidian vault plus the agent
-  skills and memory that run your work. Load FIRST, every session, before reading or writing anything
-  in that repo. Use for: filing raw notes, meeting notes, interview notes, or work logs; creating or
+  skills and memory that run your work. Load for vault work, not for unrelated prompts. Use for:
+  filing raw notes, meeting notes, interview notes, or work logs; creating or
   updating project/reference notes; answering personal, career, or Acme work-context questions from
   the vault; adding or editing a skill; and as the entry point to _Agents/memory/ — this machine, where
   credentials live, and how to connect to every platform you work in — the warehouse, the cloud
@@ -175,16 +175,15 @@ day be swept into an archive with a single query and the rest of the vault survi
 
 Wiki-links resolve by **note name**, not path — moving a note into `Archive/` doesn't break `[[links]]`.
 
-## `_Agents/memory/` — read before any hands-on work
+## `_Agents/memory/` — load by task
 
 The operational knowledge these skills assume. **This is what makes an agent behave the same in every
 harness** — connecting to a system is never left to whatever a tool happens to have configured.
 
-**Read `environment.md` and `credentials.md` first**, and let `environment.md` route you to the one
-`machines/` profile that applies. Nearly every failure mode here is in one of them: **wrong machine**,
-wrong shell (on Windows the Bash tool is Git Bash, *not* WSL), a CLI that isn't installed on this target,
-wrong AWS profile, expired SSO session, read-only SQL MCP, symlinks across the WSL boundary, a Sheet not
-shared with the service account.
+Do not preload this folder. Shell commands or machine-dependent paths/tooling require
+`environment.md` and exactly one matching `machines/` profile. Authentication, profiles, secret
+locations, or connection failures require `credentials.md` plus the relevant platform file. Topic
+work requires only the matching topic memory. Live state comes from its connector.
 
 | Need | File |
 |---|---|
@@ -212,7 +211,7 @@ Never report a skill unavailable because your harness didn't load it.
 
 | Skill | Use for |
 |---|---|
-| `watchtower` | **The primary context. Load it first, every session.** Layout, hard rules, how to write here, the employer-scope tag, the memory index. |
+| `watchtower` | Vault-specific context: layout, writing, preview gate, employer scope, filing, and memory routing. |
 | `bootstrap` | Sets up a new user or machine, seeds the memory maps, and teaches the operating model. |
 | `weekly-work-log` | The weekly manager-facing work log, from evidence only, in the house format. |
 | `vault-memory` | Refreshes `_Agents/memory/` from prior sessions and your connectors. |
@@ -247,8 +246,8 @@ mirror. Full flow and checklist: `_Agents/CONVENTIONS.md`. Short version:
 2. `_Agents/scripts/new-skill.sh <name>` — needs a POSIX shell. On Windows use WSL or Git Bash;
    check your `memory/machines/` profile.
 3. Write the `description` first; it's the trigger every platform reads.
-4. Register it in the four hand-maintained index tables: this file's table above,
-   `_Agents/README.md`, `_Docs/Skills Repo.md`, root `AGENTS.md`. Miss one and `vault-doctor` fails.
+4. Register it in the three hand-maintained index tables: this file's table above,
+   `_Agents/README.md`, and `_Docs/Skills Repo.md`. Miss one and `vault-doctor` fails.
 5. `_Agents/scripts/install-skills.sh --here` — the mirror is a copy, not a link.
 6. Branch `feat/<slug>` + PR.
 
