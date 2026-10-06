@@ -33,12 +33,10 @@ The reference files keep the names of the old separate skills. Read them as thes
 `personal-reflection` → `references/reflections.md`, `personal-entities` →
 `references/entities.md`, `personal-triage` → `references/triage.md`.
 
-## Preview before saving
+## The PR is the preview
 
-Follow the vault-wide verification preview. Unless the current request contains an explicit,
-positive bypass such as `full perms`, `skip verification`, or `write it directly`, show every destination and the exact proposed Markdown plus frontmatter, links,
-tags, and landing-page changes here before writing. The bypass skips only the human preview; preserve
-the hard rules and do not guess.
+Write on a branch and open a PR. The diff is the preview (`AGENTS.md` → *Write to the vault*). Show
+the Markdown in chat only when the user asks. Keep the hard rules and do not guess.
 
 ## Capture rules
 
@@ -56,5 +54,5 @@ the hard rules and do not guess.
 ## Before finishing
 
 Check the path, frontmatter, scope tags, people/location/pet links, landing-page backlinks, and that
-no source wording or personal detail was silently dropped. Apply the vault preview/bypass gate,
-then commit vault edits on the active feature branch; do not push `main`.
+no source wording or personal detail was silently dropped. Commit vault edits on the active feature
+branch and open a PR; do not push `main`.

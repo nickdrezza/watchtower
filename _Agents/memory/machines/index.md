@@ -1,3 +1,10 @@
+---
+type: memory
+title: "The environment"
+description: "Find which machine you are on, read its one profile, and see the facts that are true on every machine."
+updated: 2026-10-06
+---
+
 # The environment
 
 **Pick a machine profile before you run anything.** Most failures here are not bugs — they're a command
@@ -16,9 +23,9 @@ No shell at all — a chat client with no filesystem — means **phone**.
 
 | Target | Tell | Profile |
 |---|---|---|
-| **Laptop (macOS)** | `Darwin` | [`machines/macos.md`](machines/macos.md) |
-| **Laptop (Windows + WSL)** | `MINGW*` or WSL `Linux` | [`machines/windows-wsl.md`](machines/windows-wsl.md) |
-| **Phone** | no shell, no filesystem | [`machines/mobile.md`](machines/mobile.md) |
+| **Laptop (macOS)** | `Darwin` | [`machines/macos.md`](macos.md) |
+| **Laptop (Windows + WSL)** | `MINGW*` or WSL `Linux` | [`machines/windows-wsl.md`](windows-wsl.md) |
+| **Phone** | no shell, no filesystem | [`machines/mobile.md`](mobile.md) |
 
 Add a profile per target you actually use. **Read the profile; don't assume the other one.**
 
@@ -56,5 +63,18 @@ Never carry one of these across profiles from memory — look it up.
    the search hook, and the pre-commit hook. You can run it again at any time.
 3. `_Agents/wt doctor` — must report 0 errors.
 4. Authenticate your git CLI; set a per-repo `user.email` if the global one is personal.
-5. **Write a profile for it** in [`machines/`](machines/README.md) — including what is *not* installed.
+5. **Write a profile for it** in this folder (see *Machine profiles* below) — including what is *not* installed.
    That list is as load-bearing as the paths.
+
+## Machine profiles
+
+One file per target you actually work on. This page routes here.
+
+| Profile | Target |
+|---|---|
+| [`macos.md`](macos.md) | A macOS laptop |
+| [`windows-wsl.md`](windows-wsl.md) | Windows with WSL — the two-shell case |
+| [`mobile.md`](mobile.md) | A phone: no shell, no filesystem |
+
+**Record what is deliberately *not* installed.** That list is as load-bearing as the paths — it stops an
+agent burning turns on a tool that isn't there.

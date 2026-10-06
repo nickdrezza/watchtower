@@ -21,7 +21,8 @@ filler, framing, and adjacent suggestions.
 - `Spaces/Work/Work Logs/<YYYY>/Q<n>/MM-DD-YYYY.md`, dated by the **Monday** of the week
   (week of Mon 2026-07-13 → `07-13-2026.md`), filed under the quarter that Monday falls in. Template:
   `_Templates/Weekly Work Log.md`.
-- Add the new week's note to the weekly-log index in `Maps/` as a wiki-link — it isn't generated.
+- List the new week in `Spaces/Work/Work Logs/index.md`: create it with an `okf-view` block if it
+  does not exist, then run `_Agents/wt index`.
 - The current-week file may already exist as a stub or a mid-week draft. **Update it, don't duplicate.**
 - Frontmatter: the weekly-log template in `watchtower`'s `reference.md`, carrying both the `work` scope
   tag and your employer tag — work logs are employer-specific by definition.
@@ -55,13 +56,11 @@ sources, and the one place they're documented.
    one line each. Offer tighter (~1 line/project) or fuller on request. No wall of text, no per-day
    breakdown unless asked.
 
-## Verification preview before saving
+## The PR is the preview
 
-Follow the vault-wide verification preview before creating or updating the weekly Markdown file or the
-index. By default, show the complete proposed work-log Markdown and the exact index changes in chat
-before writing. An explicit current-request bypass such as `full perms`, `skip verification`, or
-`write it directly` skips that human preview and approval. It does not
-permit invented work, unsupported claims, secrets, or a direct push to `main`.
+Write the weekly Markdown file and the `Spaces/Work/Work Logs/index.md` change on a branch and open a
+PR. The diff is the preview (`AGENTS.md` → *Write to the vault*). Show it in chat only when the user
+asks. Do not write invented work, unsupported claims, or secrets, and do not push to `main`.
 
 ## Format
 

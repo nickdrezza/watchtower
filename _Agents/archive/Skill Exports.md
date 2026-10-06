@@ -1,13 +1,12 @@
 ---
 type: documentation
+description: "Archived ledger of skills published from this vault to other repos; team skills now live only in the team repo."
+updated: 2026-10-06
 status: active
 domain: system
 workspace: vault
 tags:
   - "topic/agents"
-related:
-  - "[[Skills Repo]]"
-  - "[[Agent Memory]]"
 ---
 
 # Skill Exports
@@ -33,7 +32,7 @@ rather than silently re-clobbering it on the next export.
 |---|---|---|---|---|
 | *example* | `your-org/skills-marketplace` | **A — Claude Code plugin marketplace** (`skills-sync/reference.md`) | whoever merges | If the repo auto-syncs to everyone's client, **merging deploys** — the PR review is the only gate. Note any per-plugin review rules and any vendored skills that must be fixed upstream. |
 
-Clone paths are per-machine — `_Agents/memory/machines/<target>.md`, routed by `environment.md`.
+Clone paths are per-machine — `_Agents/memory/machines/<target>.md`, routed by `_Agents/memory/machines/index.md`.
 
 ## Ledger
 

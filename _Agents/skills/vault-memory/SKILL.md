@@ -87,16 +87,15 @@ Ask about anything you inferred rather than read, any contradiction, and any fac
 embarrassing to get wrong (an account id, a role, a path). **One batched multiple-choice set**, before
 writing. Don't ask about the obvious.
 
-## Verification preview before writing
+## The PR is the preview
 
-This skill always runs the **full path** — a multi-fact run is never fast-path eligible. (The fast
-path is for a single fact captured mid-session in some other context; conditions in
+A multi-fact run is never a fast-path write; it goes in its own PR. (The fast path is for one fact
+captured during other work; the conditions are in
 [`../../memory/README.md`](../../memory/README.md) → *When to write memory*.)
 
-After the candidate facts are settled, follow the vault-wide verification preview. By default,
-show the exact proposed Markdown or diff for every `_Agents/memory/*.md` and `Spaces/*/memory/*.md` change here before writing.
-An explicit current-request bypass such as `full perms`, `skip verification`, or `write it directly` skips that human preview and approval. The bypass does not allow
-invented facts or secret values; unresolved facts remain open questions.
+After the candidate facts are settled, write them on a branch and open a PR. The diff is the preview
+(`AGENTS.md` → *Write to the vault*). Show it in chat only when the user asks. Do not write invented
+facts or secret values; unresolved facts stay open questions.
 
 ## 5. Write
 
@@ -107,7 +106,7 @@ invented facts or secret values; unresolved facts remain open questions.
 - **Locations, never values** — the hard rule. Recording that a token lives in
   `events-api/env/.env` as `HS_PROSPECT_SYNC_TOKEN` is the goal; the token itself never lands here.
 - **Tag `#ACME`** on employer-specific files and sections, per `watchtower`. Portable files
-  (`environment.md`, `credentials.md`'s non-Acme rows, `git-and-tickets.md`'s tooling half,
+  (`machines/index.md`, `credentials.md`'s non-Acme rows, `git-and-tickets.md`'s tooling half,
   `working-preferences.md`) stay untagged.
 - **Prune while you're in there.** Delete facts now proven wrong, collapse duplicates, drop
   project blocks that closed. Growth without pruning is how this becomes unreadable.

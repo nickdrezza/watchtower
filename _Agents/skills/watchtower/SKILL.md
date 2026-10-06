@@ -13,11 +13,11 @@ Every edit gets committed, so treat it that way.
 
 | Half | Path | Read by |
 |---|---|---|
-| **Vault** — notes, projects, meetings, work logs, career, personal | `Spaces/` `Concepts/` `Maps/` `Dashboards/` `Inbox/` `_Templates/` `_Docs/` | Obsidian + agents |
-| **Agent layer** — skills, memory, conventions | `_Agents/` (also `.agents/`, a symlink) | agents, and readable in Obsidian |
+| **Vault** — notes, projects, meetings, work logs, career, personal | `Spaces/` `Concepts/` `Inbox/` `_Templates/` `README.md` | Obsidian + agents |
+| **Agent layer** — skills, memory, tag registry, `wt` | `_Agents/` (also `.agents/`, a symlink) | agents, and readable in Obsidian |
 
 **Location is per-machine.** Never assume a path — read the one `memory/machines/` profile
-that applies to the target you're on. The path is the only thing that changes between machines;
+that applies to the target you're on, routed by `memory/machines/index.md`. The path is the only thing that changes between machines;
 everything else here is true everywhere. Some targets (a phone) have no clone at all.
 
 ## Hard rules
@@ -27,7 +27,7 @@ mechanics worth having in front of you:
 
 1. **Secrets.** The repo's extension-based check misses inline secrets — **you are the backstop**.
    Recording *where* a credential lives is required, and that is the space's `memory/credentials/`'s job.
-2. **Binaries.** Images → a `> Image removed:` callout plus an entry in `_Docs/Image Descriptions.md`.
+2. **Binaries.** Images → a `> Image removed:` callout plus an entry in `_Agents/image-descriptions.md`.
    PDFs → text-extracted `.md`.
 3. **The user's wording.** Add structure around rough notes; never rewrite them. Explicit
    consolidation is fine and carries the original wording across.
@@ -41,26 +41,22 @@ years. Verify first (the code, the PR, the ticket, the email), ask second, assum
   post-hoc "correct me if that's wrong."
 - **State your understanding so it can be contradicted in one word** — *"my understanding: X keys on
   the legacy `md5(domain)`, not `company_id`. Correct?"* — never *"is my understanding correct?"*.
-- **Approval is per listed item.** Silence is not approval; one yes covers only the complete set shown
-  in the preview, not later or unlisted work.
+- **Approval is per listed item.** Silence is not approval; one yes covers only the items that you
+  listed, not later or unlisted work.
 - **Mark the seams.** Each claim is verified (name the source) or inferred (ask it). Never bridge a gap
   with a plausible-sounding mechanism.
 - He doesn't know either → record it as an open question. Don't invent, don't silently drop.
 
-## Verification preview before any vault write
+## The PR is the preview
 
-`AGENTS.md` → **Vault writes** is the rule; this is the phrase list it refers to. The gate covers every
-entry in the repo — notes, indexes, landing pages, `_Agents/memory/*.md`, `Spaces/*/memory/*.md`. Show a `vault preview` with
-every destination path and the complete proposed Markdown or exact diff, then wait. A confirmation
-approves only the set shown.
+`AGENTS.md` → **Write to the vault** is the rule. Every write to this repo — notes, indexes, landing
+pages, `_Agents/memory/`, `Spaces/*/memory/` — goes on a branch, in a commit, in a PR to this repo. The
+user reviews the diff and merges it. Do not show a chat preview first; show the Markdown or diff in chat
+only when the user asks. A memory fast-path fact is one commit on the working branch
+(`_Agents/memory/README.md`).
 
-Bypass, current-request only and case-insensitive: **`full perms`** is canonical; `full permissions`,
-`skip the preview`, `skip verification`, `write it directly`, `save it without asking` are equivalent.
-Clear equivalents count; vague requests like "organize this" do not, and a negated phrase never
-bypasses. **Merge phrases are not a bypass** — `auto merge` / `just merge` mean the git operation and
-nothing else; they collide with GitHub's own auto-merge setting.
-
-A bypass skips the human preview. It never waives the hard rules.
+The PR does not waive the hard rules or **Ask instead of assuming**: ask the batched questions before
+you write. `auto merge` / `just merge` mean the git operation and nothing else.
 
 ## How to write here
 
@@ -92,23 +88,23 @@ compressing into jargon is the second.
 
 ## Tagging
 
-**`Maps/Tag Registry.md` is the authority** — every allowed tag with when to apply it. Read it before
+**`_Agents/tags.md` is the authority** — every allowed tag with when to apply it. Read it before
 tagging; **update it in the same commit as any tag change.** A tag not in the registry shouldn't exist.
 
 Tags carry graph scope, employer scope, and subject matter. `personal` and `work` are deliberate
-graph-filter flags; the full policy is in root `AGENTS.md` and [[Tag Registry]].
+graph-filter flags; the full policy is in `_Agents/tags.md`.
 
 | Namespace | Meaning |
 |---|---|
 | `personal` | Personal graph scope; mixed notes may also carry `work` |
 | `work` | Professional graph scope; mixed notes may also carry `personal` |
 | `ACME` | Employer scope — below |
-| `topic/*` | Subject matter; one per `Concepts/` note, listed in `Maps/Concept Index.md` |
+| `topic/*` | Subject matter; one per `Concepts/` note, listed in `Concepts/index.md` |
 
 - **Never add a tag merely to restate a property.** No `work/log` on a `type: weekly-log` note. The
   scope tags are the intentional exception because Graph view needs cross-folder filters.
 - **A `topic/*` tag rides along with a `[[link]]`** to that concept. No concept note → no topic tag;
-  create the concept, list it in `Maps/Concept Index.md`, and register the tag in `Maps/Tag Registry.md`.
+  create the concept, check that it shows in `Concepts/index.md`, and register the tag in `_Agents/tags.md`.
 - `type: index` notes get no `topic/*` tags — they link to everything.
 - Leave `source/pdf-converted`, `assets/images-converted`, and `excalidraw` alone.
 
@@ -128,13 +124,10 @@ day be swept into an archive with a single query and the rest of the vault survi
 
 ## Layout
 
-- `Spaces/Work/` — Projects, Meeting Notes, Work Logs, Reference, Training,
-  Interviews, Visual Notes, `memory/`, `skills/` · `Spaces/Career/` · `Spaces/Personal/` (with `skills/`)
-- `Concepts/` durable concept notes · `Maps/` MOCs and indexes · `Dashboards/` Obsidian `.base` files
-- `_Templates/` · `_Docs/` governance · `Inbox/{Raw Dumps,Processed}/`
-- `_Agents/` — `skills/`, `memory/`, `CONVENTIONS.md`, `docs/`, `scripts/`
-- Root `AGENTS.md` is the always-on instruction file; `CLAUDE.md` / `GEMINI.md` /
-  `.github/copilot-instructions.md` are stubs pointing at it.
+`Spaces/{Personal,Work,Career}/` hold the notes; each space has its own `memory/` and `skills/`.
+`Concepts/` holds one note per durable subject. `Inbox/{Raw Dumps,Processed}/` holds material with no
+home yet. `_Templates/` holds note templates. `_Agents/` holds shared skills, shared memory, `tags.md`,
+and `wt`. Full tree: [`reference.md`](reference.md#folder-layout).
 
 Wiki-links resolve by **note name**, not path — moving a note into `Archive/` doesn't break `[[links]]`.
 
@@ -160,7 +153,7 @@ The operational knowledge these skills assume. **This is what makes an agent beh
 harness** — connecting to a system is never left to whatever a tool happens to have configured.
 
 Do not preload this folder; the index is [`memory/README.md`](../../memory/README.md). Shell commands
-or machine-dependent paths/tooling require `environment.md` and exactly one matching `machines/`
+or machine-dependent paths/tooling require `machines/index.md` and exactly one matching `machines/`
 profile. Authentication, profiles, secret locations, or connection failures require the space's
 `memory/credentials/` plus the relevant platform file. Topic work requires only the matching topic memory. Live state comes
 from its connector.
@@ -187,28 +180,18 @@ environment*. A skill hard-coding an account id, path, or cron expression is doi
 
 ### Adding or editing a skill
 
-New skills belong here, at `_Agents/skills/<name>/SKILL.md`. Edit there; Claude Code's skills folder only
-holds links to it. Full flow and checklist: `_Agents/CONVENTIONS.md`. Short version:
-
-1. Skill or memory? Mostly-facts → memory.
-2. `cp -r _Agents/templates/skill-template _Agents/skills/<name>`, then set `name:` to match.
-3. Write the `description` first; it's the trigger every platform reads.
-4. Add a row to `_Agents/README.md`'s Skills table. `vault-doctor` fails if you miss it.
-5. `_Agents/wt install` — links the new skill.
-6. Branch `feat/<slug>` + PR.
+Shared skills go in `_Agents/skills/<name>/`; a skill for one space goes in `Spaces/<Name>/skills/<name>/`.
+Edit the real folder; the global skills folders only hold links to it. Copy
+`_Agents/templates/skill-template`, write the `description` first, add a row to `_Agents/README.md`,
+run `_Agents/wt install`, and open a PR. Full steps: [`reference.md`](reference.md#adding-a-skill).
 
 ## Filing a raw dump
 
-Per `_Docs/AI Note Intake Workflow.md`:
-
-1. Identify date range, projects, meetings, tasks, links, people, open questions.
-2. Pick the space **before** editing.
-3. File under the right subfolder (`Work Logs/2. Systems Dev Weekly Notes/…`, `Projects/…`,
-   `Meeting Notes/…`, `Reference/…`, `Training/…`, `Interviews/…`).
-4. Add YAML properties for that space (templates in `reference.md`) — including `ACME` when it applies.
-5. Add `[[wiki-links]]` to existing Concepts and project notes.
-6. Keep his wording. Apply **How to write here** to anything you author.
-7. Genuinely uncertain or mixed → `Inbox/Processed/` or an `## Open questions` section. Don't guess.
+Follow [`reference.md` → Filing a raw dump](reference.md#filing-a-raw-dump). In short: pick the space
+**before** you edit, file under the correct subfolder, add the properties for that space (with `ACME`
+when it applies), link existing concepts and project notes, keep the user's wording, and put material
+that is truly uncertain or mixed in `Inbox/Processed/` or an `## Open questions` section. Treat
+identifiers in a dictated dump as not verified.
 
 ## Before you finish
 
@@ -217,7 +200,7 @@ Per `_Docs/AI Note Intake Workflow.md`:
 - Secret-scan the diff:
   `git diff | grep -nEi 'private key|password|client_secret|AKIA|api[_-]?key|ghp_|pat-na1|xox'`
 - Properties valid, `ACME` set where it applies, links resolve, nothing deleted unasked.
-- **Any tag added, renamed, or retired → `Maps/Tag Registry.md` updated in the same commit.**
+- **Any tag added, renamed, or retired → `_Agents/tags.md` updated in the same commit.**
 
-Full folder map, per-space property templates, the status/dashboard convention, and the
-secret-handling checklist: [`reference.md`](reference.md).
+Folder tree, property templates, status and dashboards, filing steps, adding a skill, and the
+secret and binary checklist: [`reference.md`](reference.md).

@@ -1,5 +1,8 @@
 ---
 type: documentation
+title: "Image Descriptions"
+description: "Text descriptions of images removed from the vault, so the content stays without the binary file."
+updated: 2026-10-06
 status: active
 domain: system
 workspace: vault

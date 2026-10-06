@@ -11,7 +11,7 @@ argument-hint: "[--fix|--json|--errors-only]"
 # Vault doctor
 
 Deterministic checks only. Everything this reports is objectively right or wrong; nothing here needs
-taste. **Read-only** — it never edits, so it needs no preview gate and is safe to run at any time.
+taste. **Read-only** — it never edits, so it needs no branch or PR and is safe to run at any time.
 
 Quality judgement (is this note worth keeping? should these two merge?) belongs to **`vault-prune`**.
 Keeping the two apart matters: this one can run unattended, that one cannot.
@@ -36,7 +36,7 @@ broken links.
 | `broken-link` | error | Wiki-links resolve by **note name**, markdown links by path. After a move or rename, `--fix` repoints them. Otherwise correct the target or remove the link |
 | `broken-anchor` | error | The heading is gone or renamed. Point at the heading that now holds the text |
 | `missing-frontmatter` | error | Add frontmatter from `_Templates/` |
-| `unregistered-tag` | error | Register it in `Maps/Tag Registry.md` **in the same commit**, or remove it |
+| `unregistered-tag` | error | Register it in `_Agents/tags.md` **in the same commit**, or remove it |
 | `skill-name-mismatch` / `skill-no-name` | error | `name:` must equal the folder name |
 | `skill-not-indexed` | error | Add the row to `_Agents/README.md` |
 | `hardcoded-machine-path` | error | Move the fact to `_Agents/memory/machines/` and point at it |

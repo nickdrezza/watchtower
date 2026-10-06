@@ -24,7 +24,7 @@ a link to that doc ("point, don't copy").
 | This repo's rules (secrets, wording, `#ACME`, how to write) | `watchtower` skill — **load first, always** |
 | Which knowledge base a thing belongs to at all | `watchtower` skill → *Which knowledge base* |
 | shared-vault **format, folders, template, changelog, commit mechanics** | The **live shared-vault repo** — `README.md`, `CLAUDE.md`, `_template.md`, the folder `README.md`, `systems/registry.yml`. Re-read them every time; the `shared-vault-read` skill has the per-type recipe. |
-| Where the repo is, which identity pushes | `_Agents/memory/git-and-tickets.md` and `environment.md` |
+| Where the repo is, which identity pushes | `_Agents/memory/git-and-tickets.md` and `_Agents/memory/machines/index.md` |
 | Deciding *what* to promote, and asking before you do | This skill |
 
 **Never rely on your memory of the wiki's layout.** Conventions drift, folders get added. Pull the
@@ -67,13 +67,13 @@ The wiki is a normal clone on this machine — path, identity, and the PR flow a
 Everything in the vault is in scope. the user flags add-or-skip; your job is to surface
 candidates worth reading, not to pre-filter aggressively or to dump the whole vault.
 
-1. **Establish the frontier.** Read the ledger `_Docs/Shared Vault Promotions.md` (what's shipped, what
+1. **Establish the frontier.** Read the ledger `Spaces/Work/source/ledgers/Shared Vault Promotions.md` (create it on first use; what's shipped, what
    was declined and why). Pull the wiki clone and read `GAPS.md`, the folder `README.md` indexes, and
    `systems/registry.yml` — that's what's already covered and what the team has explicitly asked for.
 2. **Sweep, in this order** — highest signal first, so the top of the candidate list is the best part:
    `_Agents/memory/*.md` (dense, already high-signal, needs the tightest filter) → `Spaces/Work/
    Acme Analytics/` (`Projects/`, `Reference/`, `Meeting Notes/`, `Work Logs/`) → `Concepts/` and
-   `Maps/`. Then a **gap-driven pass**: for each open item in `GAPS.md`, grep the vault for material
+   the folder `index.md` pages. Then a **gap-driven pass**: for each open item in `GAPS.md`, grep the vault for material
    that would fill it.
 3. **Test each candidate** — all five, or it's not a candidate. Details and worked judgement calls in
    - **Team-useful:** another dev needs it to build, operate, or decide — not just the user.
@@ -128,7 +128,7 @@ Both modes, non-negotiable. Low confidence is fine; **presenting low confidence 
 
 ## The ledger
 
-`_Docs/Shared Vault Promotions.md` — one row per decision, shipped or declined. Read it at the start of
+`Spaces/Work/source/ledgers/Shared Vault Promotions.md` — one row per decision, shipped or declined. Read it at the start of
 every scan; update it in the same PR as the contribution.
 
 It is a **memory aid, not a gate**. A decline records a judgement made under the conditions of that

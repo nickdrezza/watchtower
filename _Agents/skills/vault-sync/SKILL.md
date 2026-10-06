@@ -18,17 +18,17 @@ Default flow: **pull → weekly-work-log → vault-memory → commit → PR → 
 Skip steps 2–3 for a plumbing-only sync ("just push what I've got"). If that's ambiguous and there are
 already uncommitted edits, ask which they want.
 
-## Verification preview for note-bearing syncs
+## The PR is the preview
 
-The weekly log, memory, and any other vault Markdown written during sync follow the universal
-`vault preview` gate. By default, show the exact proposed Markdown and index/diff changes in chat
-before writing. An explicit current-request phrase such as `full perms`, `skip verification`, or
-`write it directly` bypasses that human preview and approval. It does not bypass secret, binary, space-boundary, factual-integrity, branch, or PR safety rules.
+The weekly log, memory, and other vault Markdown that a sync writes follow `AGENTS.md` → *Write to
+the vault*: the PR diff is the preview. Do not show a chat preview first; show the diff in chat only
+when the user asks. The secret, binary, space-boundary, factual-integrity, branch, and PR rules still
+apply.
 
 ## Environment
 
 Remote `git@github.com:<you>/<your-vault>.git`, default branch `main`. Everything else here is
-per-machine — **read `_Agents/memory/environment.md` and the one `machines/` profile it routes you to
+per-machine — **read `_Agents/memory/machines/index.md` and the one `machines/` profile it routes you to
 before running a single command.** The vault path, whether `git`/`gh` need a shell wrapper, and which
 `gh` identity you get all differ by target, and using the other machine's invocation is the most common
 failure in this skill.

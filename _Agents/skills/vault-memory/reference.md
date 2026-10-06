@@ -3,7 +3,7 @@
 Per-source queries, the concrete tool binding, and a portable fallback for each. The AI-platform
 sources are true anywhere; the tracker / email / GitHub / Drive halves assume you've connected those.
 
-Environment facts referenced throughout live in `_Agents/memory/environment.md` (which shell reaches
+Environment facts referenced throughout live in `_Agents/memory/machines/index.md` (which shell reaches
 what) and the matching `_Agents/memory/machines/` profile. **Never hardcode a path here** — that's the
 machine profile's job.
 
@@ -122,7 +122,7 @@ create one, tell the user which older ids to trash.
 | The fact is about… | Goes to |
 |---|---|
 | This machine, shells, paths, venvs, runner scripts | the matching `machines/` profile |
-| What's true on every target, and how to tell them apart | `environment.md` |
+| What's true on every target, and how to tell them apart | `machines/index.md` |
 | Where a credential lives, or a rotation obligation | `credentials.md` |
 | Which connector owns a question, and where each one lies | `connectors.md` |
 | Warehouse connection, roles, object topology, modelling gotchas | `warehouse.md` |

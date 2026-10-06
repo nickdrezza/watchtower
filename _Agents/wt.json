@@ -27,5 +27,6 @@
     "Spaces/Career/": [
       "ACME"
     ]
-  }
+  },
+  "tag_registry": "_Agents/tags.md"
 }

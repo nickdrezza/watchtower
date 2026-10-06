@@ -4,9 +4,9 @@ status: active
 domain: system
 workspace: vault
 related:
-  - "[[Spaces Index]]"
+  - "[[README|Watchtower]]"
 ---
 
 # Shared Home
 
-Landing page for this space. See [[Spaces Index]] for what belongs here.
+Landing page for this space. [[README#Spaces|README → Spaces]] says what belongs here.
