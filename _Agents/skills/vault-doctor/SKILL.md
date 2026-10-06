@@ -6,10 +6,10 @@ description: >
   the hand-maintained index table, skill name/folder mismatches, thin skill descriptions, machine
   paths hardcoded into skills, possible secrets, and stale okf-view snapshots. Use when the user says "check my
   vault", "vault health", "is anything broken", "run the integrity checks", "did I break any links",
-  "audit the skills", or before shipping a large structural change. Read-only and safe to run anytime.
+  "audit the skills", or before shipping a large structural change. Safe to run anytime; only `--fix` edits files.
   For quality judgement — bad notes, duplicates, notes to simplify — use vault-prune instead.
 user-invocable: true
-argument-hint: "[check,check]"
+argument-hint: "[--fix|--json|--errors-only]"
 ---
 
 # Vault doctor
