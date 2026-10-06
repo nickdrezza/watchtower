@@ -8,9 +8,9 @@ tags:
 related:
   - "[[Home]]"
   - "[[Spaces Index]]"
-  - "[[Current Work Home]]"
-  - "[[Future Work Home]]"
-  - "[[Personal Home]]"
+  - "[[Spaces/Work/index|Current Work Home]]"
+  - "[[Spaces/Career/index|Future Work Home]]"
+  - "[[Spaces/Personal/index|Personal Home]]"
 ---
 
 # AI Note Intake Workflow
@@ -56,20 +56,19 @@ hard rule 6 applied to the most common way it gets broken.
 
 Use the content to choose the right space:
 
-- Acme/current work: `Spaces/Work/Current Work/...`
-- Future professional work or career planning: `Spaces/Work/Future Work/...`
+- Acme/current work: `Spaces/Work/...`
+- Future professional work or career planning: `Spaces/Career/...`
 - Personal notes: `Spaces/Personal/...`
-- Reusable cross-domain material: `Spaces/Shared/...`
 - Unclear or mixed notes: `Inbox/Processed/...`
 
 ## Acme Current Work
 
-- Daily or weekly work updates: `Spaces/Work/Current Work/Work Logs/2. Systems Dev Weekly Notes/...`
-- Project-specific context: `Spaces/Work/Current Work/Projects/...`
-- Reusable instructions/snippets/processes: `Spaces/Work/Current Work/Reference/...`
-- Meeting-specific notes: `Spaces/Work/Current Work/Meeting Notes/...`
-- Training notes: `Spaces/Work/Current Work/Training/...`
-- Interview notes: `Spaces/Work/Current Work/Interviews/...`
+- Daily or weekly work updates: `Spaces/Work/Work Logs/2. Systems Dev Weekly Notes/...`
+- Project-specific context: `Spaces/Work/Projects/...`
+- Reusable instructions/snippets/processes: `Spaces/Work/Reference/...`
+- Meeting-specific notes: `Spaces/Work/Meeting Notes/...`
+- Training notes: `Spaces/Work/Training/...`
+- Interview notes: `Spaces/Work/Interviews/...`
 
 ## Processing Rules
 
@@ -88,8 +87,8 @@ Use the content to choose the right space:
 - A `vault preview` was shown here and approved, unless the current request explicitly bypassed it.
 - Raw dump content is still present somewhere in the vault.
 - Notes landed in the right space.
-- employer-specific content did not land in personal/future-work spaces.
-- Personal or future-work content did not land under Acme.
+- employer-specific content did not land in the personal or career spaces.
+- Personal or career content did not land under Acme.
 - No binary files were added.
 - No secrets were added.
 - New links resolve or intentionally create useful future notes.

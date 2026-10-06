@@ -57,7 +57,7 @@ Load `watchtower` first for the hard rules and the writing standard. This skill 
 
 - Rename a note without sweeping its links. Half a rename is worse than none.
 - `git add -A` — the tree carries `.obsidian/app.json` churn and stray `Untitled*.canvas`.
-- Move Acme material into a personal or future-work space, or the reverse (hard rule 4).
+- Move Acme material into the personal or career space, or the reverse (hard rule 4).
 - Delete anything staged in `Inbox/` or personal `Uncategorized.md` because it looks unfinished. That is
   what those places are for; the `personal` skill classifies them.
 - Push to `main`. Branch → PR, via `vault-sync`.

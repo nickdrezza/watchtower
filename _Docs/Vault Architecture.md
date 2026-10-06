@@ -21,14 +21,13 @@ the vault is one vault with multiple clearly separated spaces.
 - `Maps`: navigation notes and indexes.
 - `Dashboards`: Obsidian Bases for database-style views.
 - `Inbox`: raw note dumps and processed intake notes.
-- `Daily Notes`: vault-level daily notes.
 - `_Templates`: note templates.
 - `_Docs`: repo and workflow documentation.
 - `_Vault Maintenance`: local maintenance notes and archived helper files.
 
 ## Spaces
 
-`Spaces/Work/Current Work` is the current-work space for employer-specific material:
+`Spaces/Work` is the current-work space for employer-specific material:
 
 - `Projects`
 - `Work Logs`
@@ -40,7 +39,8 @@ the vault is one vault with multiple clearly separated spaces.
 - `Interviews`
 - `Visual Notes`
 
-`Spaces/Work/Future Work` is for future roles, career planning, reusable professional material, and non-Acme work.
+`Spaces/Career` is for future roles, career planning, reusable professional material, and non-Acme work.
+It also holds the old shared-space landing page (`Spaces/Career/Shared Home.md`).
 
 `Spaces/Personal` is for personal notes and life material. Its durable framework is:
 
@@ -53,7 +53,8 @@ the vault is one vault with multiple clearly separated spaces.
 
 [[Personal Vault Guide]] is the routing and writing contract for this space.
 
-`Spaces/Shared` is for cross-domain material that intentionally belongs to more than one area.
+There is no shared space. Put material that is true in every space in `_Agents/`. Put mixed or
+uncertain material in `Inbox/Processed/`.
 
 ## Properties
 

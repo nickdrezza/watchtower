@@ -10,9 +10,8 @@ Repo-wide instructions live in the root [`AGENTS.md`](../AGENTS.md). This folder
 _Agents/
 ├── README.md                 you are here
 ├── CONVENTIONS.md            how to author a skill (the SKILL.md spec + pre-commit checklist)
-├── memory/                   operational knowledge — the environment, credentials, platforms
+├── memory/                   memory true in every space (space memory: Spaces/<Name>/memory/)
 │   ├── README.md             the memory index + WHEN TO WRITE MEMORY
-│   ├── connectors.md         the live systems: who owns what, and where each one lies
 │   └── machines/             one profile per target — add one per machine you work on
 ├── skills/                   the skills — one folder per skill, canonical source of truth
 │   └── <name>/
@@ -43,7 +42,7 @@ how to connect to each platform you work in, who's who, what's in flight, and ho
 work.
 
 Read [`memory/environment.md`](memory/environment.md) plus exactly one machine profile before
-machine-dependent commands. Read [`memory/credentials.md`](memory/credentials.md) only for
+machine-dependent commands. Read [`memory/credentials.md`](../Spaces/Work/memory/credentials.md) only for
 authentication, profiles, secret locations, or connection failures. Full routing index:
 [`memory/README.md`](memory/README.md).
 
@@ -58,16 +57,16 @@ one query if you changes jobs; `vault-memory` keeps the folder current.
 |---|---|
 | [`watchtower`](skills/watchtower/) | Vault-specific context: layout, writing, preview gate, employer scope, filing, and memory routing. |
 | [`bootstrap`](skills/bootstrap/) | Sets up a new user or machine, seeds the memory maps, and teaches the operating model. |
-| [`weekly-work-log`](skills/weekly-work-log/) | Writes or updates the weekly manager-facing work log, from evidence only, in the house format. |
+| [`weekly-work-log`](../Spaces/Work/skills/weekly-work-log/) | Writes or updates the weekly manager-facing work log, from evidence only, in the house format. |
 | [`vault-memory`](skills/vault-memory/) | Refreshes `_Agents/memory/` from prior sessions and your connectors. |
 | [`vault-sync`](skills/vault-sync/) | Pull → refresh → commit → PR → merge → concise summary. The single entry point for "sync my vault". |
 | [`vault-doctor`](skills/vault-doctor/) | Mechanical integrity checks — links, tags, frontmatter, skill-index drift, secrets. Backed by `wt doctor`. |
 | [`vault-prune`](skills/vault-prune/) | Quality pass — slop, near-duplicates, bloat, stale claims, orphans, gaps. Per-item approval; never deletes unasked. |
 | [`vault-edit`](skills/vault-edit/) | Safe create / move / rename / merge / split / archive / delete, and what must move with the file. |
-| [`shared-vault`](skills/shared-vault/) | Moves vault knowledge into the team shared vault as a PR, rewritten for a team audience and stripped of private content. To read team knowledge, read the shared vault clone directly. |
+| [`shared-vault`](../Spaces/Work/skills/shared-vault/) | Moves vault knowledge into the team shared vault as a PR, rewritten for a team audience and stripped of private content. To read team knowledge, read the shared vault clone directly. |
 | [`secrets`](skills/secrets/) | Get, store, rotate, and inject credentials. **Never surfaces a value.** |
 | [`playwright-testing`](skills/playwright-testing/) | Real-browser tests for user-visible behavior — uploads, downloads, forms, navigation, responsive layout. |
-| [`personal`](skills/personal/) | Personal material: diary, memories, reflections, people, places, pets, and triage of Uncategorized notes. One router, one reference file for each note type. |
+| [`personal`](../Spaces/Personal/skills/personal/) | Personal material: diary, memories, reflections, people, places, pets, and triage of Uncategorized notes. One router, one reference file for each note type. |
 
 Skills here are the owner's only. Team skills live in the team's skills repo and are not copied here.
 
@@ -104,7 +103,8 @@ Full path matrix: [`docs/platforms.md`](docs/platforms.md). Why it's built this 
 
 ## Authoring a skill
 
-**New skills belong here**, at `_Agents/skills/<name>/SKILL.md`.
+**New skills belong here**, at `_Agents/skills/<name>/SKILL.md`. A skill that only one space uses goes in
+`Spaces/<Name>/skills/<name>/SKILL.md`.
 
 ```bash
 cp -r _Agents/templates/skill-template _Agents/skills/my-skill-name

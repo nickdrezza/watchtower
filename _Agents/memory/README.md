@@ -1,5 +1,9 @@
 # `_Agents/memory/` — operational memory
 
+> This folder holds only memory that is true in every space: `environment.md`,
+> `working-preferences.md`, and `machines/`. Each space keeps its own facts in
+> `Spaces/<Name>/memory/`. The work examples are in `Spaces/Work/memory/`.
+
 The knowledge an agent needs to actually *do* your work: which machine it's on, where every credential
 lives, how to reach each platform, and how you like to work.
 
@@ -8,7 +12,7 @@ hard-codes an account id or a file path is doing memory's job — put the fact h
 point at it.
 
 Load memory by task. Read `environment.md` and exactly one machine profile before machine-dependent
-commands. Read `credentials.md` only for authentication, secret locations, profiles, or connection
+commands. Read the space's `memory/credentials.md` only for authentication, secret locations, profiles, or connection
 failures. Read a platform file only when the prompt or search results point to that platform.
 
 ## Files
@@ -17,13 +21,13 @@ failures. Read a platform file only when the prompt or search results point to t
 |---|---|
 | [`environment.md`](environment.md) | **Start here.** How to tell which target you're on, and what's true on all of them. |
 | [`machines/`](machines/README.md) | One profile per target. Paths, shells, installed tooling, and what is deliberately *not* installed. |
-| [`credentials.md`](credentials.md) | Every key, token, and profile — what it authenticates and **where it lives**. Locations only, never values. |
-| [`connectors.md`](connectors.md) | The live systems: which one is authoritative for what, and the limit that will bite you. |
-| [`warehouse.md`](warehouse.md) | **Worked example** of a platform file. Copy its shape for each system you actually use. |
+| [`Spaces/Work/memory/credentials.md`](../../Spaces/Work/memory/credentials.md) | Every key, token, and profile — what it authenticates and **where it lives**. Locations only, never values. |
+| [`Spaces/Work/memory/connectors.md`](../../Spaces/Work/memory/connectors.md) | The live systems: which one is authoritative for what, and the limit that will bite you. |
+| [`Spaces/Work/memory/warehouse.md`](../../Spaces/Work/memory/warehouse.md) | **Worked example** of a platform file. Copy its shape for each system you actually use. |
 | [`working-preferences.md`](working-preferences.md) | Standing instructions — how you want agents to work. |
-| [`projects.md`](projects.md) | Active work, one compact block each. |
+| [`Spaces/Work/memory/projects.md`](../../Spaces/Work/memory/projects.md) | Active work, one compact block each. |
 
-**Add one file per platform you use** — the CRM, the tracker, the orchestration tool, the cloud account.
+**Add one file per platform you use**, in the `memory/` folder of the space that uses it — the CRM, the tracker, the orchestration tool, the cloud account.
 `warehouse.md` is the template for what a good one looks like: how to connect, what the limits are, and
 the gotchas that have cost hours.
 
@@ -68,7 +72,7 @@ Anything only meaningful **while you're at this employer** carries a short emplo
 frontmatter `tags:` — this template uses `ACME`; rename it to yours. One query can then archive the
 non-reusable material if you change jobs, and the rest of the vault survives.
 
-**Tagged:** the platform files, `credentials.md`, `connectors.md`, `projects.md`.
+**Tagged:** the platform files, `credentials.md`, `connectors.md`, `projects.md` (all in `Spaces/Work/memory/`).
 **Untagged (portable):** this README, `environment.md`, the `machines/` profiles, `working-preferences.md`.
 
 ## Rules

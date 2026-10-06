@@ -67,7 +67,7 @@ If this week's log already exists and is complete, say so and move on — don't 
 ## 3. Memory
 
 Hand off to **`vault-memory`**. It scans local AI-platform history plus the tracker/email/GitHub/Drive since
-memory was last committed, produces a candidate table, asks, then writes to `_Agents/memory/`.
+memory was last committed, produces a candidate table, asks, then writes to `_Agents/memory/` and the space `memory/` folders.
 
 Both skills stop before committing. That's this skill's job.
 

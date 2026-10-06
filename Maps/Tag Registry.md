@@ -39,7 +39,7 @@ can't go stale on numbers alone.
 | Tag | Apply to |
 |---|---|
 | `personal` | Personal-life notes under `Spaces/Personal`, including diary, memories, reflections, personal people/locations/pets, literature, and personal staging notes. A genuinely mixed note may also carry `work`. |
-| `work` | Professional material under `Spaces/Work`, including current Acme work and future-work/career notes. A genuinely mixed note may also carry `personal`. |
+| `work` | Professional material under `Spaces/Work` (current Acme work) and `Spaces/Career` (career notes). A genuinely mixed note may also carry `personal`. |
 | `ACME` | Anything only meaningful while you is at Acme Analytics — projects, tickets, systems, people, meeting notes, work logs, client and event material, and employer-specific memory files. Acme work normally carries both `work` and `ACME`. **Don't** tag machine setup, personal notes, or portable future-work material. A mostly-portable file with one employer-specific section gets an inline `#ACME` on that section instead. |
 
 ## Subject matter — `topic/*`
@@ -86,7 +86,7 @@ alone; don't add new ones without a reason this concrete.
 
 There is no `person/*` namespace, and there should not be one. A person is an **entity** with attributes
 — email, role, org, current or former — and a tag can hold none of them. People live in
-`Spaces/Work/Current Work/People/`, indexed by [[People Index]], and are linked from a note's
+`Spaces/Work/People/`, indexed by [[People Index]], and are linked from a note's
 `people:` property. That gives real graph nodes and real backlinks: open a person, see every log and
 project that involved them. A tag would give a flat list and nothing else.
 
