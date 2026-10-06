@@ -42,7 +42,7 @@ how to connect to each platform you work in, who's who, what's in flight, and ho
 work.
 
 Read [`memory/environment.md`](memory/environment.md) plus exactly one machine profile before
-machine-dependent commands. Read [`memory/credentials.md`](../Spaces/Work/memory/credentials.md) only for
+machine-dependent commands. Read [`memory/credentials/`](../Spaces/Work/memory/credentials/index.md) only for
 authentication, profiles, secret locations, or connection failures. Full routing index:
 [`memory/README.md`](memory/README.md).
 

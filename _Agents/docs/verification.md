@@ -9,7 +9,7 @@ how to gather context, this one says how to earn a claim.
 
 Every claim in a deliverable traces to something checkable — a command's output, a merged PR, a
 ticket, a query result, an email, or his own words. This is the standing instruction in
-[`../memory/working-preferences.md`](../memory/working-preferences.md) → *Verify; never fabricate*;
+[`../memory/working-preferences/`](../memory/working-preferences/index.md) → *Verify; never fabricate*;
 it has gotten work rejected before.
 
 ## What counts as evidence
@@ -30,7 +30,7 @@ it has gotten work rejected before.
 - **Prefer the real data shape.** Empty and single-row cases pass almost anything.
 - **Scale-only bugs slip past small supervised tests.** This is a lesson already paid for — the
   the enrichment vendor `personIds` cap only showed up above the tested batch size
-  ([`Spaces/Work/memory/warehouse.md`](../../Spaces/Work/memory/warehouse.md)). If behavior can change with volume,
+  ([`Spaces/Work/memory/warehouse/`](../../Spaces/Work/memory/warehouse/index.md)). If behavior can change with volume,
   concurrency, or time, say so explicitly rather than implying the small run generalizes.
 - **Run it twice** when a script is meant to be idempotent or scheduled. Most re-run bugs are invisible
   on the first pass.
@@ -50,7 +50,7 @@ loading the page.
 
 The executable arm is the **`playwright-testing`** skill: reusable tests that live in the repo, not
 one-off manual clicks. Platform-specific auth and iframe constraints are in
-[`Spaces/Work/memory/connectors.md`](../../Spaces/Work/memory/connectors.md) — check it before concluding an app can't be tested.
+[`Spaces/Work/memory/connectors/`](../../Spaces/Work/memory/connectors/index.md) — check it before concluding an app can't be tested.
 
 ## Before saying it's done
 

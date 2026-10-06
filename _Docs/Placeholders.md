@@ -71,13 +71,13 @@ tag in [Tag Registry](../Maps/Tag%20Registry.md) in the same change** — it is 
 | `_Docs/Agent Memory.md` | 3 |
 | `_Docs/Vault Architecture.md` | 3 |
 | `_Agents/memory/README.md` | 2 |
-| `Spaces/Work/memory/warehouse.md` | 2 |
+| `Spaces/Work/memory/warehouse/` | 2 |
 | `_Agents/skills/vault-edit/SKILL.md` | 2 |
 | `_Templates/Weekly Work Log.md` | 2 |
 | `_Agents/README.md` | 1 |
-| `Spaces/Work/memory/connectors.md` | 1 |
-| `Spaces/Work/memory/credentials.md` | 1 |
-| `Spaces/Work/memory/projects.md` | 1 |
+| `Spaces/Work/memory/connectors/` | 1 |
+| `Spaces/Work/memory/credentials/` | 1 |
+| `Spaces/Work/memory/projects/` | 1 |
 | `_Agents/skills/bootstrap/SKILL.md` | 1 |
 | `Spaces/Personal/skills/personal/SKILL.md` | 1 |
 | `Spaces/Personal/skills/personal/references/diary.md` | 1 |
@@ -95,8 +95,8 @@ them:
 | File | What |
 |---|---|
 | `_Agents/memory/machines/macos.md` · `windows-wsl.md` | Whole profiles are examples. Paths, installed tooling, and the **deliberately not installed** list all need your values — that last list is load-bearing, it stops an agent burning turns on a tool you don't have. |
-| `Spaces/Work/memory/warehouse.md` | Example platform memory. Rename it per system you actually use and shape the rest like it. |
-| `Spaces/Work/memory/credentials.md` · `connectors.md` · `projects.md` | Example rows only. **Locations only, never values.** |
+| `Spaces/Work/memory/warehouse/` | Example platform memory. Rename it per system you actually use and shape the rest like it. |
+| `Spaces/Work/memory/credentials/` · `connectors.md` · `projects.md` | Example rows only. **Locations only, never values.** |
 | `_Docs/Skill Exports.md` | One example destination row (`your-org/skills-marketplace`). Replace it the first time you publish somewhere, or delete it. |
 
 ## Known gap

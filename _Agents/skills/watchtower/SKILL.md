@@ -26,7 +26,7 @@ The eight hard rules live in root `AGENTS.md` and are not restated here. Three c
 mechanics worth having in front of you:
 
 1. **Secrets.** The repo's extension-based check misses inline secrets — **you are the backstop**.
-   Recording *where* a credential lives is required, and that is the space's `memory/credentials.md`'s job.
+   Recording *where* a credential lives is required, and that is the space's `memory/credentials/`'s job.
 2. **Binaries.** Images → a `> Image removed:` callout plus an entry in `_Docs/Image Descriptions.md`.
    PDFs → text-extracted `.md`.
 3. **The user's wording.** Add structure around rough notes; never rewrite them. Explicit
@@ -162,7 +162,7 @@ harness** — connecting to a system is never left to whatever a tool happens to
 Do not preload this folder; the index is [`memory/README.md`](../../memory/README.md). Shell commands
 or machine-dependent paths/tooling require `environment.md` and exactly one matching `machines/`
 profile. Authentication, profiles, secret locations, or connection failures require the space's
-`memory/credentials.md` plus the relevant platform file. Topic work requires only the matching topic memory. Live state comes
+`memory/credentials/` plus the relevant platform file. Topic work requires only the matching topic memory. Live state comes
 from its connector.
 
 Memory is **point-in-time**. Environment facts (paths, accounts, which shell holds the SSH key) are

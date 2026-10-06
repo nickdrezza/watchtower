@@ -73,9 +73,10 @@ One row per candidate fact. Present this **before writing anything**.
 | fact | target file | new / updates / contradicts | evidence | `#ACME`? |
 |---|---|---|---|---|
 
-- **target file** — a file in the space's `memory/` (for work, `Spaces/Work/memory/`), or in
-  `_Agents/memory/` when the fact is true in every space. If a fact fits nowhere, propose a new file
-  and say why; don't force it.
+- **target file** — one concept file in the right topic folder: the space's `memory/<topic>/` (for
+  work, `Spaces/Work/memory/`), or `_Agents/memory/<topic>/` when the fact is true in every space. A new
+  concept gets a new file (`type: memory`, `title`, one-line `description`, `updated`); a new topic
+  folder needs the full path and a reason.
 - **contradicts** is the important column. Memory that disagrees with itself is worse than missing
   memory. Flag the conflict, say which side you believe and why, and let the user settle it.
 - Merge duplicates across sources into one row.

@@ -22,8 +22,8 @@ small; the vault holds the rest as searchable skills, memory, notes, and prior-s
    - Shell commands or machine-dependent paths/tooling → `_Agents/memory/environment.md`, then exactly
      one matching `_Agents/memory/machines/` profile.
    - Authentication, secret locations, profiles, or connection failures →
-     `Spaces/Work/memory/credentials.md` plus the relevant platform memory.
-   - Live external state → the authoritative connector named in `Spaces/Work/memory/connectors.md`.
+     `Spaces/Work/memory/credentials/` plus the relevant platform memory.
+   - Live external state → the authoritative connector named in `Spaces/Work/memory/connectors/`.
    - Prior decisions or unfinished work → the relevant note/memory first, then prior sessions.
 5. **Pointers are not content.** Search results and indexes tell you what to open; they do not require
    reading every linked file.
