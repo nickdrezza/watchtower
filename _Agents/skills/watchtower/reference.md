@@ -130,7 +130,7 @@ bodies. A 2026-06-30 cleanup found AWS/Google/RSA secrets pasted **inline** in t
 3. Real secrets belong in a secret manager, your secret manager, `~/.ssh/`, or `~/.credentials/` — never in
    the vault, never in the backup (`Obsidian Vault Backups/` is plaintext too).
 4. **Locations are not secrets.** Writing down *where* a credential lives — a file path, an env-var
-   name, a your secret manager item name, a the warehouse user/role/warehouse, an AWS profile name — is the whole
+   name, a secret-manager item name, a warehouse user/role/warehouse, an AWS profile name — is the whole
    point of this repo being useful to agents, and it is explicitly allowed. The rule is only about
    values: never the key material, never the password, never the token string.
 5. Never add images/PDFs/plugin bundles/JS/CSS. `.gitignore` should already exclude them (and

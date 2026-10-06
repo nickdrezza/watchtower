@@ -19,7 +19,7 @@ Read [`../../docs/operating-model.md`](../../docs/operating-model.md) first. You
 
 ## Ask two things before you start
 
-Batched, once, per `AGENTS.md` → *Ask instead of assuming*:
+Batched, once, per the `watchtower` skill → *Ask instead of assuming*:
 
 1. **What do you do, and what systems do you work in daily?** Drives which platform memory files to
    create and which example content to delete.

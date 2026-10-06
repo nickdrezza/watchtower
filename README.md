@@ -90,6 +90,8 @@ doing memory's job.
 | [`bootstrap`](_Agents/skills/bootstrap/) | Sets up a new user or machine, and teaches the model |
 | [`vault-memory`](_Agents/skills/vault-memory/) | Refreshes memory from prior sessions and your connectors |
 | [`vault-sync`](_Agents/skills/vault-sync/) | Pull → refresh → commit → PR → merge → summary |
+| [`weekly-work-log`](_Agents/skills/weekly-work-log/) | Writes the weekly work log from verified activity |
+| [`skills-sync`](_Agents/skills/skills-sync/) | Publishes selected skills to a team skills repo |
 | [`vault-doctor`](_Agents/skills/vault-doctor/) | Mechanical integrity checks. Read-only, script-backed |
 | [`vault-prune`](_Agents/skills/vault-prune/) | Finds slop, duplicates, bloat, stale claims, gaps |
 | [`vault-edit`](_Agents/skills/vault-edit/) | Safe CRUD — and what must move with the file |
@@ -113,7 +115,7 @@ Full text in [`AGENTS.md`](AGENTS.md). The load-bearing ones:
 7. **No filler, no editorializing.** Every sentence carries a fact a future reader needs. Padding
    degrades retrieval, which degrades everything else.
 
-Rule 7 has a banned-patterns table and one test: *would a competent reader six weeks from now be worse
+Rule 7 has one test: *would a competent reader six weeks from now be worse
 off without this?* It applies to an agent's chat reply as much as to a note.
 
 ## Two things people get wrong
