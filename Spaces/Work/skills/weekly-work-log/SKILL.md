@@ -18,7 +18,7 @@ filler, framing, and adjacent suggestions.
 
 ## Where it lives
 
-- `Spaces/Work/Current Work/Work Logs/<YYYY>/Q<n>/MM-DD-YYYY.md`, dated by the **Monday** of the week
+- `Spaces/Work/Work Logs/<YYYY>/Q<n>/MM-DD-YYYY.md`, dated by the **Monday** of the week
   (week of Mon 2026-07-13 → `07-13-2026.md`), filed under the quarter that Monday falls in. Template:
   `_Templates/Weekly Work Log.md`.
 - Add the new week's note to the weekly-log index in `Maps/` as a wiki-link — it isn't generated.
@@ -39,7 +39,7 @@ Mon–Fri of the target week. Every bullet must trace to one of these:
 | **Meeting notes** | Whatever your notetaker writes to shared drive storage. |
 | **The user** | Their own dictation always wins over inference. |
 
-Query details and token-budget cautions live with [`vault-memory`](../vault-memory/SKILL.md) — same
+Query details and token-budget cautions live with [`vault-memory`](../../../../_Agents/skills/vault-memory/SKILL.md) — same
 sources, and the one place they're documented.
 
 ## Hard rules

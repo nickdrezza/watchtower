@@ -13,7 +13,7 @@ Every edit gets committed, so treat it that way.
 
 | Half | Path | Read by |
 |---|---|---|
-| **Vault** — notes, projects, meetings, work logs, career, personal | `Spaces/` `Concepts/` `Maps/` `Dashboards/` `Inbox/` `Daily Notes/` `_Templates/` `_Docs/` | Obsidian + agents |
+| **Vault** — notes, projects, meetings, work logs, career, personal | `Spaces/` `Concepts/` `Maps/` `Dashboards/` `Inbox/` `_Templates/` `_Docs/` | Obsidian + agents |
 | **Agent layer** — skills, memory, conventions | `_Agents/` (also `.agents/`, a symlink) | agents, and readable in Obsidian |
 
 **Location is per-machine.** Never assume a path — read the one `memory/machines/` profile
@@ -26,7 +26,7 @@ The eight hard rules live in root `AGENTS.md` and are not restated here. Three c
 mechanics worth having in front of you:
 
 1. **Secrets.** The repo's extension-based check misses inline secrets — **you are the backstop**.
-   Recording *where* a credential lives is required, and that is `memory/credentials.md`'s job.
+   Recording *where* a credential lives is required, and that is the space's `memory/credentials.md`'s job.
 2. **Binaries.** Images → a `> Image removed:` callout plus an entry in `_Docs/Image Descriptions.md`.
    PDFs → text-extracted `.md`.
 3. **The user's wording.** Add structure around rough notes; never rewrite them. Explicit
@@ -50,7 +50,7 @@ years. Verify first (the code, the PR, the ticket, the email), ask second, assum
 ## Verification preview before any vault write
 
 `AGENTS.md` → **Vault writes** is the rule; this is the phrase list it refers to. The gate covers every
-entry in the repo — notes, indexes, landing pages, `_Agents/memory/*.md`. Show a `vault preview` with
+entry in the repo — notes, indexes, landing pages, `_Agents/memory/*.md`, `Spaces/*/memory/*.md`. Show a `vault preview` with
 every destination path and the complete proposed Markdown or exact diff, then wait. A confirmation
 approves only the set shown.
 
@@ -128,10 +128,10 @@ day be swept into an archive with a single query and the rest of the vault survi
 
 ## Layout
 
-- `Spaces/Work/Current Work/` — Projects, Meeting Notes, Work Logs, Reference, Training,
-  Interviews, Visual Notes · `Spaces/Work/Future Work/` · `Spaces/Personal/` · `Spaces/Shared/`
+- `Spaces/Work/` — Projects, Meeting Notes, Work Logs, Reference, Training,
+  Interviews, Visual Notes, `memory/`, `skills/` · `Spaces/Career/` · `Spaces/Personal/` (with `skills/`)
 - `Concepts/` durable concept notes · `Maps/` MOCs and indexes · `Dashboards/` Obsidian `.base` files
-- `_Templates/` · `_Docs/` governance · `Inbox/{Raw Dumps,Processed}/` · `Daily Notes/`
+- `_Templates/` · `_Docs/` governance · `Inbox/{Raw Dumps,Processed}/`
 - `_Agents/` — `skills/`, `memory/`, `CONVENTIONS.md`, `docs/`, `scripts/`
 - Root `AGENTS.md` is the always-on instruction file; `CLAUDE.md` / `GEMINI.md` /
   `.github/copilot-instructions.md` are stubs pointing at it.
@@ -144,21 +144,25 @@ Wiki-links resolve by **note name**, not path — moving a note into `Archive/` 
 |---|---|
 | Personal, career, or "my" work context (plans, logs, my view of a project) | this vault |
 | "How does X work", "why did we decide Y", runbooks, team policy | the team shared vault — read its clone directly |
-| "How do I connect to X", "where do the credentials live" | `_Agents/memory/` first; for a system fact the shared vault wins, for this machine memory wins |
+| "How do I connect to X", "where do the credentials live" | the active space's `memory/`, then `_Agents/memory/`; for a system fact the shared vault wins, for this machine memory wins |
 | "Should the team know this", "put this in the dev wiki" | `shared-vault` skill |
 
 Never copy vault content into the shared vault, and never copy shared-vault facts into this vault.
 Refer to the other base with a short summary and a link. A task that spans both is two writes.
 
-## `_Agents/memory/` — load by task
+## Memory — load by task
+
+Shared memory is in `_Agents/memory/` (true in every space). Each space keeps its own memory in
+`Spaces/<Name>/memory/` (for work, `Spaces/Work/memory/`). Put a fact in the narrowest folder where it
+is true.
 
 The operational knowledge these skills assume. **This is what makes an agent behave the same in every
 harness** — connecting to a system is never left to whatever a tool happens to have configured.
 
 Do not preload this folder; the index is [`memory/README.md`](../../memory/README.md). Shell commands
 or machine-dependent paths/tooling require `environment.md` and exactly one matching `machines/`
-profile. Authentication, profiles, secret locations, or connection failures require `credentials.md`
-plus the relevant platform file. Topic work requires only the matching topic memory. Live state comes
+profile. Authentication, profiles, secret locations, or connection failures require the space's
+`memory/credentials.md` plus the relevant platform file. Topic work requires only the matching topic memory. Live state comes
 from its connector.
 
 Memory is **point-in-time**. Environment facts (paths, accounts, which shell holds the SSH key) are

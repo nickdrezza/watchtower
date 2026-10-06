@@ -34,7 +34,7 @@ Cheapest first:
 2. **Prior sessions, across chats** — the session-mgmt MCP (`list_sessions`,
    `search_session_transcripts`) for Claude Code; `<codex-home>/session_index.jsonl` for Codex. Paths
    per machine: [`../memory/machines/`](../memory/machines/README.md).
-3. **Connectors** — [`../memory/connectors.md`](../memory/connectors.md) says which one is
+3. **Connectors** — [`Spaces/Work/memory/connectors.md`](../../Spaces/Work/memory/connectors.md) says which one is
    authoritative for what, and where each one lies to you.
 4. **Ask him.**
 
@@ -87,7 +87,7 @@ housekeeping. They are what lets an agent fetch exactly what a task needs and pu
 
 **Never cache live state into memory.** A ticket status written into a memory file is wrong within
 days and will be believed anyway. Full routing and per-connector limits:
-[`../memory/connectors.md`](../memory/connectors.md).
+[`Spaces/Work/memory/connectors.md`](../../Spaces/Work/memory/connectors.md).
 
 ## Verify before reporting
 

@@ -100,7 +100,7 @@ Document any reliance on these in the body so a reader on another platform knows
 - [ ] No environment facts hard-coded in the body — account ids, file paths, cron expressions, roles,
       and credential locations belong in `_Agents/memory/`. Point at the memory file instead.
 - [ ] **No secret values.** Same hard rule as the rest of this repo: reference where a credential lives
-      (path, env-var name, your secret manager item), never the value. See `_Agents/memory/credentials.md`.
+      (path, env-var name, your secret manager item), never the value. See `Spaces/Work/memory/credentials.md`.
 - [ ] **If it writes anything, it asks first.** A skill that produces a note, doc, log, ticket, or wiki
       page must tell the agent to verify what's checkable, batch the rest into one multiple-choice
       question set *before* the write, and state its understanding concretely enough to be

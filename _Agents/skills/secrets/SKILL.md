@@ -13,7 +13,7 @@ argument-hint: "<get|store|rotate> <name>"
 **Never surface a secret value.** Not in a note, a log, a commit, a chat message, or a terminal echo.
 That is hard rule 1, and this skill exists so it never has to be broken to get work done.
 
-Where each credential lives is recorded in [`../../memory/credentials.md`](../../memory/credentials.md)
+Where each credential lives is recorded in [`Spaces/Work/memory/credentials.md`](../../../Spaces/Work/memory/credentials.md)
 — locations only. Read it first; the credential you need may already be reachable.
 
 ## The order of preference

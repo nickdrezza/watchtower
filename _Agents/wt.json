@@ -23,6 +23,9 @@
   "boundaries": {
     "Spaces/Personal/": [
       "ACME"
+    ],
+    "Spaces/Career/": [
+      "ACME"
     ]
   }
 }

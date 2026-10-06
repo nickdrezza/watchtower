@@ -17,6 +17,9 @@ the vault carries an **operational memory layer** for AI agents at **`_Agents/me
 answer to "why does my agent know how to connect to the warehouse in one session and not the next" — the
 facts live in the repo instead of in whichever tool happened to be configured.
 
+`_Agents/memory/` holds only memory that is true in every space. Each space keeps its own memory in
+`Spaces/<Name>/memory/`. The work files below are in `Spaces/Work/memory/`.
+
 **Obsidian indexes it**, because the folder has no leading dot — that is why it is `_Agents/` and not
 `.agents/`. A committed `.agents` symlink points at it so every harness still finds the universal path
 it auto-discovers. You can also read it in an editor, on
@@ -34,11 +37,11 @@ full sync.
 | `README.md` | The index and the rules for writing memory. |
 | `environment.md` | **Start here.** How to tell which target you're on, what's true on all of them, and what must be looked up per-machine. |
 | `machines/` | One profile per target — paths, shells, installed tooling, and what's deliberately *not* installed. |
-| `credentials.md` | The credential map — every key, token, and profile, what it authenticates, and **where it lives**. |
-| `connectors.md` | The live systems — which connector is authoritative for what, the limit that will bite you, and where cross-chat session history lives. |
-| `warehouse.md` | **The worked example of a platform file** — how to connect, the roles, the limit you'll hit, and the way around it. |
+| `Spaces/Work/memory/credentials.md` | The credential map — every key, token, and profile, what it authenticates, and **where it lives**. |
+| `Spaces/Work/memory/connectors.md` | The live systems — which connector is authoritative for what, the limit that will bite you, and where cross-chat session history lives. |
+| `Spaces/Work/memory/warehouse.md` | **The worked example of a platform file** — how to connect, the roles, the limit you'll hit, and the way around it. |
 | `working-preferences.md` | Standing instructions — the PR rule, verify-don't-fabricate, comment-don't-edit. |
-| `projects.md` | Active and recent work, one compact block each. |
+| `Spaces/Work/memory/projects.md` | Active and recent work, one compact block each. |
 
 **Add one file per platform you actually work in**, named for it, and a `people.md` once more than a
 couple of names matter. `warehouse.md` is the shape to copy. The set ships small on purpose — a
@@ -67,7 +70,7 @@ needed. Everything larger (multi-fact runs, contradictions, pruning, new files) 
 ## Relationship to the vault's own notes
 
 Memory is written **for agents**: terse, operational, "run this, watch for that." The vault's
-`Concepts/` notes and `Spaces/Work/Current Work/Reference/` are written **for you**. They can
+`Concepts/` notes and `Spaces/Work/Reference/` are written **for you**. They can
 cover the same systems from different angles; neither replaces the other. Deep project narrative belongs
 in `Projects/` notes and the tracker — `projects.md` holds only the pointer plus what's needed to resume.
 
