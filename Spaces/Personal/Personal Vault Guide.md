@@ -20,3 +20,9 @@ The routing and writing contract for the personal space. Personal material is pr
 | [[Uncategorized]] | Preserved material awaiting routing |
 
 Records only what you actually said. Never infers a relationship, a date, or a place.
+
+## Save protocol
+
+Follow `AGENTS.md` → *Write to the vault*: write on a branch and open a PR. The diff is the preview.
+Show the Markdown in chat only when the user asks. The hard rules still apply: do not guess, leak
+secrets, add binaries, cross space boundaries, or push directly to `main`.

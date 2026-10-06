@@ -9,20 +9,19 @@ Repo-wide instructions live in the root [`AGENTS.md`](../AGENTS.md). This folder
 ```
 _Agents/
 ├── README.md                 you are here
-├── CONVENTIONS.md            how to author a skill (the SKILL.md spec + pre-commit checklist)
 ├── memory/                   memory true in every space (space memory: Spaces/<Name>/memory/)
 │   ├── README.md             the memory index + WHEN TO WRITE MEMORY
-│   └── machines/             one profile per target — add one per machine you work on
+│   ├── machines/             one profile per target — add one per machine you work on
+│   └── working-preferences/  how you want agents to work
 ├── skills/                   the skills — one folder per skill, canonical source of truth
 │   └── <name>/
 │       ├── SKILL.md          required: frontmatter (name + description) + Markdown body
 │       ├── reference.md      optional: deep detail, loaded only when SKILL.md points to it
 │       └── scripts/          optional: executable helpers (run, not read into context)
-├── docs/                     agent doctrine (vs ../_Docs/, which is human/vault governance)
-│   ├── operating-model.md    HOW TO BEHAVE — one brain, fetch before asking, chats are disposable
-│   ├── verification.md       how to know you're done; what counts as evidence
-│   ├── platforms.md          per-tool path matrix (where each harness reads skills + instructions)
-│   └── portability.md        the portability model + when to reach for rulesync
+├── archive/                  old agent-layer pages, kept as history
+├── tags.md                   the tag registry
+├── image-descriptions.md     text for images removed from the vault
+├── placeholders.md           the stand-in values to replace after setup
 ├── templates/skill-template/ starter SKILL.md for a new skill
 ├── global-instructions.md    the text `wt install` writes into each harness's global instruction file
 ├── search-fixtures.json      prompts and the pages search must (or must not) return
@@ -41,8 +40,8 @@ search points into the agent layer; do not read it or its linked files wholesale
 how to connect to each platform you work in, who's who, what's in flight, and how you want agents to
 work.
 
-Read [`memory/environment.md`](memory/environment.md) plus exactly one machine profile before
-machine-dependent commands. Read [`memory/credentials/`](../Spaces/Work/memory/credentials/index.md) only for
+Read [`memory/machines/index.md`](memory/machines/index.md) plus exactly one machine profile before
+machine-dependent commands. Read [`Spaces/Work/memory/credentials/`](../Spaces/Work/memory/credentials/index.md) only for
 authentication, profiles, secret locations, or connection failures. Full routing index:
 [`memory/README.md`](memory/README.md).
 
@@ -55,7 +54,7 @@ one query if you changes jobs; `vault-memory` keeps the folder current.
 
 | Skill | What it does |
 |---|---|
-| [`watchtower`](skills/watchtower/) | Vault-specific context: layout, writing, preview gate, employer scope, filing, and memory routing. |
+| [`watchtower`](skills/watchtower/) | Vault-specific context: layout, writing, the PR-as-preview rule, employer scope, filing, adding a skill, and memory routing. |
 | [`bootstrap`](skills/bootstrap/) | Sets up a new user or machine, seeds the memory maps, and teaches the operating model. |
 | [`weekly-work-log`](../Spaces/Work/skills/weekly-work-log/) | Writes or updates the weekly manager-facing work log, from evidence only, in the house format. |
 | [`vault-memory`](skills/vault-memory/) | Refreshes `_Agents/memory/` from prior sessions and your connectors. |
@@ -98,13 +97,11 @@ _Agents/wt install --copy     # copies instead of links (Windows/WSL)
 …or just read `_Agents/skills/<name>/SKILL.md` directly. It's plain Markdown; auto-discovery is a
 convenience, not a requirement.
 
-Full path matrix: [`docs/platforms.md`](docs/platforms.md). Why it's built this way:
-[`docs/portability.md`](docs/portability.md).
+Path table for each harness and the Windows↔WSL note: [`../README.md`](../README.md#set-up).
 
 ## Authoring a skill
 
-**New skills belong here**, at `_Agents/skills/<name>/SKILL.md`. A skill that only one space uses goes in
-`Spaces/<Name>/skills/<name>/SKILL.md`.
+Shared skills go in `_Agents/skills/<name>/`; a skill for one space goes in `Spaces/<Name>/skills/<name>/`.
 
 ```bash
 cp -r _Agents/templates/skill-template _Agents/skills/my-skill-name
@@ -112,23 +109,11 @@ cp -r _Agents/templates/skill-template _Agents/skills/my-skill-name
 _Agents/wt install            # link the new skill
 ```
 
-Then **add a row to the Skills table above** — this file is the one hand-maintained skill index, so a
-new skill is invisible to a reader until it's there, and `vault-doctor` fails without it. The
-`watchtower` skill and `_Docs/Skills Repo.md` used to carry duplicate copies of this table and now
-point here; don't reintroduce them.
-
-Rules of thumb (full flow and checklist in [`CONVENTIONS.md`](CONVENTIONS.md)):
-
-- One skill per folder; folder name = `name:` frontmatter = lowercase-hyphenated, and they match.
-- **Only `name` and `description` are load-bearing.** Everything else is optional, tool-specific
-  sugar. Never let a skill *break* without a Claude-only field.
-- `description` is the trigger — state what it does *and* when to use it, with phrases the user
-  would actually type.
-- Keep `SKILL.md` under ~500 lines; push detail into `reference.md`, code into `scripts/`.
-- Prefer POSIX shell / `python3` / common CLIs. Isolate and document any tool-specific step.
+Then **add a row to the Skills table above**. This file is the one hand-maintained skill index. Full
+steps and rules: [`skills/watchtower/reference.md`](skills/watchtower/reference.md#adding-a-skill).
 
 ## History
 
 These skills were a separate private repo, `<you>/skills`. They were merged into the vault so one
-repo carries both the knowledge and the skills that operate on it — see [`../_Docs/Skills Repo.md`](../_Docs/Skills%20Repo.md). Treat
+repo carries both the knowledge and the skills that operate on it — see [`skills/watchtower/reference.md`](skills/watchtower/reference.md#adding-a-skill). Treat
 the old repo as archived; this folder is the source of truth.

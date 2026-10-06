@@ -1,89 +1,57 @@
 # AGENTS.md — the vault
 
-Always-on instructions for every AI agent working with this vault's owner. This file is intentionally
-small; the vault holds the rest as searchable skills, memory, notes, and prior-session pointers.
+Instructions for every AI agent that works with this vault's owner. Keep this file short. The vault
+holds the rest: skills, memory, and notes that you search and load when a task needs them.
 
-## Context loading
+## Load context
 
-1. **Start with the request and this file. Do not preload the vault.**
-2. **Search before implementing.** When the request may depend on prior context, run:
-   ```bash
-   _Agents/wt search <2-5 specific nouns or phrases from the request>
-   ```
-   Read only relevant results. If the first terms miss, try safe synonyms, identifiers, project names,
-   and obvious typo corrections before asking the user.
-3. **Load skills on demand.** Read a skill's complete `SKILL.md` when the request names it or matches
-   its description. Load `_Agents/skills/watchtower/SKILL.md` only for vault work: reading, filing,
-   editing, restructuring, governing, or answering from this vault.
-   **Each skill name exists once.** Skills in this repo are the owner's. Team skills exist only in the
-   team's own repo and are often shown as `plugin:skill`. Nothing is copied between the two, so there
-   is no duplicate to choose between and nothing to sync.
-4. **Load operational context only when the action needs it:**
-   - Shell commands or machine-dependent paths/tooling → `_Agents/memory/environment.md`, then exactly
-     one matching `_Agents/memory/machines/` profile.
-   - Authentication, secret locations, profiles, or connection failures →
-     `Spaces/Work/memory/credentials/` plus the relevant platform memory.
-   - Live external state → the authoritative connector named in `Spaces/Work/memory/connectors/`.
-   - Prior decisions or unfinished work → the relevant note/memory first, then prior sessions.
-5. **Pointers are not content.** Search results and indexes tell you what to open; they do not require
-   reading every linked file.
+1. Start with the request and this file. Do not preload the vault.
+2. Search before you act: `_Agents/wt search <2-5 specific terms>`. Open only the relevant results. If
+   nothing matches, try synonyms, identifiers, and project names before you ask the user.
+3. Load a skill when the request names it or matches its description. Vault skills are the owner's and
+   live in `_Agents/skills/` and `Spaces/<Name>/skills/`. Team skills live only in the team's skills
+   repo (often shown as `plugin:skill`); change them there by PR, never here. When you use a team
+   skill: use the data tool that is connected, treat data imported into the skill as a dated snapshot
+   and verify it live, draft before you publish, never get around a guardrail by switching roles or
+   data sources, and never create infrastructure automatically.
+4. Load operational memory only when the action needs it:
+   - Shell commands or machine paths → `_Agents/memory/machines/index.md`, then one profile.
+   - Credentials or connection failures → `Spaces/Work/memory/credentials/`.
+   - Live state (tickets, counts, schedules) → the connector named in
+     `Spaces/Work/memory/connectors/`. Never cache live state in memory.
+5. A search result or index is a pointer. Open what you need, not everything it links.
 
-Order: request → this bootstrap → search → matching skill/context → action. Read
-`_Agents/docs/operating-model.md` only when changing agent governance or retrieval behavior.
+How the user wants agents to work — evidence, decide vs ask, reporting, testing — is in
+`_Agents/memory/working-preferences/`. Read the matching page when a task needs it.
 
 ## Hard rules
 
 1. **No secret values.** Never put keys, passwords, tokens, private keys, `.env` contents, or OAuth
-   secrets in notes, code blocks, logs, commits, or chat. Recording locations is allowed.
-2. **No binaries in the vault.** No images, PDFs, private keys, `.env`, plugin bundles, JS, or CSS.
-   Extract PDFs to Markdown; catalogue removed images in `_Docs/Image Descriptions.md`.
-3. **Preserve the user's wording and data.** Never delete notes or rewrite rough material into generic
-   prose. Add structure around it; explicit consolidation must carry the original wording forward.
-4. **Respect space boundaries.** Employer-specific material stays out of the personal and career
-   spaces.
-5. **Never push straight to `main`.** Use a branch and PR. Do not publish, push, open a PR, or send
-   external communication without explicit authorization for that external action.
-6. **Never write a low-confidence inference as fact.** Verify from evidence; if evidence cannot settle
-   it, ask one concrete batched question before writing.
-7. **No filler or editorializing.** Every sentence must carry a fact a future reader needs. Report
-   what changed, what was verified, and what was deliberately left out.
-8. **Build the smallest maintainable change that fully solves the request.** Keep scope, machinery,
-   documentation, and testing proportional to behavior and risk.
+   secrets in notes, code, logs, commits, or chat. Record only where a secret lives.
+2. **No binaries in the vault.** No images, PDFs, keys, `.env`, plugin bundles, JS, or CSS. Extract PDFs
+   to Markdown. Record removed images in `_Agents/image-descriptions.md`.
+3. **Keep the user's wording and data.** Never delete notes or rewrite rough material into generic
+   prose. Add structure around it. A merge carries the original wording forward.
+4. **Keep space boundaries.** Employer material stays out of the personal and career spaces.
+5. **Never push to `main`.** Work on a branch and open a PR. Do not publish, message, or change
+   another repo or system unless the user asks for that action.
+6. **Never write a low-confidence inference as fact.** Verify from evidence. If evidence cannot settle
+   it, ask one batched question before you write.
+7. **No filler.** Every sentence carries a fact a future reader needs. Report what changed, what you
+   verified, and what you left out.
+8. **Make the smallest maintainable change that solves the request.** Keep code, docs, and tests in
+   proportion to the risk.
 
-## Working model
+## Write to the vault
 
-- **One brain, many disposable agents.** The vault is shared memory; chats and agents are not.
-- **Fetch before asking.** Search this vault, then relevant prior sessions, then live connectors.
-- **Decide reversible, conventional, evidence-answerable details.** Ask about irreversible, expensive,
-  unrecoverable, or taste-dependent choices.
-- **Durable facts live here; live state does not.** Query tickets, row counts, schedules, and current
-  status from their source instead of caching them in memory.
-- **Verify before reporting.** Use `_Agents/docs/verification.md` when completion criteria are unclear.
-- **A vault's skills have the same audience as the vault.** Ask "who runs this?", not "what is it about?":
-  the owner's skills stay here, also work-topic ones; team skills live only in the team's skills repo.
-- **Using team skills** (installed from a team repo or marketplace): use whatever data tool is connected; treat data imported into a skill as a dated snapshot and verify it live; draft locally and publish only when asked; never get around a guardrail by switching roles or data sources; never create infrastructure automatically.
-
-## Vault writes
-
-The full filing, writing, tagging, template, and structural rules live in the matching skill. For any
-vault write, load `watchtower` and any operation skill such as `vault-edit` first.
-
-Default gate: show a `vault preview` containing every destination and the exact proposed content or
-diff, then wait for approval. A clear current-turn instruction such as `full perms`, `skip the
-preview`, `write it directly`, or `save it without asking` bypasses only that preview gate. It never
-waives the hard rules. A memory fast path is defined in `_Agents/memory/README.md`.
-
-Structural edits must update links, indexes, frontmatter, and tags together. `Maps/Tag Registry.md` is
-the tag authority. Employer-specific material uses the configured employer tag; graph scope uses
-`work` and `personal`. Verify vault edits with the `vault-doctor` skill.
-
-## Git and completion
-
-- Fetch before branching when remote state matters; stage only intended files, never `git add -A`.
-- Preserve unrelated user changes in a dirty tree.
-- Secret-scan the diff before committing.
-- Use the matching machine profile for paths, shells, installed tools, and git identity.
-- Do not treat focused tests as proof that an external deployment or live system changed.
+- **The PR diff is the preview.** Write on a branch, commit, and open a PR to this repo. The user
+  reviews and merges it. You do not need a chat preview first. Show the diff in chat only when the user
+  asks.
+- Load `watchtower` before a vault write, and `vault-edit` before a move, rename, merge, or delete.
+- Moves use `git mv`, then `_Agents/wt doctor --fix`. Merge only with 0 errors from `wt doctor`.
+- Write a durable fact to memory when you learn it. `_Agents/memory/README.md` says where.
+- Tags must be in `_Agents/tags.md`. Employer material carries the employer tag (`ACME` in this
+  template).
 
 ## Spaces
 
@@ -97,32 +65,32 @@ in `_Agents/`.
 | `Spaces/Career/` | Resume, career plans, and future work | None |
 
 - Find the active space from the working directory or the request. Search that space and `_Agents/`.
-- Put a fact that one space needs in that space's `memory/`. Put a fact that is true everywhere in
+- A fact that one space needs goes in that space's `memory/`. A fact true everywhere goes in
   `_Agents/memory/`.
 - `wt doctor` reports a tag that crosses a boundary (`_Agents/wt.json` → `boundaries`).
 - To leave a job, archive its space folder. Its memory and skills go with it.
 
 ## Page conventions
 
-These apply to new and moved pages. Existing pages change in later redesign steps.
-Obsidian, GitHub, and Isomorphic read the same files.
+Obsidian, GitHub, and Isomorphic read the same files. These rules apply to new and moved pages.
 
-- **Frontmatter:** `type`, `description`, `updated`. Add `title` only when it is different from the
-  file name. A folder note does not need `type`.
-- **Folder notes:** a folder's overview page is `<folder>/index.md`. In Obsidian, set the folder-notes
-  plugin to use the name `index`.
-- **Titles:** each content page has a unique title. `index.md` and `SKILL.md` are exempt.
-- **Listings:** use an `okf-view` block, not a hand-kept list. `_Agents/wt index` writes the cached
-  snapshot under it, so Obsidian and GitHub show the list. Isomorphic computes it live.
-- **Paths:** `.isomorphic.json` declares which folders are content and which are system.
-- **Plugin files** (`.excalidraw.md`, `.base`) are extras. They are never the only index of anything.
-- **Moves and renames:** use `git mv`, then `_Agents/wt doctor --fix`. Merge only with 0 broken links.
+- Frontmatter: `type`, `description`, `updated`. Add `title` only when it differs from the file name.
+- A folder's overview page is `<folder>/index.md`. Each content page has a unique title.
+- Use an `okf-view` block for a listing, not a hand-kept list. `_Agents/wt index` writes its snapshot.
+- `.isomorphic.json` says which folders are content and which are system.
+- Plugin files (`.excalidraw.md`, `.base`) are extras, never the only index of anything.
 
-## Entry points
+## Git
 
-- Skills: `_Agents/skills/<name>/SKILL.md` (shared) and `Spaces/<Name>/skills/<name>/SKILL.md` (one space)
-- Memory index: `_Agents/memory/README.md` (shared) and `Spaces/<Name>/memory/` (one space)
-- Agent-layer map: `_Agents/README.md`
-- Vault structure and indexes: `_Agents/skills/watchtower/reference.md`, `Maps/`
-- Skill authoring: `_Agents/CONVENTIONS.md`
-- Platform/harness paths: `_Agents/docs/platforms.md`
+- Fetch before you branch. Stage only the files you changed; never `git add -A` in a dirty tree.
+- Keep unrelated changes that the user has not committed.
+- The pre-commit hook runs `wt doctor`; CI runs `wt doctor`, the search tests, and gitleaks.
+- A passing local test does not prove that a deployment or live system changed.
+
+## Where things are
+
+- Vault guide for people: `README.md`
+- Skills: `_Agents/skills/`, `Spaces/<Name>/skills/` (table: `_Agents/README.md`)
+- Memory: `_Agents/memory/README.md`
+- Vault layout, templates, filing, and adding a skill: the `watchtower` skill and its `reference.md`
+- The tool: `_Agents/wt` (`search`, `doctor`, `install`, `index`)

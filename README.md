@@ -1,148 +1,149 @@
-# Watchtower
-
-> **A shared brain for your AI agents.** One plain-Markdown vault that every harness reads as memory —
-> so your chats become disposable and nothing gets re-explained twice.
-
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Docs: Markdown](https://img.shields.io/badge/docs-Markdown-blue.svg)](#whats-in-here)
-[![Works with](https://img.shields.io/badge/works%20with-Claude%20Code%20·%20Codex%20·%20Cursor%20·%20Gemini%20·%20Copilot-8A2BE2.svg)](_Agents/docs/platforms.md)
-
-This is a **template**. Generate your own repo from it, run one skill, and start working.
-
+---
+type: documentation
+title: Watchtower
+description: "The guide for a new user: what this vault template is, how to set it up, and how to use it each day."
+updated: 2026-10-06
 ---
 
-## The idea
+# Watchtower
 
-Most people scale AI development by building a *hierarchy* — a manager agent that owns context and
-delegates to specialists, each with its own private memory. That means orchestration to maintain,
-hand-off protocols, and context that dies when a thread does.
+> **A shared brain for your AI agents.** One plain-Markdown vault that every agent reads as memory, so
+> your chats become disposable and nothing gets explained twice.
 
-This does the opposite. **One vault, read by every agent.** No manager thread, no per-agent memory, no
-message passing. Every agent knows everything.
+This is a **template** for a private, text-first Obsidian vault: your notes for work, personal life,
+and career, and the memory for each AI agent that works with you. Claude Code, Codex, Cursor, Gemini
+CLI, Copilot, and Antigravity read the same skills and memory, so they operate the same way. There is
+no manager agent: a chat can stop at any time, because the durable facts are in the vault. Agents read
+[`AGENTS.md`](AGENTS.md); this page is for people. **Keep your copy private.**
 
-What that buys you:
-
-- **A new chat is cheap.** It rehydrates from the vault, from your prior sessions, and from your
-  connectors — without being told to.
-- **Chats are disposable.** End them freely. When a project resurfaces a month later, open a new chat
-  instead of hunting the old one.
-- **Nothing gets re-explained.** The gotcha that cost you three hours is written down once.
-- **Every tool behaves the same.** One set of rules, one skills directory, every harness.
-
-Subagents still earn their place on large work — roughly one per feature or commit — but for parallel
-*execution*, never to hold context.
-
-## Quickstart
-
-```bash
-gh repo create my-vault --template <you>/watchtower --private
-cd my-vault
-```
-
-Then open it in any agent and say **"set me up"** — the [`bootstrap`](_Agents/skills/bootstrap/) skill
-installs the skills, wires the global instruction bridge, writes your machine profile, seeds the
-credential and connector maps, and deletes the example content.
-
-Prefer to do it by hand? [`_Docs/Setup Guide.md`](_Docs/Setup%20Guide.md) — about 15 minutes.
-
-**Keep it private.** This fills up with credential locations, work context, and personal notes.
-
-## What's in here
-
-Two halves, one repo.
+## Layout
 
 ```text
-AGENTS.md                authoritative rules for every agent  ← the entrance
-CLAUDE.md, GEMINI.md,    stubs -> AGENTS.md, so no harness gets different rules
-  .github/copilot-instructions.md
-
-_Agents/                 the agent layer (also .agents/, a symlink for tool auto-discovery)
-  docs/
-    operating-model.md   HOW TO BEHAVE — the model above, as instructions
-    verification.md      how to know you're done; what counts as evidence
-    platforms.md         where each harness reads skills and instructions
-    portability.md       why it's built this way
-  memory/                what is TRUE about your environment
-    README.md            the index + WHEN TO WRITE MEMORY
-    machines/            one profile per target — paths, shells, what's NOT installed
-  skills/<name>/         one folder per skill, read by every harness
-  wt                     the one tool: search · doctor · install · index
-  CONVENTIONS.md         how to author a skill
-
-Spaces/                  your actual notes — Work / Personal / Career; each space has its own
-                         memory/ and skills/ (Spaces/Work/memory/connectors/: which live
-                         system owns which question)
-Concepts/                durable topic notes; the targets of topic/* tags
-Maps/                    indexes, and Tag Registry — the tag authority
-Dashboards/              Obsidian .base views (they filter on `type ==`)
-Inbox/                   Raw Dumps + Processed — where uncertain material lands
-_Templates/  _Docs/      frontmatter templates · Setup & Usage guides, governance
+AGENTS.md            agent instructions; CLAUDE.md, GEMINI.md, copilot-instructions.md point to it
+README.md            this guide, and the Obsidian home page
+Spaces/
+  Personal/          personal life
+  Work/              work for your current employer (tag ACME)
+  Career/            resume and future work
+Concepts/            one note for each durable subject; the targets of topic/* tags
+_Agents/             the agent layer (.agents is a symlink to it)
+  skills/            shared skills, one folder for each skill
+  memory/            facts that are true in all spaces: machines/, working-preferences/
+  templates/         the starter files for a new skill
+  archive/           old agent-layer pages, kept as history
+  tags.md            the tag registry
+  placeholders.md    the stand-in values to replace after setup
+  wt                 the vault tool: search, doctor, install, index
+_Templates/          note templates for each space
+Inbox/               Raw Dumps/ and Processed/: material with no home yet
 ```
 
-**Skills vs memory** is the distinction that keeps this clean. A skill is *how to perform a task*.
-Memory is *what is true about this environment*. A skill that hard-codes an account id or a path is
-doing memory's job.
+A space keeps its own `memory/` and `skills/`. A **skill** tells an agent how to do a task. **Memory**
+tells it what is true about your systems and machines. A skill that hard-codes an account ID or a path
+does the job of memory.
 
-## The skills
+## Spaces
+
+- [Personal](Spaces/Personal/index.md) — diary, memories, reflections, people, places, and pets. Space
+  rules: [Personal Vault Guide](<Spaces/Personal/Personal Vault Guide.md>).
+- [Work](Spaces/Work/index.md) — projects, people, work logs, meeting notes, reference, and dashboards.
+  Space rules: [`Spaces/Work/AGENTS.md`](Spaces/Work/AGENTS.md).
+- [Career](Spaces/Career/index.md) — resume, career plans, and material for future work.
+
+Work material stays in `Spaces/Work/`. Material with no clear home goes to `Inbox/Processed/`.
+
+## Set up
+
+1. Make your own private repo from the template, then clone it. Any path is correct; record it in the
+   machine profile (step 5).
+   ```bash
+   gh repo create my-vault --template <you>/watchtower --private --clone
+   ```
+2. **Fast path:** open the repo in any agent and say "set me up". The
+   [`bootstrap`](_Agents/skills/bootstrap/SKILL.md) skill does steps 3–7 with you, removes the example
+   content, and teaches the operating model.
+3. Run `_Agents/wt install --dry-run` to see the changes, then `_Agents/wt install` (safe to run
+   again). It writes the stub `_Agents/global-instructions.md` into each harness's global instruction
+   file (`~/.claude/CLAUDE.md`, `~/.codex/AGENTS.md`, `~/.gemini/GEMINI.md`, `~/.cursor/AGENTS.md`;
+   a hand-written file is kept unless you add `--force`), links each skill into `~/.agents/skills/`
+   and `~/.claude/skills/`, adds the Claude Code search hook (`wt search --hook` on each prompt), and
+   adds a git pre-commit hook that runs `wt doctor --errors-only`.
+4. Test it. Open a new chat in a folder that is not this repo, and ask: "What are the hard rules of my
+   vault, and where is my agent memory?" If the agent does not know, the install did not reach that
+   harness. Make sure that its config folder exists, then run `wt install` again.
+5. Copy the nearest profile in `_Agents/memory/machines/`: paths, shell, CLIs installed and not
+   installed, `gh` identity, git author email. Add it to `_Agents/memory/machines/index.md`.
+6. Record where each credential is in `Spaces/Work/memory/credentials/`, never the value.
+7. Connect your MCP connectors; record which one owns which data in `Spaces/Work/memory/connectors/`.
+8. Replace the placeholders: your handle and vault name, then the employer tag `ACME`. The list and the
+   grep checks are in [`_Agents/placeholders.md`](_Agents/placeholders.md). Add your account names to
+   `users` in `_Agents/wt.json`.
+9. Optional: open the repo as an Obsidian vault. Nothing needs Obsidian.
+
+Where each harness reads skills and instructions:
+
+| Harness | Skills | Instructions |
+|---|---|---|
+| Claude Code | `~/.claude/skills/`, `.claude/skills/` | `CLAUDE.md` (stub); it also reads `AGENTS.md` |
+| Codex, Cursor, Copilot | `~/.agents/skills/`, `.agents/skills/` | `AGENTS.md`; Copilot also reads `.github/copilot-instructions.md` (stub) |
+| Gemini CLI, Antigravity | `~/.agents/skills/`, `.agents/skills/` | `AGENTS.md` and `GEMINI.md` (stub; `GEMINI.md` wins on a conflict) |
+| Old Cursor, Windsurf | — | `.cursor/rules/`, `.windsurf/rules/`; new versions read `AGENTS.md` |
+
+`.agents` is a committed symlink to `_Agents/` (Obsidian hides dot-folders). If a harness does not
+find a skill, tell the agent to read `_Agents/skills/<name>/SKILL.md`. It is plain Markdown.
+
+**Windows and WSL:** a WSL symlink does not resolve for a Windows app (Cursor.exe, Antigravity.exe).
+For those, use `_Agents/wt install --copy`, and run it again after each skill change. For
+tool-specific variants of skills, rules, or MCP configs from one source, look at `rulesync`.
+
+## Daily use
+
+- **Say what you want.** Do not paste context or summarize the last chat. The agent searches the
+  vault, old sessions, and connectors first. If it asks you to explain a thing that it can find, that
+  is a bug: usually a missing memory page, or a harness that `wt install` did not reach.
+- **Dump raw material. Do not sort it first.** Put it in the chat or in `Inbox/Raw Dumps/` and say
+  "file these notes". The agent keeps your words and adds the structure.
+- **Use voice** for debriefs, work-log material, and personal capture. Speech recognition changes
+  identifiers (ticket keys, paths, SQL, URLs) and the result looks correct: speak the prose, paste the
+  exact strings, never speak a credential. On the phone, dictate; a laptop session files it later.
+- **Let chats end.** A new chat loses nothing that is in memory. The test for a fact: "Will a new agent
+  do the job worse in six weeks without this?" If yes, say "save that".
+- **Review agent writes in the PR.** The diff is the preview; ask for a chat preview only when you want
+  one. Nothing goes to `main` without a PR.
+- **Sync** with "sync my vault": `vault-sync` pulls, updates the log and memory, and ships a PR.
+- **Use few subagents**, only for independent work, never to own a topic. **One fact, one home.**
+  Verify a report before you trust it, also a report from an agent.
+
+### When something goes wrong
+
+| Problem | Usual cause and fix |
+|---|---|
+| The agent asks you to explain known context | `wt install` did not reach that harness. Run it again. |
+| The agent says that a skill is not available | It did not find the skill. Tell it to read `_Agents/skills/<name>/SKILL.md`. |
+| The agent states a wrong fact with confidence | A stale memory page. Fix the page, not only the chat. |
+| The agent asks permission for each step | See `_Agents/memory/working-preferences/Decide vs ask.md`: decide reversible details, ask about irreversible ones. |
+| Commands fail with wrong paths | Wrong machine profile. Start at `_Agents/memory/machines/index.md`. |
+
+## Skills
 
 | Skill | What it does |
 |---|---|
-| [`watchtower`](_Agents/skills/watchtower/) | **The primary context. Loaded first, every session.** |
-| [`bootstrap`](_Agents/skills/bootstrap/) | Sets up a new user or machine, and teaches the model |
-| [`vault-memory`](_Agents/skills/vault-memory/) | Refreshes memory from prior sessions and your connectors |
-| [`vault-sync`](_Agents/skills/vault-sync/) | Pull → refresh → commit → PR → merge → summary |
-| [`weekly-work-log`](Spaces/Work/skills/weekly-work-log/) | Writes the weekly work log from verified activity |
-| [`vault-doctor`](_Agents/skills/vault-doctor/) | Mechanical integrity checks. Read-only, script-backed |
-| [`vault-prune`](_Agents/skills/vault-prune/) | Finds slop, duplicates, bloat, stale claims, gaps |
-| [`vault-edit`](_Agents/skills/vault-edit/) | Safe CRUD — and what must move with the file |
-| [`shared-vault`](Spaces/Work/skills/shared-vault/) | Moves vault knowledge into a team wiki as a PR |
-| [`secrets`](_Agents/skills/secrets/) | Get, store, rotate, inject — never surfacing a value |
-| [`playwright-testing`](_Agents/skills/playwright-testing/) | Real-browser tests for user-visible behavior |
-| [`personal`](Spaces/Personal/skills/personal/) | Files personal material and keeps your voice |
+| [`watchtower`](_Agents/skills/watchtower/SKILL.md) | The vault rules: layout, writing, tags, filing, adding a skill. Load it before a vault write |
+| [`bootstrap`](_Agents/skills/bootstrap/SKILL.md) | Sets up a new user or machine, and teaches the operating model |
+| [`vault-memory`](_Agents/skills/vault-memory/SKILL.md) | Updates memory from prior sessions and your connectors |
+| [`vault-sync`](_Agents/skills/vault-sync/SKILL.md) | Pull, update, commit, PR, merge, summary |
+| [`weekly-work-log`](Spaces/Work/skills/weekly-work-log/SKILL.md) | Writes the weekly work log from verified activity |
+| [`vault-doctor`](_Agents/skills/vault-doctor/SKILL.md) | Mechanical checks, backed by `wt doctor`. Read-only |
+| [`vault-prune`](_Agents/skills/vault-prune/SKILL.md) | Finds slop, duplicates, bloat, stale claims, and gaps |
+| [`vault-edit`](_Agents/skills/vault-edit/SKILL.md) | Create, move, rename, merge, or delete notes without breaking links |
+| [`shared-vault`](Spaces/Work/skills/shared-vault/SKILL.md) | Moves vault knowledge into a team wiki as a PR |
+| [`secrets`](_Agents/skills/secrets/SKILL.md) | Gets, stores, rotates, and injects credentials; never shows a value |
+| [`playwright-testing`](_Agents/skills/playwright-testing/SKILL.md) | Real-browser tests for user-visible behavior |
+| [`personal`](Spaces/Personal/skills/personal/SKILL.md) | Files personal material and keeps your voice |
 
-## The rules that make it work
+The full index, which `wt doctor` checks, is [`_Agents/README.md`](_Agents/README.md). Skills in this
+vault are yours. Team skills live only in the team's skills repo and are never copied in. A team wiki is
+a separate repo; the `shared-vault` skill moves material there as a rewrite, never a paste.
 
-Full text in [`AGENTS.md`](AGENTS.md). The load-bearing ones:
-
-1. **No secret values, ever.** Recording *where* a credential lives is required; pasting the value never is.
-2. **No binaries.** Plain text outlives every tool.
-3. **Never delete notes or rewrite the user's wording.** Add structure around rough notes.
-4. **Respect space boundaries.** Work material stays out of personal spaces.
-5. **Never push straight to `main`.** Branch → PR.
-6. **Never write a low-confidence inference as fact. Ask.** A wrong claim reads as true for years.
-7. **No filler, no editorializing.** Every sentence carries a fact a future reader needs. Padding
-   degrades retrieval, which degrades everything else.
-
-Rule 7 has one test: *would a competent reader six weeks from now be worse
-off without this?* It applies to an agent's chat reply as much as to a note.
-
-## Two things people get wrong
-
-**Skipping the global instruction bridge.** Run `_Agents/wt install`. Without it your agents only
-see these rules when opened *on* this repo — which is not where you work most of the time.
-
-**Never building the memory habit.** The vault only makes chats disposable if facts actually get written
-back. The rule is deliberately bounded so it's cheap to follow:
-[`_Agents/memory/README.md`](_Agents/memory/README.md) → *When to write memory*.
-
-## Team knowledge
-
-A personal vault is not a team wiki. The companion template for the shared half is
-**[`nickdrezza/dev-wiki`](https://github.com/nickdrezza/dev-wiki)** — strict, documentation-heavy, filed
-by document type, no PII. Run both and you have a complete personal + team knowledge system.
-
-The `watchtower` skill decides which base owns a topic. The `shared-vault` skill moves material to the
-team base **as a rewrite, never a paste**. In the other direction, agents read the team base's clone
-directly; your vault keeps only a short summary and a link. The team base stays the source of truth
-for team facts.
-
-**Skills follow the same split.** A vault's skills have the same audience as the vault: ask "who runs
-this?", not "what is it about?". Your vault keeps only skills you run. Team skills live only in the
-team's skills repo (for example a plugin marketplace) and are never copied in. A shared vault holds
-shared skills. One copy per skill means nothing to sync.
-
-## License
-
-MIT — see [`LICENSE`](LICENSE). Built on the open
-[`AGENTS.md`](https://agents.md) and [`SKILL.md`](https://agentskills.io/specification) standards, so
-nothing here is locked to one vendor.
+MIT licensed. Built on the open [`AGENTS.md`](https://agents.md) and
+[`SKILL.md`](https://agentskills.io/specification) standards, so nothing here is locked to one vendor.

@@ -3,12 +3,10 @@
 Read `watchtower`, `Spaces/Personal/Personal Vault Guide.md`, and `Spaces/Personal/Uncategorized.md`
 first. Triage is a later classification pass, not permission to rewrite or discard a raw dump.
 
-## Preview before saving
+## The PR is the preview
 
-Follow the vault-wide verification preview. Unless the current request contains an explicit,
-positive bypass such as `full perms`, `skip verification`, or `write it directly`, show each source and destination path plus the exact proposed Markdown or diff
-for moves, splits, merges, landing-page changes, and entity links before writing. The bypass skips
-only the human preview; do not guess.
+Write on a branch and open a PR. The diff is the preview (`AGENTS.md` → *Write to the vault*). Show
+the Markdown in chat only when the user asks. Keep the hard rules and do not guess.
 
 ## Workflow
 
