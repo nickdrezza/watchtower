@@ -615,7 +615,9 @@ def stub():
 
 
 def is_our_hook(command):
-    return "wt-search.sh --hook" in command or ("_Agents/wt" in command and "search --hook" in command)
+    """Our hook in any quoting: the old wt-search.sh script, or `wt search --hook`."""
+    c = command.replace('"', "").replace("'", "")
+    return "wt-search.sh" in c or ("_Agents/wt" in c and "search --hook" in c)
 
 
 class Installer:
