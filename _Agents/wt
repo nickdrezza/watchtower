@@ -30,6 +30,7 @@ FIXTURES = ROOT / "_Agents" / "search-fixtures.json"
 TAG_REGISTRY = ROOT / "Maps" / "Tag Registry.md"
 SKILL_INDEX = ROOT / "_Agents" / "README.md"
 GLOBAL_TEXT = ROOT / "_Agents" / "global-instructions.md"
+SETTINGS = ROOT / "_Agents" / "wt.json"  # optional per-vault overrides: {"triggers": [...], "users": [...]}
 
 # Agent folders that are not pages (system) but are searched.
 AGENT_SEARCH_ROOTS = ("_Agents/memory/", "_Agents/skills/", "_Agents/docs/")
@@ -44,8 +45,15 @@ TRIGGERS = (
     "secrets", "deployment", "worktree", "meeting", "interview", "diary", "career",
 )
 
-# Account names whose home paths must not appear in skills. Add yours, pipe-separated.
+# Account names whose home paths must not appear in skills. Set yours in _Agents/wt.json.
 USERS = r"alice|bob"
+
+try:
+    _settings = json.loads(SETTINGS.read_text()) if SETTINGS.exists() else {}
+except ValueError:
+    _settings = {}
+TRIGGERS = tuple(_settings.get("triggers", TRIGGERS))
+USERS = "|".join(map(re.escape, _settings["users"])) if _settings.get("users") else USERS
 
 DESCRIPTION_MIN, DESCRIPTION_MAX = 100, 300
 MEMORY_MAX_LINES = 200

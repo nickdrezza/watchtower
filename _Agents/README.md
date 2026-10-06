@@ -27,6 +27,7 @@ _Agents/
 ├── templates/skill-template/ starter SKILL.md for a new skill
 ├── global-instructions.md    the text `wt install` writes into each harness's global instruction file
 ├── search-fixtures.json      prompts and the pages search must (or must not) return
+├── wt.json                   this vault's search trigger words and account names for `wt`
 └── wt                        the one tool: search · doctor [--fix] · install · index
 ```
 
