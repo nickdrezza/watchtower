@@ -1,11 +1,9 @@
 ---
 name: bootstrap
 description: >
-  Sets up this vault for a new user or on a new machine — installs the skills and the global instruction
-  bridge, writes the first machine profile, seeds the credential and connector maps, and explains the
-  operating model. Use when someone says "set me up", "get this working", "I just cloned this", "help me
-  start", "configure this vault", "onboard me", or opens the repo for the first time and doesn't know
-  where to begin. Deletes the example content once real content replaces it.
+  Sets up this vault for a new user or machine: installs skills, writes the machine profile, and seeds
+  the credential and connector maps. Use for "set me up", "I just cloned this", "onboard me", or
+  "configure this vault".
 user-invocable: true
 argument-hint: "set me up"
 ---

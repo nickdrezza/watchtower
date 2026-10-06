@@ -1,13 +1,9 @@
 ---
 name: vault-prune
 description: >
-  Full-vault quality pass — finds notes that are AI slop or otherwise worthless, near-duplicates that
-  should merge, bloated notes to simplify, stale content, orphans nothing links to, and knowledge gaps
-  worth filling. Proposes every change as a per-item decision and never deletes or rewrites without
-  approval. Use when the user says "prune my vault", "clean up the vault", "find crappy notes", "what
-  should I delete", "any duplicates", "simplify these notes", "what's missing", "the vault is getting
-  messy", or wants a periodic curation pass. For mechanical breakage (dead links, unregistered tags)
-  run vault-doctor first — this skill assumes the vault is structurally sound.
+  Finds slop, near-duplicates, bloated or stale notes, orphans, and gaps, and proposes each change for
+  approval. Use for "prune my vault", "clean up the vault", "any duplicates", "what should I delete",
+  or "what's missing".
 user-invocable: true
 argument-hint: "[folder|all]"
 ---

@@ -1,13 +1,3 @@
----
-name: personal-memory
-description: >
-  Files past events, milestones, and life-history notes in the personal Memories section, keeping
-  your own wording. Use when he says "I remember...", "back in 2019...", describes something
-  from the past, or records a move, graduation, job change, college period, trip, or other event that
-  already happened. For today's events use diary; for an opinion or belief use personal-reflection;
-  for the people and places involved use personal-entities.
----
-
 # Personal memory
 
 Read `watchtower` and `Spaces/Personal/Personal Vault Guide.md` first. Use this skill only when

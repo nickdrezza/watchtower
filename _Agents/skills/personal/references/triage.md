@@ -1,14 +1,3 @@
----
-name: personal-triage
-description: >
-  Reviews personal notes staged in Uncategorized.md, preserves their original wording, and classifies
-  each into diary, memories, reflections, people, locations, literature, or another personal
-  destination. Use when the user says "process my uncategorized notes", "triage my personal inbox",
-  "file those notes I dumped", "sort out Uncategorized", or wants earlier personal material organized
-  after the fact. Splits or moves only when the destination is supported — never rewrites, never
-  deletes, and leaves unclear items staged with status: needs-triage.
----
-
 # Personal triage
 
 Read `watchtower`, `Spaces/Personal/Personal Vault Guide.md`, and `Spaces/Personal/Uncategorized.md`

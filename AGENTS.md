@@ -15,12 +15,9 @@ small; the vault holds the rest as searchable skills, memory, notes, and prior-s
 3. **Load skills on demand.** Read a skill's complete `SKILL.md` when the request names it or matches
    its description. Load `_Agents/skills/watchtower/SKILL.md` only for vault work: reading, filing,
    editing, restructuring, governing, or answering from this vault.
-   **When a skill name exists twice, this repo's copy wins — always.** Skills published from here to a
-   marketplace or a shared repo come back as installed copies, so a name can appear both unprefixed
-   (`my-skill` — this repo, deployed to `~/.agents/skills`) and prefixed (`some-plugin:my-skill`).
-   **Invoke the unprefixed one.** This repo is the source; a prefixed copy is a build artifact that may
-   be behind or edited by someone else. Use a `plugin:skill` name only when no unprefixed skill of that
-   name exists. Ledger of what is published and currently duplicated: `_Docs/Skill Exports.md`.
+   **Each skill name exists once.** Skills in this repo are the owner's. Team skills exist only in the
+   team's own repo and are often shown as `plugin:skill`. Nothing is copied between the two, so there
+   is no duplicate to choose between and nothing to sync.
 4. **Load operational context only when the action needs it:**
    - Shell commands or machine-dependent paths/tooling → `_Agents/memory/environment.md`, then exactly
      one matching `_Agents/memory/machines/` profile.
@@ -62,6 +59,9 @@ Order: request → this bootstrap → search → matching skill/context → acti
 - **Durable facts live here; live state does not.** Query tickets, row counts, schedules, and current
   status from their source instead of caching them in memory.
 - **Verify before reporting.** Use `_Agents/docs/verification.md` when completion criteria are unclear.
+- **A vault's skills have the same audience as the vault.** Ask "who runs this?", not "what is it about?":
+  the owner's skills stay here, also work-topic ones; team skills live only in the team's skills repo.
+- **Using team skills** (installed from a team repo or marketplace): use whatever data tool is connected; treat data imported into a skill as a dated snapshot and verify it live; draft locally and publish only when asked; never get around a guardrail by switching roles or data sources; never create infrastructure automatically.
 
 ## Vault writes
 
