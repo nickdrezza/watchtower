@@ -95,7 +95,7 @@ a file.
 
 ## Related knowledge bases
 
-- **shared-vault** (team repo `Acme-Healthcare/shared-vault`; clone path per machine in
+- **shared-vault** (team repo `Acme/shared-vault`; clone path per machine in
   `_Agents/memory/git-and-tickets.md`) — the Acme team "how it works" wiki. Kept fully separate.
   `knowledge-router` decides which repo a task belongs to; `shared-vault-promote` carries material
   across when it should travel. Team-relevant, non-personal material goes there (or its

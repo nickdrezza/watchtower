@@ -130,12 +130,12 @@ records where the content came from, which nothing else in the vault captures.
 
 ## Asking instead of assuming
 
-Root `AGENTS.md` → **Ask instead of assuming** is the rule; this is what the questions are for here:
+The `watchtower` skill → **Ask instead of assuming** is the rule; this is what the questions are for here:
 
 - **Which docs to absorb vs index**, as one batched multiple-choice set before any write — not a drip.
   Approval is per item.
 - **Every mechanism you're about to state as fact**, phrased to be contradicted in one word: *"my
-  understanding: an the newsletter platform `XE` validity code is the address vendor's mapping of a the validation vendor `R` verdict, and
+  understanding: a newsletter-platform `XE` validity code is the address vendor's mapping of a validation-vendor `R` verdict, and
   the 10-soft/1-hard bounce counts are backfilled synthetically — the address never bounced. Correct?"*
 - **Where a fact goes** when two memory files could hold it. Guessing splits the truth in two.
 - Wiki says one thing, vault says another → surface both verbatim and ask. Never silently pick.

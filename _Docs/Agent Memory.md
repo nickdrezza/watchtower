@@ -54,7 +54,7 @@ needed. Everything larger (multi-fact runs, contradictions, pruning, new files) 
 
 ## Three rules
 
-1. **Locations, never values.** A path, an env-var name, a your secret manager item name, a the warehouse user/role —
+1. **Locations, never values.** A path, an env-var name, a secret-manager item name, a warehouse user/role —
    yes, and that's the point. The secret itself — never, in any file in this repo.
 2. **Point-in-time.** Environment facts (paths, accounts, which shell holds the SSH key) are stable.
    Facts about code and data drift — an agent should verify before asserting, and date anything that ages.

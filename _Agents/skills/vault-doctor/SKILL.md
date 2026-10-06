@@ -57,7 +57,7 @@ the script's `GENERIC_LINKS` instead of re-explaining it every run.
 ## Fixing what it finds
 
 Mechanical fixes (a typo'd path, a missing index row, refreshing the mirror) are yours to make — they
-are reversible and verifiable, which is exactly the `AGENTS.md` → *…and when not to ask* case. Anything
+are reversible and verifiable, which is exactly the `AGENTS.md` → *Working model* case (decide reversible details). Anything
 that deletes content, or that needs a judgement call about what a note *should* say, goes to
 `vault-prune` and its per-item approval.
 
