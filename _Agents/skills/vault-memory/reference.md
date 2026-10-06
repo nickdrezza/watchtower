@@ -110,7 +110,7 @@ The Drive MCP's recent-files / search / read calls. Meeting-notes docs are usual
 
 Extract decisions and follow-ups only. **Never import verbatim.** Personal work context → a vault
 meeting note (hand to `watchtower`); team "how it works" → propose for the shared vault via
-`knowledge-router`, as a separate approved step.
+`shared-vault`, as a separate approved step.
 
 ⚠️ Drive connectors often **cannot edit in place** — each revision is a new doc and URL. When you
 create one, tell the user which older ids to trash.

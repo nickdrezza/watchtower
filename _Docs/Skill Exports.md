@@ -12,6 +12,8 @@ related:
 
 # Skill Exports
 
+> **Retired.** Team skills live only in the team repo; edit them there by PR. This ledger is kept for history.
+
 Which skills have been published from this vault to an external destination, in what shape, and from
 which revision. Maintained by `skills-sync`: the registry says where destinations are and how they're
 formatted; the ledger says what has gone and lets it compute drift.

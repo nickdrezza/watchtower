@@ -1,16 +1,9 @@
 ---
 name: watchtower
 description: >
-  Primary operating context for "the vault" — your private Obsidian vault plus the agent
-  skills and memory that run your work. Load for vault work, not for unrelated prompts. Use for:
-  filing raw notes, meeting notes, interview notes, or work logs; creating or
-  updating project/reference notes; answering personal, career, or Acme work-context questions from
-  the vault; adding or editing a skill; and as the entry point to _Agents/memory/ — this machine, where
-  credentials live, and how to connect to every platform you work in — the warehouse, the cloud
-  account, the CRM, GitHub, the tracker. Triggers: "organize this into my vault", "add to the vault", "file
-  these notes", "update my project note", "what does my vault say about…", "add a skill", "how do I
-  connect to…", "where do the credentials live". Team "how does X work" questions → shared-vault instead
-  (see knowledge-router).
+  Operating rules for the private vault and its agent memory. Use to file notes, meeting notes, or
+  work logs, update project notes, answer from the vault, add a skill, or find how to connect to a
+  system. Triggers: "add to the vault", "file these notes", "how do I connect to…".
 ---
 
 # the vault
@@ -145,6 +138,18 @@ day be swept into an archive with a single query and the rest of the vault survi
 
 Wiki-links resolve by **note name**, not path — moving a note into `Archive/` doesn't break `[[links]]`.
 
+## Which knowledge base
+
+| Request | Goes to |
+|---|---|
+| Personal, career, or "my" work context (plans, logs, my view of a project) | this vault |
+| "How does X work", "why did we decide Y", runbooks, team policy | the team shared vault — read its clone directly |
+| "How do I connect to X", "where do the credentials live" | `_Agents/memory/` first; for a system fact the shared vault wins, for this machine memory wins |
+| "Should the team know this", "put this in the dev wiki" | `shared-vault` skill |
+
+Never copy vault content into the shared vault, and never copy shared-vault facts into this vault.
+Refer to the other base with a short summary and a link. A task that spans both is two writes.
+
 ## `_Agents/memory/` — load by task
 
 The operational knowledge these skills assume. **This is what makes an agent behave the same in every
@@ -170,6 +175,8 @@ Never report a skill unavailable because your harness didn't load it.
 
 **The skill index is [`_Agents/README.md`](../../README.md)** — one table, one place to update.
 Employer-specific skills carry `ACME` in their frontmatter `tags:`, same convention as notes and memory.
+Skills here are the owner's, also work-topic ones. Team skills live only in the team's skills repo;
+do not copy them in.
 
 **Skills vs memory:** a skill is *how to perform a task*; memory is *what is true about this
 environment*. A skill hard-coding an account id, path, or cron expression is doing memory's job.

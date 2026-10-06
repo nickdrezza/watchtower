@@ -49,7 +49,7 @@ produces far more of it per minute than typing. Use voice mode in the Claude or 
 - **Meeting debriefs** — talk through what happened while it's fresh; let the agent file it.
 - **Work-log material** — narrate the week, don't compose it.
 - **Thinking out loud** — half-formed reasoning is exactly what a reflection or decision note wants.
-- **Personal capture** — the `diary` and `personal-*` skills preserve your voice deliberately, so
+- **Personal capture** — the `personal` skill preserves your voice deliberately, so
   speaking gets a better result than writing does.
 
 **The one real gotcha: transcription mangles identifiers.** Ticket keys, table and column names, file

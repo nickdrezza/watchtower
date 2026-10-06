@@ -1,15 +1,3 @@
----
-name: diary
-description: >
-  Turns a personal text dump, voice note, or conversation into a lightly cleaned diary entry in the
-  personal year/month/day hierarchy, preserving your own wording and voice. Use when he says
-  "write a diary entry", "add this to my journal", "log my day", "save this as today's note", "here's
-  what happened today", or dictates a day's events. Never polishes a dump into an essay. For a past
-  event use personal-memory; for an opinion or ramble use personal-reflection.
-user-invocable: true
-argument-hint: [what happened]
----
-
 # Diary
 
 Capture personal diary dumps with basic cleanup while preserving your voice, wording, and

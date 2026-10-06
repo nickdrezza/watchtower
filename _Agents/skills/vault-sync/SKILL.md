@@ -1,12 +1,9 @@
 ---
 name: vault-sync
 description: >
-  Full sync of the vault to its GitHub remote — pull anything new on main, run weekly-work-log and
-  vault-memory to bring the vault and _Agents/memory/ current, then commit on a branch, open a PR,
-  auto-merge it, and report a concise summary of what shipped. Use when the user says "sync my vault",
-  "push my vault", "save my notes to GitHub", "commit my vault", "my vault is out of sync", "back up the
-  vault", or wants local vault changes shipped to main. Also the plumbing-only path when the user
-  just wants existing edits committed and merged without running the other two skills.
+  Syncs the vault to GitHub: pulls main, runs weekly-work-log and vault-memory, then commits on a
+  branch, opens a PR, and merges it. Use for "sync my vault", "push my vault", "back up the vault", or
+  "commit my vault".
 user-invocable: true
 argument-hint: "sync my vault"
 ---

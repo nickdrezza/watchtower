@@ -79,9 +79,9 @@ in the `watchtower` skill; `vault-doctor` now checks only the one.
 `vault-sync` is the entry point to the **vault family** — it calls `weekly-work-log` and `vault-memory`,
 so "sync my vault" brings the log, the memory directory, and the remote current in one pass.
 
-Marketplace and plugin skills are deliberately **not** copied in here — they're managed by their
-marketplaces and would go stale. If you publish skills *out* to one, `skills-sync` owns that direction
-and [Skill Exports](Skill%20Exports.md) is its ledger.
+Marketplace and plugin skills are deliberately **not** copied in here. A vault's skills have the same
+audience as the vault: this vault keeps only skills its owner runs, also work-topic ones. Team skills
+live only in the team's skills repo; edit them there by PR. One copy per skill means nothing to sync.
 
 ## The `#ACME` convention
 
@@ -96,7 +96,7 @@ a file.
 
 - **shared-vault** (team repo `Acme/shared-vault`; clone path per machine in
   `_Agents/memory/git-and-tickets.md`) — the Acme team "how it works" wiki. Kept fully separate.
-  `knowledge-router` decides which repo a task belongs to; `shared-vault-promote` carries material
+  The `watchtower` skill decides which repo a task belongs to; `shared-vault` carries material
   across when it should travel. Team-relevant, non-personal material goes there (or its
   `notebooks/<you>/` scratch), never private vault content from here — and never as a paste.
   Every call is logged in Shared Vault Promotions.
