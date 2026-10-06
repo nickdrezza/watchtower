@@ -3,7 +3,7 @@
   {"prompt": "write a cover letter that draws on my context", "expect": []},
   {"prompt": "what laws apply to persona design?", "expect": []},
   {"prompt": "fix the failing unit test in the parser", "expect": []},
-  {"prompt": "where do the credentials for the warehouse live?", "expect": ["Spaces/Work/memory/credentials.md", "Spaces/Work/memory/warehouse.md"]},
+  {"prompt": "where do the credentials for the warehouse live?", "expect": ["Spaces/Work/memory/credentials/", "Spaces/Work/memory/warehouse/"]},
   {"prompt": "write a diary entry about today", "expect": ["Spaces/Personal/skills/personal/references/diary.md"]},
   {"prompt": "rotate the secrets for the crm connector", "expect": ["_Agents/skills/secrets/SKILL.md"]}
 ]

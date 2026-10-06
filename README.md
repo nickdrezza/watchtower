@@ -70,7 +70,7 @@ _Agents/                 the agent layer (also .agents/, a symlink for tool auto
   CONVENTIONS.md         how to author a skill
 
 Spaces/                  your actual notes — Work / Personal / Career; each space has its own
-                         memory/ and skills/ (Spaces/Work/memory/connectors.md: which live
+                         memory/ and skills/ (Spaces/Work/memory/connectors/: which live
                          system owns which question)
 Concepts/                durable topic notes; the targets of topic/* tags
 Maps/                    indexes, and Tag Registry — the tag authority
