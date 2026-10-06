@@ -42,17 +42,15 @@ the grep, not the table.
 
 | File | Count |
 |---|---|
-| `_Agents/skills/knowledge-router/SKILL.md` | 4 |
-| `_Docs/Skills Repo.md` | 3 |
 | `_Docs/Setup Guide.md` | 3 |
+| `_Docs/Skills Repo.md` | 3 |
 | `_Agents/memory/machines/windows-wsl.md` | 2 |
 | `_Agents/skills/vault-sync/SKILL.md` | 2 |
+| `Concepts/AI Agents.md` | 1 |
 | `README.md` | 1 |
 | `_Agents/README.md` | 1 |
 | `_Agents/memory/machines/macos.md` | 1 |
-| `_Agents/skills/shared-vault-ingest/SKILL.md` | 1 |
-| `_Agents/skills/shared-vault-promote/SKILL.md` | 1 |
-| `Concepts/AI Agents.md` | 1 |
+| `_Agents/skills/shared-vault/SKILL.md` | 1 |
 
 ## Employer scope — replace with your own employer tag and name
 
@@ -62,32 +60,28 @@ tag in [Tag Registry](../Maps/Tag%20Registry.md) in the same change** — it is 
 
 | File | Count |
 |---|---|
-| `_Agents/skills/watchtower/SKILL.md` | 12 |
+| `_Agents/skills/watchtower/SKILL.md` | 11 |
 | `_Agents/skills/watchtower/reference.md` | 9 |
 | `Maps/Tag Registry.md` | 8 |
-| `_Agents/skills/shared-vault-ingest/SKILL.md` | 7 |
 | `_Docs/Skills Repo.md` | 6 |
-| `_Agents/skills/knowledge-router/SKILL.md` | 5 |
-| `_Docs/AI Note Intake Workflow.md` | 4 |
 | `_Agents/skills/vault-memory/SKILL.md` | 4 |
-| `_Agents/skills/shared-vault-promote/SKILL.md` | 4 |
+| `_Docs/AI Note Intake Workflow.md` | 4 |
+| `_Agents/skills/shared-vault/SKILL.md` | 3 |
+| `_Agents/skills/vault-sync/SKILL.md` | 3 |
 | `_Docs/Agent Memory.md` | 3 |
 | `_Docs/Vault Architecture.md` | 3 |
-| `_Agents/skills/vault-sync/SKILL.md` | 3 |
-| `_Templates/Weekly Work Log.md` | 2 |
 | `_Agents/memory/README.md` | 2 |
 | `_Agents/memory/warehouse.md` | 2 |
 | `_Agents/skills/vault-edit/SKILL.md` | 2 |
-| `_Agents/skills/skills-sync/reference.md` | 2 |
+| `_Templates/Weekly Work Log.md` | 2 |
 | `_Agents/README.md` | 1 |
-| `_Agents/memory/projects.md` | 1 |
 | `_Agents/memory/connectors.md` | 1 |
 | `_Agents/memory/credentials.md` | 1 |
+| `_Agents/memory/projects.md` | 1 |
 | `_Agents/skills/bootstrap/SKILL.md` | 1 |
-| `_Agents/skills/shared-vault-sync/SKILL.md` | 1 |
-| `_Agents/skills/personal-vault/SKILL.md` | 1 |
-| `_Agents/skills/personal-reflection/SKILL.md` | 1 |
-| `_Agents/skills/diary/SKILL.md` | 1 |
+| `_Agents/skills/personal/SKILL.md` | 1 |
+| `_Agents/skills/personal/references/diary.md` | 1 |
+| `_Agents/skills/personal/references/reflections.md` | 1 |
 | `_Agents/skills/vault-prune/SKILL.md` | 1 |
 
 If you have no employer scope to track — a purely personal vault — delete the tag and its rows instead

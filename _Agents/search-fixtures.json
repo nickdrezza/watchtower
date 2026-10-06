@@ -4,6 +4,6 @@
   {"prompt": "what laws apply to persona design?", "expect": []},
   {"prompt": "fix the failing unit test in the parser", "expect": []},
   {"prompt": "where do the credentials for the warehouse live?", "expect": ["_Agents/memory/credentials.md", "_Agents/memory/warehouse.md"]},
-  {"prompt": "write a diary entry about today", "expect": ["_Agents/skills/diary/SKILL.md"]},
+  {"prompt": "write a diary entry about today", "expect": ["_Agents/skills/personal/references/diary.md"]},
   {"prompt": "rotate the secrets for the crm connector", "expect": ["_Agents/skills/secrets/SKILL.md"]}
 ]

@@ -1,11 +1,9 @@
 ---
 name: secrets
 description: >
-  Fetch, store, rotate, and inject credentials without ever surfacing a value. Use whenever a task needs
-  a credential that isn't already in the environment, when the user says "get the X key/token/password",
-  "store this secret", "rotate the X credential", "what secrets do I have", "put this in the vault", or
-  when a script fails on a missing or expired credential. Also the right skill for deciding WHERE a new
-  credential should live. Vendor-neutral — adapt the adapter section to your secret manager.
+  Gets, stores, rotates, and injects credentials, and never shows a value. Use for "get the X key",
+  "store this secret", "rotate the X credential", "where should this credential live", or when a
+  script fails on a missing credential.
 user-invocable: true
 argument-hint: "<get|store|rotate> <name>"
 ---

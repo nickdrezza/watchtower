@@ -1,11 +1,9 @@
 ---
 name: weekly-work-log
 description: >
-  Write or update the weekly work log in this vault — gather the week's real activity, verify it, ask
-  before asserting anything uncertain, and produce a concise manager-facing log in the house format.
-  Use when the user says "write my work log", "update my log for the week", "log my week", "fill in
-  last week", "add my weekly log", or wants their weekly log written or updated. Also step 2 of
-  vault-sync. Pairs with watchtower (writing rules) and vault-sync (ships it).
+  Writes or updates the weekly manager-facing work log from verified activity, in the house format.
+  Use for "write my work log", "log my week", "update my log for the week", "fill in last week", or as
+  part of vault-sync.
 user-invocable: true
 argument-hint: [week]
 ---

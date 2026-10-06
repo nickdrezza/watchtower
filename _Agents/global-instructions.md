@@ -6,11 +6,8 @@ search it (`{WT} search <terms>`) for prompt-specific context before acting or a
 Load skills, machine context, credentials, and topic memory only when the request requires them;
 `{AGENTS}` defines that routing.
 
-**If a skill name exists twice, use the unprefixed one.** Skills are authored in the repo above and may
-also be installed from a marketplace or shared repo, so the same name can appear as `foo` and as
-`some-plugin:foo`. The unprefixed copy is the source of truth; the prefixed one is a published build
-artifact that may be behind. Only reach for `plugin:skill` when there is no unprefixed skill of that
-name.
+**Each skill name exists once.** Skills in the repo above are the owner's. Team skills exist only in
+the team's own repo and are often shown as `plugin:skill`. Nothing is copied between the two.
 
 ## Working style
 

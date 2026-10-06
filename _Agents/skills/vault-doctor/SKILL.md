@@ -1,13 +1,9 @@
 ---
 name: vault-doctor
 description: >
-  Runs the vault's mechanical integrity checks and reports what is objectively broken — dead relative
-  and wiki links, tags missing from the Tag Registry, notes without frontmatter, skills missing from
-  the hand-maintained index table, skill name/folder mismatches, thin skill descriptions, machine
-  paths hardcoded into skills, possible secrets, and stale okf-view snapshots. Use when the user says "check my
-  vault", "vault health", "is anything broken", "run the integrity checks", "did I break any links",
-  "audit the skills", or before shipping a large structural change. Safe to run anytime; only `--fix` edits files.
-  For quality judgement — bad notes, duplicates, notes to simplify — use vault-prune instead.
+  Runs mechanical integrity checks: dead links, unregistered tags, missing frontmatter, skill index
+  and description errors, machine paths, and possible secrets. Use for "check my vault", "is anything
+  broken", or "audit the skills".
 user-invocable: true
 argument-hint: "[--fix|--json|--errors-only]"
 ---

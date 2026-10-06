@@ -1,13 +1,3 @@
----
-name: personal-reflection
-description: >
-  Captures personal reflections, opinions, values, identity questions, and free-form rambles in
-  your natural voice. Use when he says "I think...", "I've been wondering whether...", explores
-  a moral, political, or religious view, talks through a friendship or a decision, or asks to record a
-  ramble. Preserves the thinking as-is — never resolves the question, argues back, or tidies it into a
-  conclusion. For a past event use personal-memory; for a day's log use diary.
----
-
 # Personal reflection
 
 Read `watchtower` and `Spaces/Personal/Personal Vault Guide.md` before writing. This is for
