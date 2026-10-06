@@ -1,20 +1,12 @@
 {
   "triggers": [
-    "vault",
     "warehouse",
     "crm",
-    "github",
     "tracker",
-    "tickets",
-    "connector",
-    "credentials",
-    "secrets",
     "deployment",
     "worktree",
-    "meeting",
-    "interview",
     "diary",
-    "career"
+    "journal"
   ],
   "users": [
     "alice",
@@ -28,5 +20,25 @@
       "ACME"
     ]
   },
-  "tag_registry": "_Agents/tags.md"
+  "tag_registry": "_Agents/tags.md",
+  "spaces": {
+    "Spaces/Personal/": {
+      "only_when": [
+        "diary",
+        "journal",
+        "personal",
+        "reflection",
+        "my friend",
+        "memories"
+      ]
+    },
+    "Spaces/Career/": {
+      "only_when": [
+        "career",
+        "resume",
+        "job search",
+        "future work"
+      ]
+    }
+  }
 }

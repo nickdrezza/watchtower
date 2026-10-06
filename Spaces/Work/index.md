@@ -4,12 +4,12 @@ status: active
 domain: system
 workspace: vault
 related:
-  - "[[README|Watchtower]]"
+  - "README.md"
 ---
 
 # Current Work Home
 
-Landing page for this space. [[README#Spaces|README → Spaces]] says what belongs here.
+Landing page for this space. [README → Spaces](../../README.md#Spaces) says what belongs here.
 
 - [[Spaces/Work/Projects/index|Projects]] — one note per project
 - [[Spaces/Work/People/index|People]] — one note per person you work with

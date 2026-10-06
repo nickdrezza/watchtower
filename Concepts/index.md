@@ -4,13 +4,13 @@ title: "Concept Index"
 description: "One note for each durable subject; each topic/* tag in the tag registry points to a note here."
 updated: 2026-10-06
 related:
-  - "[[README|Watchtower]]"
-  - "[[tags|Tag Registry]]"
+  - "README.md"
+  - "_Agents/tags.md"
 ---
 
 # Concept Index
 
-One note per durable subject. **Every `topic/*` tag in [[tags|Tag Registry]] points at a note here** — no
+One note per durable subject. **Every `topic/*` tag in [Tag Registry](../_Agents/tags.md) points at a note here** — no
 concept note means no topic tag. The registry holds the tag-to-concept mapping.
 
 Ships with one, [[AI Agents]]. Add yours as you go. Create the concept note *first*, then register the
