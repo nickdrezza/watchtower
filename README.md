@@ -147,3 +147,15 @@ a separate repo; the `shared-vault` skill moves material there as a rewrite, nev
 
 MIT licensed. Built on the open [`AGENTS.md`](https://agents.md) and
 [`SKILL.md`](https://agentskills.io/specification) standards, so nothing here is locked to one vendor.
+
+## Moving to Isomorphic
+
+The vault is a valid [Isomorphic](https://github.com/isomorphic-team/isomorphic-app) brain: `validate`
+reports 0 broken links (checked against Isomorphic `a99ae2c`).
+
+- To check again: in an Isomorphic checkout, run `pnpm try <copy of this vault>` (it commits into the
+  folder, so use a copy), then call `validate` from an MCP client.
+- Each space can become its own brain: its `index.md`, `AGENTS.md`, `memory/`, `skills/`, and `source/`
+  are already in place. `_Agents/` becomes shared through cross-brain search.
+- `.isomorphic.json` sets which folders are content, source, and system. `wt doctor` reports the links
+  Isomorphic cannot follow (`ambiguous-link`, `link-to-non-page`); `--fix` repairs them.
