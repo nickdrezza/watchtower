@@ -647,20 +647,21 @@ class Installer:
         skills = skill_dirs()
         names = {d.name for d in skills}
         for target in (home / ".agents" / "skills", home / ".claude" / "skills"):
-            if target.is_symlink():  # an old whole-folder link: the harness writes into the vault
+            fresh = target.is_symlink()  # an old whole-folder link: the harness writes into the vault
+            if fresh:
                 self.do(f"unlink   {target} -> {os.readlink(target)} (replace with one link per skill)",
                         target.unlink)
-            if not target.exists():
+            if fresh or not target.exists():
                 self.do(f"mkdir    {target}", lambda t=target: t.mkdir(parents=True))
-            existing = list(target.iterdir()) if target.is_dir() else []
+            existing = [] if fresh or not target.is_dir() else list(target.iterdir())
             for e in existing:  # remove our links to skills that no longer exist
                 if e.is_symlink() and str(ROOT) in os.readlink(e) and not Path(os.readlink(e)).exists():
                     self.do(f"remove   {e} (stale)", e.unlink)
             for d in skills:
                 dest = target / d.name
-                if dest.is_symlink() and Path(os.readlink(dest)) == d:
+                if not fresh and dest.is_symlink() and Path(os.readlink(dest)) == d:
                     continue
-                if dest.exists() and not dest.is_symlink() and not self.copy:
+                if not fresh and dest.exists() and not dest.is_symlink() and not self.copy:
                     print(f"skip     {dest} (a different skill with this name exists)")
                     continue
                 if self.copy:
