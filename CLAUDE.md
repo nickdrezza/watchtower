@@ -12,5 +12,5 @@ Claude-Code-specific notes (everything else is in `AGENTS.md`):
   `_Agents/skills/<name>/SKILL.md` directly — they're plain Markdown. Never report a skill as
   unavailable because it wasn't auto-discovered.
 - `.claude/skills/` is gitignored (it's a generated mirror). Edit the files under `_Agents/skills/`.
-- Run `git`/`gh` through `wsl.exe -d ubuntu -e bash -lc '...'`; see `AGENTS.md` → Git for the
-  quoting and `--body-file` gotchas.
+- On Windows, run `git`/`gh` through WSL. `_Agents/memory/machines/windows-wsl.md` has the quoting
+  and `--body-file` rules.

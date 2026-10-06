@@ -91,7 +91,7 @@ The vault's value is being scannable in two years. Verbosity is the failure mode
   (`robust`, `comprehensive`, `seamless`, `significantly`), no hedging frames ("it's worth noting
   that"), no enthusiasm. Attribute every claim or mark it inferred.
 
-**Hard rule 7 in root `AGENTS.md`** carries the full banned-patterns table and both tests — *would a
+**Hard rule 7 in root `AGENTS.md`** is the rule. Apply two tests — *would a
 competent reader six weeks from now be worse off without this?* and *could a teammate who has never
 opened this code say what broke and why it matters?* Both apply to your task report in chat exactly as
 much as to a note; a wall of text after a small change is the most common way this breaks, and

@@ -114,6 +114,6 @@ Document any reliance on these in the body so a reader on another platform knows
 - [ ] **If it writes anything, it asks first.** A skill that produces a note, doc, log, ticket, or wiki
       page must tell the agent to verify what's checkable, batch the rest into one multiple-choice
       question set *before* the write, and state its understanding concretely enough to be
-      contradicted. Root `AGENTS.md` → **Ask instead of assuming** is the rule; don't restate it, point
+      contradicted. The `watchtower` skill → **Ask instead of assuming** is the rule; don't restate it, point
       at it and say what the questions are for this task.
 - [ ] Registered in `_Agents/README.md`'s Skills table (step 4 above), and the `.claude/skills/` mirror refreshed.
