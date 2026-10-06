@@ -464,6 +464,19 @@ def fix_links(md, files):
             # A unique new stem links by name; otherwise link by path and keep the old name as the label.
             unique = stem_count[Path(n).stem] == 1 and Path(n).stem not in TITLE_EXEMPT
             stem_moves[Path(o).stem] = (Path(n).stem if unique else os.path.splitext(n)[0], Path(o).stem)
+    origin = {n: o for o, n in moved.items()}
+
+    def moved_dir(old):
+        """A link to a folder whose files all moved together: follow the folder."""
+        prefix = old.rstrip("/") + "/"
+        for o, n in moved.items():
+            if o.startswith(prefix):
+                rest = o[len(prefix):]
+                if n.endswith(rest):
+                    new_dir = n[: len(n) - len(rest)].rstrip("/")
+                    return new_dir if (ROOT / new_dir).is_dir() else None
+        return None
+
     changed = []
     for p in md:
         text = read(p)
@@ -474,17 +487,20 @@ def fix_links(md, files):
             target_s, hash_, anchor = raw.partition("#")
             if not target_s or target_s.startswith(("http://", "https://", "mailto:")):
                 return m.group(0)
-            old = os.path.normpath(os.path.join(os.path.dirname(p), urllib.parse.unquote(target_s)))
-            if (ROOT / old).exists():
+            target = urllib.parse.unquote(target_s)
+            if (ROOT / os.path.normpath(os.path.join(os.path.dirname(p), target))).exists():
                 return m.group(0)
-            dest = moved.get(old)
+            # Resolve against where this file was before it moved, then follow the target's own move.
+            old = os.path.normpath(os.path.join(os.path.dirname(origin.get(p, p)), target))
+            dest = old if (ROOT / old).exists() else moved.get(old) or moved_dir(old)
             if not dest:
                 cands = by_name.get(Path(old).name, [])
                 dest = cands[0] if len(cands) == 1 else None
             if not dest:
                 return m.group(0)
             encode = "%" in target_s
-            return f"[{label}]({rel_href(p, dest, encode)}{hash_}{anchor})"
+            href = rel_href(p, dest, encode) + ("/" if target_s.endswith("/") else "")
+            return f"[{label}]({href}{hash_}{anchor})"
 
         new = re.sub(r"\[([^\]]*)\]\(([^)<>\s]+)\)", md_link, new)
 
