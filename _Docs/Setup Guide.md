@@ -82,14 +82,14 @@ Then add it to `machines/README.md` and the routing table in `environment.md`.
 
 ## 7. Set up credentials — locations only
 
-Record *where* each credential lives in `Spaces/Work/memory/credentials.md`: the path, the env-var name,
+Record *where* each credential lives in `Spaces/Work/memory/credentials/`: the path, the env-var name,
 the secret-manager item, the role. **Never the value.** That is the repo's first hard rule and the
 extension-based check won't catch a pasted secret — you're the backstop.
 
 ## 8. Connect what you use
 
 Add MCP connectors for the systems you actually work in, then record what each one is authoritative
-for — and where it lies — in `Spaces/Work/memory/connectors.md`. That file is what stops an agent trusting
+for — and where it lies — in `Spaces/Work/memory/connectors/`. That file is what stops an agent trusting
 a stale number instead of querying the source.
 
 ## 9. Know the pre-push check

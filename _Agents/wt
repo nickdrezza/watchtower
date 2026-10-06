@@ -567,14 +567,16 @@ def parse_view(yaml):
     return spec
 
 
-def render_view(spec, page, content_pages):
+def render_view(spec, page, content_pages, all_pages=()):
     kind, as_ = spec.get("kind", ""), spec.get("as", "list")
     if kind not in ("pages", "folders"):
         return None  # backlinks views need a link index: Isomorphic computes them
     under = spec.get("under", "").strip("/")
     rows = []
     if kind == "pages":
-        rows = [p for p in content_pages if p != page and (not under or p.startswith(under + "/"))]
+        # An explicit folder lists every page in it, system folders (_Agents/memory/) included.
+        pool = all_pages if under else content_pages
+        rows = [p for p in pool if p != page and (not under or p.startswith(under + "/"))]
     else:
         base = ROOT / under
         for d in sorted(x for x in base.iterdir() if x.is_dir() and not x.name.startswith(".")) if base.is_dir() else []:
@@ -623,7 +625,7 @@ def index_views(check=False, quiet=False):
             continue
 
         def sub(m):
-            body = render_view(parse_view(m.group(1)), p, content)
+            body = render_view(parse_view(m.group(1)), p, content, [x for x in files if x.endswith(".md")])
             if body is None:
                 return m.group(0)
             return f"```okf-view\n{m.group(1)}```\n\n{SNAP_BEGIN}\n{body}\n{SNAP_END}\n"

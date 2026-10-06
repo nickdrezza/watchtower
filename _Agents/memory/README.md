@@ -12,20 +12,23 @@ hard-codes an account id or a file path is doing memory's job — put the fact h
 point at it.
 
 Load memory by task. Read `environment.md` and exactly one machine profile before machine-dependent
-commands. Read the space's `memory/credentials.md` only for authentication, secret locations, profiles, or connection
+commands. Read the space's `memory/credentials/` only for authentication, secret locations, profiles, or connection
 failures. Read a platform file only when the prompt or search results point to that platform.
 
-## Files
+## Topics
 
-| File | What's in it |
+Each topic is a folder with one concept per file. Its `index.md` lists the files with a
+one-line description, so open the index, then only the files you need.
+
+| Topic | What's in it |
 |---|---|
 | [`environment.md`](environment.md) | **Start here.** How to tell which target you're on, and what's true on all of them. |
 | [`machines/`](machines/README.md) | One profile per target. Paths, shells, installed tooling, and what is deliberately *not* installed. |
-| [`Spaces/Work/memory/credentials.md`](../../Spaces/Work/memory/credentials.md) | Every key, token, and profile — what it authenticates and **where it lives**. Locations only, never values. |
-| [`Spaces/Work/memory/connectors.md`](../../Spaces/Work/memory/connectors.md) | The live systems: which one is authoritative for what, and the limit that will bite you. |
-| [`Spaces/Work/memory/warehouse.md`](../../Spaces/Work/memory/warehouse.md) | **Worked example** of a platform file. Copy its shape for each system you actually use. |
-| [`working-preferences.md`](working-preferences.md) | Standing instructions — how you want agents to work. |
-| [`Spaces/Work/memory/projects.md`](../../Spaces/Work/memory/projects.md) | Active work, one compact block each. |
+| [`Spaces/Work/memory/credentials/`](../../Spaces/Work/memory/credentials/index.md) | Every key, token, and profile — what it authenticates and **where it lives**. Locations only, never values. |
+| [`Spaces/Work/memory/connectors/`](../../Spaces/Work/memory/connectors/index.md) | The live systems: which one is authoritative for what, and the limit that will bite you. |
+| [`Spaces/Work/memory/warehouse/`](../../Spaces/Work/memory/warehouse/index.md) | **Worked example** of a platform file. Copy its shape for each system you actually use. |
+| [`working-preferences/`](working-preferences/index.md) | Standing instructions — how you want agents to work. |
+| [`Spaces/Work/memory/projects/`](../../Spaces/Work/memory/projects/index.md) | Active work, one compact block each. |
 
 **Add one file per platform you use**, in the `memory/` folder of the space that uses it — the CRM, the tracker, the orchestration tool, the cloud account.
 `warehouse.md` is the template for what a good one looks like: how to connect, what the limits are, and
@@ -46,7 +49,8 @@ The test:
 A durable fact that clears the test goes in **the moment it's learned**. All five must hold:
 
 1. **One fact**, not a batch.
-2. **Appended to an existing file** — no new files, no restructuring.
+2. **Added to an existing topic folder** — one new concept file (`type: memory`, `description`,
+   `updated`), or one line added to an existing concept file. No new topic folders, no restructuring.
 3. **Nothing existing is rewritten or deleted.**
 4. **Locations, never values.**
 5. **It contradicts nothing already written.**
