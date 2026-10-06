@@ -51,8 +51,7 @@ _Agents/
   docs/platforms.md         per-tool path matrix
   docs/portability.md       the portability model
   templates/skill-template/ starter SKILL.md
-  scripts/new-skill.sh      scaffold a new skill
-  scripts/install-skills.sh deploy to ~/.agents/skills or ./.claude/skills
+  wt                        search · doctor · install · index
 ```
 
 Repo root: `AGENTS.md` is authoritative for all agents; `CLAUDE.md`, `GEMINI.md`, and
@@ -62,11 +61,11 @@ Repo root: `AGENTS.md` is authoritative for all agents; `CLAUDE.md`, `GEMINI.md`
 
 `_Agents/skills/` **is** the universal project-level location — Codex, Cursor, Gemini CLI, Copilot,
 and Antigravity read it natively with no setup when opened on this repo. Claude Code reads
-`.claude/skills/`, so mirror once:
+`.claude/skills/`, so link once:
 
 ```bash
-_Agents/scripts/install-skills.sh --here      # -> ./.claude/skills (gitignored copy)
-_Agents/scripts/install-skills.sh             # or global: ~/.agents/skills + ~/.claude/skills
+_Agents/wt install          # one link per skill in ~/.agents/skills and ~/.claude/skills
+_Agents/wt install --copy   # copies instead of links, across a Windows↔WSL boundary
 ```
 
 Same `SKILL.md` read byte-for-byte by every tool — no per-tool conversion. And if a harness discovers

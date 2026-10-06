@@ -1,13 +1,13 @@
 # Platform path matrix
 
 Where each tool reads **skills** and **always-on instructions** from. Use this to know where
-`_Agents/scripts/install-skills.sh` should deploy, and which instruction file to point at `AGENTS.md`.
+`_Agents/wt install` links skills, and which instruction file to point at `AGENTS.md`.
 
 ## Skills (folder-per-skill `SKILL.md`)
 
 | Tool | Global skills path | Project skills path | Notes |
 |---|---|---|---|
-| **Claude Code** | `~/.claude/skills/` | `.claude/skills/` | The holdout — does **not** read `.agents/skills/`. Bridge with a symlink or `install-skills.sh`. |
+| **Claude Code** | `~/.claude/skills/` | `.claude/skills/` | The holdout — does **not** read `.agents/skills/`. `wt install` links each skill there. |
 | **OpenAI Codex** | `~/.agents/skills/` | `.agents/skills/` | Universal location. |
 | **Gemini CLI** | `~/.agents/skills/` | `.agents/skills/` | `.agents/` preferred over `.gemini/skills/`. |
 | **Cursor** | `~/.agents/skills/` | `.agents/skills/` | Native SKILL.md support added 2026. |
@@ -20,7 +20,7 @@ keeps the universal path every tool above looks for. Both spellings resolve to t
 
 **Takeaway:** `.agents/skills/` (project) and `~/.agents/skills/` (global) cover nearly everything;
 Claude Code needs its own `.claude/skills/` or `~/.claude/skills/`.
-`_Agents/scripts/install-skills.sh` handles both — `--here` for this repo only, no flags for global.
+`_Agents/wt install` links each skill into both global paths.
 
 Because this repo's canonical skills path **is** `.agents/skills/` (via that symlink), every harness except Claude Code
 works with zero setup when opened here.

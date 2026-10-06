@@ -1,0 +1,15 @@
+{
+  "paths": {
+    ".": "content",
+    "AGENTS.md": "system",
+    "CLAUDE.md": "system",
+    "GEMINI.md": "system",
+    "README.md": "system",
+    "LICENSE": "system",
+    ".github/": "system",
+    ".claude/": "system",
+    ".agents/": "system",
+    "_Agents/": "system",
+    "_Templates/": "system"
+  }
+}

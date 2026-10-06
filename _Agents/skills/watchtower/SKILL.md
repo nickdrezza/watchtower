@@ -164,8 +164,8 @@ stable — act on them. Code and data facts drift — verify first. `vault-memor
 Canonical at `_Agents/skills/<name>/SKILL.md` — the universal project path Codex, Cursor, Gemini CLI,
 Copilot, and Antigravity read natively.
 
-**Claude Code reads `.claude/skills/`** and won't auto-discover `_Agents/skills/`. Run
-`_Agents/scripts/install-skills.sh --here` once, or **just read the files** — they're plain Markdown.
+**Claude Code reads its own global skills folder** and won't auto-discover `_Agents/skills/`. Run
+`_Agents/wt install` once, or **just read the files** — they're plain Markdown.
 Never report a skill unavailable because your harness didn't load it.
 
 **The skill index is [`_Agents/README.md`](../../README.md)** — one table, one place to update.
@@ -176,15 +176,14 @@ environment*. A skill hard-coding an account id, path, or cron expression is doi
 
 ### Adding or editing a skill
 
-New skills belong here, at `_Agents/skills/<name>/SKILL.md`. Edit there, never the `.claude/skills/`
-mirror. Full flow and checklist: `_Agents/CONVENTIONS.md`. Short version:
+New skills belong here, at `_Agents/skills/<name>/SKILL.md`. Edit there; Claude Code's skills folder only
+holds links to it. Full flow and checklist: `_Agents/CONVENTIONS.md`. Short version:
 
 1. Skill or memory? Mostly-facts → memory.
-2. `_Agents/scripts/new-skill.sh <name>` — needs a POSIX shell. On Windows use WSL or Git Bash;
-   check your `memory/machines/` profile.
+2. `cp -r _Agents/templates/skill-template _Agents/skills/<name>`, then set `name:` to match.
 3. Write the `description` first; it's the trigger every platform reads.
 4. Add a row to `_Agents/README.md`'s Skills table. `vault-doctor` fails if you miss it.
-5. `_Agents/scripts/install-skills.sh --here` — the mirror is a copy, not a link.
+5. `_Agents/wt install` — links the new skill.
 6. Branch `feat/<slug>` + PR.
 
 ## Filing a raw dump

@@ -29,28 +29,28 @@ git clone git@github.com:<you>/<your-vault>.git <vault-path>
 Path is per-machine — record whatever you choose in the machine profile (step 6). Nothing depends on
 a specific location.
 
-## 2. Point your agents at it
+## 2. Point your agents at it and install the skills
 
 ```bash
-_Agents/scripts/install-instructions.sh
+_Agents/wt install --dry-run   # show what it will change
+_Agents/wt install             # do it
+_Agents/wt install --copy      # copies instead of links, across a Windows↔WSL boundary
 ```
 
-Writes a pointer stub into each installed harness's **global** instruction file, so agents load these
-rules everywhere — not only when opened on this repo. It discovers targets by which config
-directories exist, and **refuses to overwrite a hand-written file** without `--force`.
+It does four things, and you can run it again at any time:
 
-Use `--dry-run` first if you want to see what it would touch.
+- Writes a stub into each installed harness's **global** instruction file, so agents load these rules
+  everywhere, not only in this repo. The stub text is `_Agents/global-instructions.md`. It does not
+  overwrite a hand-written file unless you add `--force`.
+- Links each skill into `~/.agents/skills/` and `~/.claude/skills/`, one link per skill.
+- Adds the search hook to Claude Code (`~/.claude/settings.json` → `UserPromptSubmit`). The hook runs
+  `_Agents/wt search --hook` on each prompt and adds pointers to relevant vault pages.
+- Adds a git pre-commit hook that runs `_Agents/wt doctor --errors-only`.
 
-## 3. Install the skills
+## 3. Check the skills
 
-```bash
-_Agents/scripts/install-skills.sh          # global: ~/.agents/skills + ~/.claude/skills
-_Agents/scripts/install-skills.sh --here   # or just this repo: ./.claude/skills
-_Agents/scripts/install-skills.sh --copy   # copy instead of symlink — required across Windows↔WSL
-```
-
-Most harnesses read `_Agents/skills/` natively. Claude Code reads `.claude/skills/`, which is why the
-bridge exists. **If neither ran, nothing is broken** — `SKILL.md` is plain Markdown; an agent can read
+Most harnesses read `_Agents/skills/` natively. Claude Code reads `~/.claude/skills/`, which is why
+`wt install` links them there. **If it did not run, nothing is broken** — `SKILL.md` is plain Markdown; an agent can read
 it directly.
 
 ## 4. Verify it took
