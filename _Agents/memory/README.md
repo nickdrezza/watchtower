@@ -1,7 +1,7 @@
 # `_Agents/memory/` — operational memory
 
-> This folder holds only memory that is true in every space: `environment.md`,
-> `working-preferences.md`, and `machines/`. Each space keeps its own facts in
+> This folder holds only memory that is true in every space: `machines/` (with the environment
+> page, `machines/index.md`) and `working-preferences/`. Each space keeps its own facts in
 > `Spaces/<Name>/memory/`. The work examples are in `Spaces/Work/memory/`.
 
 The knowledge an agent needs to actually *do* your work: which machine it's on, where every credential
@@ -11,7 +11,7 @@ Skills say *how to perform a task*. Memory says *what is true about this environ
 hard-codes an account id or a file path is doing memory's job — put the fact here and let the skill
 point at it.
 
-Load memory by task. Read `environment.md` and exactly one machine profile before machine-dependent
+Load memory by task. Read `machines/index.md` and exactly one machine profile before machine-dependent
 commands. Read the space's `memory/credentials/` only for authentication, secret locations, profiles, or connection
 failures. Read a platform file only when the prompt or search results point to that platform.
 
@@ -22,8 +22,7 @@ one-line description, so open the index, then only the files you need.
 
 | Topic | What's in it |
 |---|---|
-| [`environment.md`](environment.md) | **Start here.** How to tell which target you're on, and what's true on all of them. |
-| [`machines/`](machines/README.md) | One profile per target. Paths, shells, installed tooling, and what is deliberately *not* installed. |
+| [`machines/`](machines/index.md) | **Start here.** How to tell which target you're on, what's true on all of them, and one profile per target: paths, shells, installed tooling, and what is deliberately *not* installed. |
 | [`Spaces/Work/memory/credentials/`](../../Spaces/Work/memory/credentials/index.md) | Every key, token, and profile — what it authenticates and **where it lives**. Locations only, never values. |
 | [`Spaces/Work/memory/connectors/`](../../Spaces/Work/memory/connectors/index.md) | The live systems: which one is authoritative for what, and the limit that will bite you. |
 | [`Spaces/Work/memory/warehouse/`](../../Spaces/Work/memory/warehouse/index.md) | **Worked example** of a platform file. Copy its shape for each system you actually use. |
@@ -37,28 +36,37 @@ the gotchas that have cost hours.
 ## When to write memory
 
 Chats are disposable **only because this folder gets written** — see
-[`../docs/operating-model.md`](../docs/operating-model.md). A fact learned in a session that ends
+[*Chats are disposable*](<working-preferences/Chats are disposable.md>). A fact learned in a session that ends
 without being recorded is a fact re-derived from scratch next month.
 
 The test:
 
 > Would a fresh agent, six weeks from now, do the job worse without this?
 
-### Fast path — write it now, no preview
+Memory writes follow `AGENTS.md` → *Write to the vault*: the PR diff is the preview. No chat preview
+is necessary.
 
-A durable fact that clears the test goes in **the moment it's learned**. All five must hold:
+### Fast path — commit one fact on the branch
+
+Write a durable fact that passes the test **when you learn it**. Do not wait for a sync. Commit it
+directly on the working branch, in the PR that the session already has. All five conditions must be
+true:
 
 1. **One fact**, not a batch.
-2. **Added to an existing topic folder** — one new concept file (`type: memory`, `description`,
-   `updated`), or one line added to an existing concept file. No new topic folders, no restructuring.
-3. **Nothing existing is rewritten or deleted.**
+2. **It goes in an existing topic folder** — one new concept file (`type: memory`, `description`,
+   `updated`), or one line added to an existing concept file. No new topic folders and no restructuring.
+3. **It rewrites or deletes nothing.**
 4. **Locations, never values.**
 5. **It contradicts nothing already written.**
 
-### Full path — preview required
+Say it in the session's report.
 
-Everything else: multi-fact runs, **anything contradicting an existing claim**, pruning, restructuring,
-new files. Goes through `vault-memory` and the verification preview.
+### Larger changes — their own PR
+
+All other memory changes go in a separate PR, through `vault-memory` when they come from history:
+multi-fact runs, **anything that contradicts an existing claim**, pruning, restructuring, new topic
+folders, and any change to this `README.md`. Ask the batched questions before you write; the user
+reviews the diff.
 
 A contradiction is never a fast-path write. Memory that disagrees with itself is worse than memory
 that's missing.
@@ -77,7 +85,7 @@ frontmatter `tags:` — this template uses `ACME`; rename it to yours. One query
 non-reusable material if you change jobs, and the rest of the vault survives.
 
 **Tagged:** the platform files, `credentials.md`, `connectors.md`, `projects.md` (all in `Spaces/Work/memory/`).
-**Untagged (portable):** this README, `environment.md`, the `machines/` profiles, `working-preferences.md`.
+**Untagged (portable):** this README, `machines/` (the environment page and the profiles), `working-preferences/`.
 
 ## Rules
 

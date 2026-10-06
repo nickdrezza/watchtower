@@ -4,11 +4,10 @@ Read `watchtower`, `Spaces/Personal/Personal Vault Guide.md`, and the relevant `
 `Pets.md`, or `Locations.md` page first. Entity notes are useful graph anchors, not a reason to create
 a stub for every incidental mention.
 
-## Preview before saving
+## The PR is the preview
 
-Follow the vault-wide verification preview. Unless the current request contains an explicit,
-positive bypass such as `full perms`, `skip verification`, or `write it directly`, show every entity path and the exact proposed Markdown or diff for each entity,
-index, and narrative-link change before writing. The bypass skips only the human preview; do not guess.
+Write on a branch and open a PR. The diff is the preview (`AGENTS.md` → *Write to the vault*). Show
+the Markdown in chat only when the user asks. Keep the hard rules and do not guess.
 
 ## People
 

@@ -4,12 +4,10 @@ Read `watchtower` and `Spaces/Personal/Personal Vault Guide.md` before writing. 
 what the user thinks, believes, values, or is trying to understand about himself—not a polished
 essay and not a list of completed tasks.
 
-## Preview before saving
+## The PR is the preview
 
-Follow the vault-wide verification preview. Unless the current request contains an explicit,
-positive bypass such as `full perms`, `skip verification`, or `write it directly`, show every path and the exact proposed Markdown or diff, including frontmatter,
-body, links, tags, and landing-page changes, before writing. The bypass skips only the human preview;
-do not guess.
+Write on a branch and open a PR. The diff is the preview (`AGENTS.md` → *Write to the vault*). Show
+the Markdown in chat only when the user asks. Keep the hard rules and do not guess.
 
 ## Filing
 

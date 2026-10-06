@@ -38,5 +38,5 @@ One line restating the purpose for a human reader.
   Reminder (delete this comment in real skills):
   - Folder name, the `name:` field, and the heading should all agree.
   - Keep this file < ~500 lines; push detail into reference.md / examples.md / scripts/.
-  - See ../../CONVENTIONS.md for the full spec.
+  - See ../../skills/watchtower/reference.md (Adding a skill) for the full spec.
 -->

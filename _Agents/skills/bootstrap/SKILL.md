@@ -13,7 +13,8 @@ argument-hint: "set me up"
 Someone just cloned this template. Your job is to get them from "a folder of Markdown" to "my agents
 know how I work" in one sitting — and to explain *why* as you go, because the model is the point.
 
-Read [`../../docs/operating-model.md`](../../docs/operating-model.md) first. You're about to teach it.
+Read [`../../memory/working-preferences/index.md`](../../memory/working-preferences/index.md) → *Operating
+model and verification* first. You're about to teach it.
 
 ## Ask two things before you start
 
@@ -44,7 +45,7 @@ what the vault's hard rules are. A blank stare means the bridge missed that harn
 `_Agents/memory/machines/<target>.md`. Copy the closest existing profile. Record paths, shell, git
 identity, harness history locations, and — **most importantly** — what is deliberately *not* installed.
 
-Then route to it from `environment.md`.
+Then add it to the profile table in `_Agents/memory/machines/index.md`.
 
 ## 3. Seed the maps
 
@@ -58,12 +59,14 @@ cares most about.
 
 ## 4. Make it theirs
 
-- **`working-preferences.md`** — replace the examples with how *they* want agents to work. This file
+- **`_Agents/memory/working-preferences/`** — replace the examples with how *they* want agents to work. This file
   earns its keep by recording corrections so they only get made once.
-- **`Maps/Tag Registry.md`** — rename the example `topic/*` tags to their subjects. Register before use.
+- **`_Agents/tags.md`** — rename the example `topic/*` tags to their subjects. Register before use.
 - **Delete the example content** — `warehouse.md`, the example project block, the sample notes. Say what
   you deleted.
 - **`README.md`, `LICENSE`** — their name, their description.
+- **Placeholders** — replace each stand-in value listed in `_Agents/placeholders.md`, then delete that
+  file.
 
 ## 5. Explain the model
 
@@ -75,7 +78,7 @@ Not optional. Walk them through, in their own vault:
   depends on, and the one most people never build.
 - **Why the organization is strict** — retrieval precision, so loading context aggressively stays cheap.
 
-Point at `_Docs/Usage Guide.md` and stop. Don't recite it.
+Point at `README.md` → *Daily use* and stop. Don't recite it.
 
 ## 6. Verify and report
 
@@ -90,4 +93,4 @@ usually to dump a week of context in and let it get filed — that's the fastest
 
 - `vault-doctor` — the integrity checks. Run at the end.
 - `watchtower` — vault-specific context, loaded only for vault work.
-- `_Docs/Setup Guide.md` — the human version of steps 1–4.
+- `README.md` → *Set up* — the human version of steps 1–4.

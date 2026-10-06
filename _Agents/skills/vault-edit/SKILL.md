@@ -22,14 +22,15 @@ Load `watchtower` first for the hard rules and the writing standard. This skill 
    **Renaming it breaks every `[[link]]` to it.** This is the single most important asymmetry here.
 2. **Dashboards filter on `type ==`**, not on tags or folders. Frontmatter is what makes a note visible
    to a view; get `type:` wrong and the note vanishes from the UI while looking fine on disk.
-3. **Indexes are hand-maintained.** Nothing generates `Maps/*.md`. An unlisted note is invisible to a
-   reader even though it exists.
+3. **A folder's index is its `index.md`.** A hand-kept list there is not generated; an unlisted note is
+   invisible to a reader even though it exists. An `okf-view` block lists notes for you — run
+   `_Agents/wt index` to refresh its snapshot.
 
 ## Per operation — what must move with the file
 
 | Operation | Also update | Watch for |
 |---|---|---|
-| **Create** | The folder's index in `Maps/`; frontmatter from `_Templates/`; `related:` backlink; `topic/*` tag **only** if the concept note exists | Right space (hard rule 4). Register any new tag in `Maps/Tag Registry.md` in the same commit |
+| **Create** | The folder's `index.md`; frontmatter from `_Templates/`; `related:` backlink; `topic/*` tag **only** if the concept note exists | Right space (hard rule 4). Register any new tag in `_Agents/tags.md` in the same commit |
 | **Read** | — | Read the whole note; don't answer from the first paragraph |
 | **Update** | `updated`-style fields if the folder uses them; the index row if the title changed | **Never rewrite his wording** (hard rule 3). Add structure around it |
 | **Move** | Index rows that name the folder; scope tags if the space changed | Links survive a move. `#ACME` may need adding or removing |
@@ -48,8 +49,8 @@ Load `watchtower` first for the hard rules and the writing standard. This skill 
    ```bash
    grep -rn '\[\[Note Name\]\]' --include='*.md' .
    ```
-3. **Preview.** Every destination path, the exact Markdown or diff, frontmatter, links, tags, and index
-   changes — per the vault-wide gate. Deletes and merges get per-path approval regardless.
+3. **Branch.** Make the change on a branch; the PR diff is the preview (`AGENTS.md` → *Write to the
+   vault*). Deletes and merges still need the user's approval for each path before you make them.
 4. **Apply**, then **update the indexes in the same change** — not as a follow-up.
 5. **Verify with `vault-doctor`.** Structural edits are exactly what it exists to catch.
 

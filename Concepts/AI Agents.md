@@ -4,14 +4,14 @@ status: "active"
 tags:
   - "topic/agents"
 related:
-  - "[[Agent Memory]]"
-  - "[[Skills Repo]]"
+  - "[[_Agents/memory/README|Agent Memory]]"
+  - "[[_Agents/README|Skills]]"
 ---
 
 # AI Agents
 
 How I actually use AI agents day to day. The rules agents *follow* are in [`AGENTS.md`](../AGENTS.md)
-and `_Agents/docs/operating-model.md`; this note is the human version — what the model is and why it
+and `_Agents/memory/working-preferences/`; this note is the human version — what the model is and why it
 beats the alternative.
 
 ## The model: one brain, many disposable agents
@@ -39,17 +39,17 @@ Subagents still earn their place on large work — roughly one per feature or co
 a platform connects, where a credential lives, the gotcha that cost hours. Without it every chat
 re-derives the same things. The rule for *when* it gets written is in that folder's `README.md`; the
 short version is that a single durable fact goes in the moment it's learned, and everything larger
-waits for a reviewed pass. See [[Agent Memory]].
+waits for a reviewed pass. See [[_Agents/memory/README|Agent Memory]].
 
 **Skills that live here, not in a tool.** `_Agents/skills/` is shared by every platform, so a
-capability written once works everywhere — no per-tool copies to drift apart. See [[Skills Repo]].
+capability written once works everywhere — no per-tool copies to drift apart. See [[_Agents/README|Skills]].
 
 **Connectors for anything live.** The vault holds durable facts; the tracker, the warehouse, email,
 Drive, and the rest hold current state. Agents query those rather than trusting a number written down months ago.
 
 **Organization, which matters more than it looks.** The tag registry, the properties, the folder
 boundaries — that discipline is what lets a model fetch precisely instead of dragging in unrelated
-context. The bigger the vault gets, the more it matters. See [[Tag Registry]].
+context. The bigger the vault gets, the more it matters. See [[tags|Tag Registry]].
 
 **Long context that survives.** Loading heavily used to degrade a thread after a few compactions. That
 stopped being true around Opus 4.6, which is why I now let chats consume a lot of input tokens without
@@ -63,8 +63,8 @@ What's private stays here; what's reusable is the scaffolding.
 
 ## Related
 - AI Prompts
-- [[Agent Memory]]
-- [[Skills Repo]]
-- [[Tag Registry]]
+- [[_Agents/memory/README|Agent Memory]]
+- [[_Agents/README|Skills]]
+- [[tags|Tag Registry]]
 - Data Quality
 - Segmentation
