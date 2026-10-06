@@ -13,7 +13,7 @@ index, and narrative-link change before writing. The bypass skips only the human
 ## People
 
 - Personal entity path: `Spaces/Personal/People/<slug>.md`
-- Work profiles stay under `Spaces/Work/Current Work/People/`.
+- Work profiles stay under `Spaces/Work/People/`.
 - Inspect existing names, aliases, and links before creating anything.
 - Create or update a personal note only when the person is explicitly important, recurring, or
   the user asks for the entity. Do not guess a surname, relationship, or identity from a first name.

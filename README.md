@@ -64,13 +64,14 @@ _Agents/                 the agent layer (also .agents/, a symlink for tool auto
     portability.md       why it's built this way
   memory/                what is TRUE about your environment
     README.md            the index + WHEN TO WRITE MEMORY
-    connectors.md        which live system owns which question
     machines/            one profile per target — paths, shells, what's NOT installed
   skills/<name>/         one folder per skill, read by every harness
   wt                     the one tool: search · doctor · install · index
   CONVENTIONS.md         how to author a skill
 
-Spaces/                  your actual notes — Work / Personal / Shared
+Spaces/                  your actual notes — Work / Personal / Career; each space has its own
+                         memory/ and skills/ (Spaces/Work/memory/connectors.md: which live
+                         system owns which question)
 Concepts/                durable topic notes; the targets of topic/* tags
 Maps/                    indexes, and Tag Registry — the tag authority
 Dashboards/              Obsidian .base views (they filter on `type ==`)
@@ -90,14 +91,14 @@ doing memory's job.
 | [`bootstrap`](_Agents/skills/bootstrap/) | Sets up a new user or machine, and teaches the model |
 | [`vault-memory`](_Agents/skills/vault-memory/) | Refreshes memory from prior sessions and your connectors |
 | [`vault-sync`](_Agents/skills/vault-sync/) | Pull → refresh → commit → PR → merge → summary |
-| [`weekly-work-log`](_Agents/skills/weekly-work-log/) | Writes the weekly work log from verified activity |
+| [`weekly-work-log`](Spaces/Work/skills/weekly-work-log/) | Writes the weekly work log from verified activity |
 | [`vault-doctor`](_Agents/skills/vault-doctor/) | Mechanical integrity checks. Read-only, script-backed |
 | [`vault-prune`](_Agents/skills/vault-prune/) | Finds slop, duplicates, bloat, stale claims, gaps |
 | [`vault-edit`](_Agents/skills/vault-edit/) | Safe CRUD — and what must move with the file |
-| [`shared-vault`](_Agents/skills/shared-vault/) | Moves vault knowledge into a team wiki as a PR |
+| [`shared-vault`](Spaces/Work/skills/shared-vault/) | Moves vault knowledge into a team wiki as a PR |
 | [`secrets`](_Agents/skills/secrets/) | Get, store, rotate, inject — never surfacing a value |
 | [`playwright-testing`](_Agents/skills/playwright-testing/) | Real-browser tests for user-visible behavior |
-| [`personal`](_Agents/skills/personal/) | Files personal material and keeps your voice |
+| [`personal`](Spaces/Personal/skills/personal/) | Files personal material and keeps your voice |
 
 ## The rules that make it work
 

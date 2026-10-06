@@ -22,8 +22,8 @@ small; the vault holds the rest as searchable skills, memory, notes, and prior-s
    - Shell commands or machine-dependent paths/tooling → `_Agents/memory/environment.md`, then exactly
      one matching `_Agents/memory/machines/` profile.
    - Authentication, secret locations, profiles, or connection failures →
-     `_Agents/memory/credentials.md` plus the relevant platform memory.
-   - Live external state → the authoritative connector named in `_Agents/memory/connectors.md`.
+     `Spaces/Work/memory/credentials.md` plus the relevant platform memory.
+   - Live external state → the authoritative connector named in `Spaces/Work/memory/connectors.md`.
    - Prior decisions or unfinished work → the relevant note/memory first, then prior sessions.
 5. **Pointers are not content.** Search results and indexes tell you what to open; they do not require
    reading every linked file.
@@ -39,7 +39,7 @@ Order: request → this bootstrap → search → matching skill/context → acti
    Extract PDFs to Markdown; catalogue removed images in `_Docs/Image Descriptions.md`.
 3. **Preserve the user's wording and data.** Never delete notes or rewrite rough material into generic
    prose. Add structure around it; explicit consolidation must carry the original wording forward.
-4. **Respect space boundaries.** Employer-specific material stays out of personal and future-work
+4. **Respect space boundaries.** Employer-specific material stays out of the personal and career
    spaces.
 5. **Never push straight to `main`.** Use a branch and PR. Do not publish, push, open a PR, or send
    external communication without explicit authorization for that external action.
@@ -85,6 +85,23 @@ the tag authority. Employer-specific material uses the configured employer tag; 
 - Use the matching machine profile for paths, shells, installed tools, and git identity.
 - Do not treat focused tests as proof that an external deployment or live system changed.
 
+## Spaces
+
+Each space holds its own notes, `memory/`, and `skills/`. Material that is true in every space stays
+in `_Agents/`.
+
+| Space | Holds | Space rules |
+|---|---|---|
+| `Spaces/Personal/` | Personal life | `Spaces/Personal/Personal Vault Guide.md` |
+| `Spaces/Work/` | Work for your current employer (tag `ACME`) | `Spaces/Work/AGENTS.md` |
+| `Spaces/Career/` | Resume, career plans, and future work | None |
+
+- Find the active space from the working directory or the request. Search that space and `_Agents/`.
+- Put a fact that one space needs in that space's `memory/`. Put a fact that is true everywhere in
+  `_Agents/memory/`.
+- `wt doctor` reports a tag that crosses a boundary (`_Agents/wt.json` → `boundaries`).
+- To leave a job, archive its space folder. Its memory and skills go with it.
+
 ## Page conventions
 
 These apply to new and moved pages. Existing pages change in later redesign steps.
@@ -103,8 +120,8 @@ Obsidian, GitHub, and Isomorphic read the same files.
 
 ## Entry points
 
-- Skills: `_Agents/skills/<name>/SKILL.md`
-- Memory index: `_Agents/memory/README.md`
+- Skills: `_Agents/skills/<name>/SKILL.md` (shared) and `Spaces/<Name>/skills/<name>/SKILL.md` (one space)
+- Memory index: `_Agents/memory/README.md` (shared) and `Spaces/<Name>/memory/` (one space)
 - Agent-layer map: `_Agents/README.md`
 - Vault structure and indexes: `_Agents/skills/watchtower/reference.md`, `Maps/`
 - Skill authoring: `_Agents/CONVENTIONS.md`

@@ -264,7 +264,8 @@ def search_test():
         terms = prompt_terms(c["prompt"])
         got = [f for f, _ in search(terms)[0]] if terms else []
         want = c.get("expect", [])
-        ok = (not got) if not want else all(w in got for w in want)
+        # A want ending in / is a folder: any hit inside it counts.
+        ok = (not got) if not want else all(any(g == w or (w.endswith("/") and g.startswith(w)) for g in got) for w in want)
         if not ok:
             failed += 1
             print(f"FAIL  {c['prompt']!r}\n      want {want or 'nothing'}\n      got  {got or 'nothing'}")
