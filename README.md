@@ -67,7 +67,7 @@ _Agents/                 the agent layer (also .agents/, a symlink for tool auto
     connectors.md        which live system owns which question
     machines/            one profile per target — paths, shells, what's NOT installed
   skills/<name>/         one folder per skill, read by every harness
-  scripts/               install-skills · install-instructions · check_vault
+  wt                     the one tool: search · doctor · install · index
   CONVENTIONS.md         how to author a skill
 
 Spaces/                  your actual notes — Work / Personal / Shared
@@ -120,7 +120,7 @@ off without this?* It applies to an agent's chat reply as much as to a note.
 
 ## Two things people get wrong
 
-**Skipping the global instruction bridge.** Run `install-instructions.sh`. Without it your agents only
+**Skipping the global instruction bridge.** Run `_Agents/wt install`. Without it your agents only
 see these rules when opened *on* this repo — which is not where you work most of the time.
 
 **Never building the memory habit.** The vault only makes chats disposable if facts actually get written

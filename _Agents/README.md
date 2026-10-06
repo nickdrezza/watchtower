@@ -24,13 +24,10 @@ _Agents/
 │   ├── verification.md       how to know you're done; what counts as evidence
 │   ├── platforms.md          per-tool path matrix (where each harness reads skills + instructions)
 │   └── portability.md        the portability model + when to reach for rulesync
-├── templates/skill-template/ starter SKILL.md, copied by new-skill.sh
-└── scripts/
-    ├── new-skill.sh          scaffold a new skill
-    ├── install-skills.sh     deploy skills/ to where a harness will find them
-    ├── install-instructions.sh  point each harness's GLOBAL instruction file at this repo
-    ├── wt-search.sh          return prompt-relevant pointers without loading file bodies
-    └── check_vault.py         mechanical integrity checks (backs vault-doctor)
+├── templates/skill-template/ starter SKILL.md for a new skill
+├── global-instructions.md    the text `wt install` writes into each harness's global instruction file
+├── search-fixtures.json      prompts and the pages search must (or must not) return
+└── wt                        the one tool: search · doctor [--fix] · install · index
 ```
 
 ## Start here
@@ -63,7 +60,7 @@ one query if you changes jobs; `vault-memory` keeps the folder current.
 | [`weekly-work-log`](skills/weekly-work-log/) | Writes or updates the weekly manager-facing work log, from evidence only, in the house format. |
 | [`vault-memory`](skills/vault-memory/) | Refreshes `_Agents/memory/` from prior sessions and your connectors. |
 | [`vault-sync`](skills/vault-sync/) | Pull → refresh → commit → PR → merge → concise summary. The single entry point for "sync my vault". |
-| [`vault-doctor`](skills/vault-doctor/) | Mechanical integrity checks — links, tags, frontmatter, skill-index drift, stale mirror. Read-only, script-backed. |
+| [`vault-doctor`](skills/vault-doctor/) | Mechanical integrity checks — links, tags, frontmatter, skill-index drift, secrets. Backed by `wt doctor`. |
 | [`vault-prune`](skills/vault-prune/) | Quality pass — slop, near-duplicates, bloat, stale claims, orphans, gaps. Per-item approval; never deletes unasked. |
 | [`vault-edit`](skills/vault-edit/) | Safe create / move / rename / merge / split / archive / delete, and what must move with the file. |
 | [`skills-sync`](skills/skills-sync/) | Publishes selected skills to an external destination — a plugin marketplace, a shared skills repo — reformatted to that destination's own layout and sanitized of anything machine-bound. Requires the user to name every skill explicitly; also reports drift and shadowing between the two copies. Ledger: [`_Docs/Skill Exports.md`](../_Docs/Skill%20Exports.md). |
@@ -101,9 +98,8 @@ Antigravity — nothing to do. (`.agents` is a committed symlink to the real `_A
 go so Obsidian would index the folder.) **Claude Code reads `.claude/skills/`**, so either:
 
 ```bash
-_Agents/scripts/install-skills.sh --here      # mirror into ./.claude/skills (gitignored)
-_Agents/scripts/install-skills.sh             # global: ~/.agents/skills + ~/.claude/skills
-_Agents/scripts/install-skills.sh --copy      # same, but copy instead of symlink (Windows/WSL)
+_Agents/wt install            # one link per skill in ~/.agents/skills + ~/.claude/skills
+_Agents/wt install --copy     # copies instead of links (Windows/WSL)
 ```
 
 …or just read `_Agents/skills/<name>/SKILL.md` directly. It's plain Markdown; auto-discovery is a
@@ -117,9 +113,9 @@ Full path matrix: [`docs/platforms.md`](docs/platforms.md). Why it's built this 
 **New skills belong here**, at `_Agents/skills/<name>/SKILL.md`.
 
 ```bash
-_Agents/scripts/new-skill.sh my-skill-name
-# edit _Agents/skills/my-skill-name/SKILL.md — start with the `description` (it's the trigger)
-_Agents/scripts/install-skills.sh --here      # refresh the Claude Code mirror (it's a copy)
+cp -r _Agents/templates/skill-template _Agents/skills/my-skill-name
+# set name: my-skill-name, then write the `description` first (it's the trigger)
+_Agents/wt install            # link the new skill
 ```
 
 Then **add a row to the Skills table above** — this file is the one hand-maintained skill index, so a

@@ -16,8 +16,7 @@ Obsidian Vault/                            # = watchtower repo
 │   ├── skills/<name>/SKILL.md             #   CANONICAL skills (+ optional reference.md, scripts/)
 │   ├── docs/platforms.md, portability.md  #   per-tool paths; the portability model
 │   ├── templates/skill-template/          #   starter SKILL.md
-│   └── scripts/new-skill.sh,              #   scaffold; deploy to ~/.agents or ./.claude/skills
-│       install-skills.sh
+│   └── wt                                 #   search · doctor · install · index
 ├── Concepts/                              # durable concept notes (AI Agents, AWS, the warehouse project,
 │                                          #   Data Quality, dbt, the CRM, the newsletter platform, the warehouse, the events platform…)
 ├── Dashboards/                            # Obsidian .base files
@@ -135,5 +134,5 @@ bodies. A 2026-06-30 cleanup found AWS/Google/RSA secrets pasted **inline** in t
    values: never the key material, never the password, never the token string.
 5. Never add images/PDFs/plugin bundles/JS/CSS. `.gitignore` should already exclude them (and
    `*.pem`, `*.key`, `*.p8`, `*.p12`, `*.env`); if you see one staged, unstage it.
-6. `.claude/skills/` is a **generated mirror** of `_Agents/skills/` and is gitignored. If it shows
-   up in `git status`, something re-added it — don't commit it, and make edits in `_Agents/skills/`.
+6. `.claude/skills/` in this repo is an old copy and is gitignored; `wt install` removes it. Make
+   edits in `_Agents/skills/`.

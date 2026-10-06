@@ -8,7 +8,7 @@ small; the vault holds the rest as searchable skills, memory, notes, and prior-s
 1. **Start with the request and this file. Do not preload the vault.**
 2. **Search before implementing.** When the request may depend on prior context, run:
    ```bash
-   _Agents/scripts/wt-search.sh <2-5 specific nouns or phrases from the request>
+   _Agents/wt search <2-5 specific nouns or phrases from the request>
    ```
    Read only relevant results. If the first terms miss, try safe synonyms, identifiers, project names,
    and obvious typo corrections before asking the user.
@@ -84,6 +84,22 @@ the tag authority. Employer-specific material uses the configured employer tag; 
 - Secret-scan the diff before committing.
 - Use the matching machine profile for paths, shells, installed tools, and git identity.
 - Do not treat focused tests as proof that an external deployment or live system changed.
+
+## Page conventions
+
+These apply to new and moved pages. Existing pages change in later redesign steps.
+Obsidian, GitHub, and Isomorphic read the same files.
+
+- **Frontmatter:** `type`, `description`, `updated`. Add `title` only when it is different from the
+  file name. A folder note does not need `type`.
+- **Folder notes:** a folder's overview page is `<folder>/index.md`. In Obsidian, set the folder-notes
+  plugin to use the name `index`.
+- **Titles:** each content page has a unique title. `index.md` and `SKILL.md` are exempt.
+- **Listings:** use an `okf-view` block, not a hand-kept list. `_Agents/wt index` writes the cached
+  snapshot under it, so Obsidian and GitHub show the list. Isomorphic computes it live.
+- **Paths:** `.isomorphic.json` declares which folders are content and which are system.
+- **Plugin files** (`.excalidraw.md`, `.base`) are extras. They are never the only index of anything.
+- **Moves and renames:** use `git mv`, then `_Agents/wt doctor --fix`. Merge only with 0 broken links.
 
 ## Entry points
 

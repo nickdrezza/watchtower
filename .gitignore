@@ -15,8 +15,7 @@ _Vault Maintenance/Nested Obsidian Config Snapshot/
 *.css
 !_Agents/**/*.js
 
-# Generated mirror of _Agents/skills for Claude Code (built by _Agents/scripts/install-skills.sh).
-# The canonical skills live in _Agents/skills/ — edit those, never this copy.
+# Old in-repo copy of _Agents/skills. `_Agents/wt install` links each skill globally instead.
 .claude/skills/
 
 # Keep this repo text-first.
