@@ -1,13 +1,3 @@
----
-name: personal-entities
-description: >
-  Creates and links personal people, pet, and location notes, and wires them into a narrative note's
-  people:, pets:, and locations: properties. Use when a diary entry, memory, or reflection names
-  someone, a pet, or a meaningful place, or when the user says "add my friend X", "make a note for my
-  dog", "link this to my hometown", or "connect these people". Records only details he actually gave —
-  never infers a relationship, a date, or where someone lives.
----
-
 # Personal people, pets, and locations
 
 Read `watchtower`, `Spaces/Personal/Personal Vault Guide.md`, and the relevant `People.md`,

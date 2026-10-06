@@ -1,12 +1,9 @@
 ---
 name: vault-edit
 description: >
-  The safe way to perform any CRUD operation on the vault — create, read, update, move, rename, merge,
-  split, archive, or delete a note — without breaking wiki-links, indexes, dashboards, or tags. Use
-  whenever the user says "create a note for X", "rename this note", "move this to the other space",
-  "merge these two notes", "split this up", "archive that project", "delete this", "restructure this
-  folder", "add a field to these notes", or asks for any structural edit. Also the reference for what
-  each operation must update alongside the file itself.
+  Creates, moves, renames, merges, splits, archives, or deletes a note without breaking links,
+  indexes, dashboards, or tags. Use for "rename this note", "move this", "merge these notes", "archive
+  that project", or "delete this".
 user-invocable: true
 argument-hint: "<operation> <note>"
 ---
@@ -62,12 +59,12 @@ Load `watchtower` first for the hard rules and the writing standard. This skill 
 - `git add -A` — the tree carries `.obsidian/app.json` churn and stray `Untitled*.canvas`.
 - Move Acme material into a personal or future-work space, or the reverse (hard rule 4).
 - Delete anything staged in `Inbox/` or personal `Uncategorized.md` because it looks unfinished. That is
-  what those places are for; `personal-triage` classifies them.
+  what those places are for; the `personal` skill classifies them.
 - Push to `main`. Branch → PR, via `vault-sync`.
 
 ## Related
 
 - `vault-doctor` — verify after any structural edit.
 - `vault-prune` — decides *what* to merge, simplify, or retire; this skill executes it safely.
-- `personal-vault` / `personal-triage` — routing and classification inside `Spaces/Personal`.
+- `personal` — routing and classification inside `Spaces/Personal`.
 - `watchtower` — hard rules, layout, property templates, the filing workflow.

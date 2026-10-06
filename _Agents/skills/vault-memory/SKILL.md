@@ -1,15 +1,9 @@
 ---
 name: vault-memory
 description: >
-  Refresh the vault's _Agents/memory/ from everything that happened since it was last updated —
-  local AI-platform history (Claude Code sessions, Codex sessions and its own memory store) plus the tracker,
-  email, GitHub, and Drive meeting notes. Extracts the durable facts an agent would otherwise
-  rediscover — how a platform connects, where a credential lives, a gotcha that cost hours, a decision
-  and its reason, project state — and files them into the right memory file. Use when the user says
-  "update my memory", "catch up my agent memory", "dump this week's context", "what did I learn this
-  week", "refresh the memory directory", "save this before I forget", or as step 2 of vault-sync.
-  Writes ONLY to _Agents/memory/ — for vault notes use watchtower, for the weekly log use
-  weekly-work-log.
+  Refreshes _Agents/memory/ with durable facts from recent AI sessions, the tracker, email, GitHub,
+  and Drive. Use for "update my memory", "catch up my agent memory", "what did I learn this week", or
+  as step 2 of vault-sync.
 user-invocable: true
 argument-hint: "update my memory"
 ---

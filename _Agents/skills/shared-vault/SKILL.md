@@ -1,13 +1,9 @@
 ---
-name: shared-vault-promote
+name: shared-vault
 description: >
-  Gets knowledge out of the vault and into the Acme team shared-vault. Two modes: SCAN the vault
-  and agent memory for material the whole team should know and propose it for approval, or COMPILE a
-  write-up on demand from work just finished. Always follows the live shared-vault conventions, always
-  strips anything private, and always asks before asserting. Use when the user says "add this to the
-  dev wiki", "document X for the team", "I just worked on X — compile notes and put them in the wiki",
-  "scan my vault for wiki-worthy stuff", "what should the team know that isn't documented", or "fill a
-  gap in GAPS.md". For *reading* the wiki to answer a question, use `shared-vault-read` instead.
+  Moves knowledge from this vault into the team shared vault as a PR. Use for "add this to the dev
+  wiki", "document X for the team", "scan my vault for wiki-worthy stuff", "what should the team
+  know", or "fill a gap in GAPS.md". To read the wiki, read its clone directly.
 tags:
   - ACME
 ---
@@ -17,12 +13,16 @@ tags:
 One direction only: vault → shared-vault. This skill decides *what* is worth promoting, strips what
 must not travel, and ships it as a PR. It does **not** own the wiki's format.
 
+The other direction has no skill. To use team knowledge, read the shared vault's clone directly. Do
+not copy its facts into this vault. When a vault note refers to a team doc, keep a short summary and
+a link to that doc ("point, don't copy").
+
 ## Load order and who owns what
 
 | Concern | Authority |
 |---|---|
 | This repo's rules (secrets, wording, `#ACME`, how to write) | `watchtower` skill — **load first, always** |
-| Which knowledge base a thing belongs to at all | `knowledge-router` skill |
+| Which knowledge base a thing belongs to at all | `watchtower` skill → *Which knowledge base* |
 | shared-vault **format, folders, template, changelog, commit mechanics** | The **live shared-vault repo** — `README.md`, `CLAUDE.md`, `_template.md`, the folder `README.md`, `systems/registry.yml`. Re-read them every time; the `shared-vault-read` skill has the per-type recipe. |
 | Where the repo is, which identity pushes | `_Agents/memory/git-and-tickets.md` and `environment.md` |
 | Deciding *what* to promote, and asking before you do | This skill |
@@ -45,7 +45,7 @@ team-relevant mechanism*, rewritten for a team audience. What never travels:
   promoted; the log entry cannot.
 
 Team-relevant but half-baked → `notebooks/<you>/` in the wiki, which has no template or review
-bar. Private → stays here. See `knowledge-router` for the full boundary.
+bar. Private → stays here. See `watchtower` → *Which knowledge base* for the full boundary.
 
 **The wiki's own source-of-truth rule bites here.** If a fact belongs to exactly one code repo
 (setup, config, run instructions, identifiers), it belongs in *that repo's* README or `docs/` — the
@@ -152,7 +152,6 @@ should just be *updated* instead.
 ## Related skills
 
 - `watchtower` — this repo's rules. First, always.
-- `knowledge-router` — personal vs team, and the hard boundary.
 - `shared-vault-read` — the team-managed skill: reading the wiki, and the per-type authoring recipe.
   Its token pre-flight is wrong for this machine; `_Agents/memory/git-and-tickets.md` has the working
   access path.

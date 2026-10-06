@@ -64,19 +64,12 @@ one query if you changes jobs; `vault-memory` keeps the folder current.
 | [`vault-doctor`](skills/vault-doctor/) | Mechanical integrity checks — links, tags, frontmatter, skill-index drift, secrets. Backed by `wt doctor`. |
 | [`vault-prune`](skills/vault-prune/) | Quality pass — slop, near-duplicates, bloat, stale claims, orphans, gaps. Per-item approval; never deletes unasked. |
 | [`vault-edit`](skills/vault-edit/) | Safe create / move / rename / merge / split / archive / delete, and what must move with the file. |
-| [`skills-sync`](skills/skills-sync/) | Publishes selected skills to an external destination — a plugin marketplace, a shared skills repo — reformatted to that destination's own layout and sanitized of anything machine-bound. Requires the user to name every skill explicitly; also reports drift and shadowing between the two copies. Ledger: [`_Docs/Skill Exports.md`](../_Docs/Skill%20Exports.md). |
-| [`knowledge-router`](skills/knowledge-router/) | Decides which knowledge base owns a task — this vault or the team's shared one. |
-| [`shared-vault-sync`](skills/shared-vault-sync/) | Both directions with the team vault in one command, drift check first. |
-| [`shared-vault-promote`](skills/shared-vault-promote/) | Outbound: what the team should have, rewritten for a team audience and stripped of anything private. |
-| [`shared-vault-ingest`](skills/shared-vault-ingest/) | Inbound: indexes the team vault and absorbs its gotchas and constraints into memory. Never copies it. |
+| [`shared-vault`](skills/shared-vault/) | Moves vault knowledge into the team shared vault as a PR, rewritten for a team audience and stripped of private content. To read team knowledge, read the shared vault clone directly. |
 | [`secrets`](skills/secrets/) | Get, store, rotate, and inject credentials. **Never surfaces a value.** |
 | [`playwright-testing`](skills/playwright-testing/) | Real-browser tests for user-visible behavior — uploads, downloads, forms, navigation, responsive layout. |
-| [`personal-vault`](skills/personal-vault/) | The front door for personal material; routes to the right section. |
-| [`personal-memory`](skills/personal-memory/) | Past events, milestones, and life-history notes. |
-| [`personal-reflection`](skills/personal-reflection/) | Opinions, values, identity questions, and rambles. |
-| [`personal-entities`](skills/personal-entities/) | People, pet, and location notes, and the links to them. |
-| [`personal-triage`](skills/personal-triage/) | Classifies personal material staged in Uncategorized. |
-| [`diary`](skills/diary/) | Lightly cleaned daily entries that preserve your voice. |
+| [`personal`](skills/personal/) | Personal material: diary, memories, reflections, people, places, pets, and triage of Uncategorized notes. One router, one reference file for each note type. |
+
+Skills here are the owner's only. Team skills live in the team's skills repo and are not copied here.
 
 The middle three are the **vault family**: `vault-sync` orchestrates, calling `weekly-work-log` and
 `vault-memory`. Run `vault-sync` and you get all of it.

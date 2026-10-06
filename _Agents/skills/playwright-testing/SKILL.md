@@ -1,13 +1,9 @@
 ---
 name: playwright-testing
 description: >
-  Adds and runs reusable Playwright browser tests for personal websites and web apps, so user-visible
-  behavior is verified in a real browser instead of inferred from the source. Use when building,
-  repairing, or extending a site and the change touches uploads, downloads, forms, navigation,
-  responsive layout, authentication, or any multi-step flow — and when the user says "test this in a
-  browser", "does the upload work", "write a Playwright test", "check it on mobile", "verify the form",
-  or "did that actually fix it". the vendor platform apps add their own auth and iframe constraints on top; see
-  _Agents/memory/vendor-platform.md before concluding an app cannot be tested.
+  Adds and runs Playwright browser tests for websites and web apps. Use for "test this in a browser",
+  "write a Playwright test", "does the upload work", "check it on mobile", or "verify the form". For
+  vendor apps, read _Agents/memory/vendor-platform.md first.
 ---
 
 # Playwright testing

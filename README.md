@@ -91,16 +91,13 @@ doing memory's job.
 | [`vault-memory`](_Agents/skills/vault-memory/) | Refreshes memory from prior sessions and your connectors |
 | [`vault-sync`](_Agents/skills/vault-sync/) | Pull → refresh → commit → PR → merge → summary |
 | [`weekly-work-log`](_Agents/skills/weekly-work-log/) | Writes the weekly work log from verified activity |
-| [`skills-sync`](_Agents/skills/skills-sync/) | Publishes selected skills to a team skills repo |
 | [`vault-doctor`](_Agents/skills/vault-doctor/) | Mechanical integrity checks. Read-only, script-backed |
 | [`vault-prune`](_Agents/skills/vault-prune/) | Finds slop, duplicates, bloat, stale claims, gaps |
 | [`vault-edit`](_Agents/skills/vault-edit/) | Safe CRUD — and what must move with the file |
-| [`knowledge-router`](_Agents/skills/knowledge-router/) | Personal vault vs shared team vault |
-| [`shared-vault-sync`](_Agents/skills/shared-vault-sync/) | Both directions with a team wiki, drift check first |
-| [`shared-vault-promote`](_Agents/skills/shared-vault-promote/) · [`-ingest`](_Agents/skills/shared-vault-ingest/) | The two one-way halves |
+| [`shared-vault`](_Agents/skills/shared-vault/) | Moves vault knowledge into a team wiki as a PR |
 | [`secrets`](_Agents/skills/secrets/) | Get, store, rotate, inject — never surfacing a value |
 | [`playwright-testing`](_Agents/skills/playwright-testing/) | Real-browser tests for user-visible behavior |
-| [`personal-vault`](_Agents/skills/personal-vault/) + 5 siblings | Routes personal material and preserves your voice |
+| [`personal`](_Agents/skills/personal/) | Files personal material and keeps your voice |
 
 ## The rules that make it work
 
@@ -133,10 +130,15 @@ A personal vault is not a team wiki. The companion template for the shared half 
 **[`nickdrezza/dev-wiki`](https://github.com/nickdrezza/dev-wiki)** — strict, documentation-heavy, filed
 by document type, no PII. Run both and you have a complete personal + team knowledge system.
 
-Three skills manage the boundary: `knowledge-router` decides which base owns a topic, and
-`shared-vault-promote` / `shared-vault-ingest` carry material across **as a rewrite, never a paste** —
-the team vault stays the source of truth for team facts, and your vault holds the constraint plus a
-pointer.
+The `watchtower` skill decides which base owns a topic. The `shared-vault` skill moves material to the
+team base **as a rewrite, never a paste**. In the other direction, agents read the team base's clone
+directly; your vault keeps only a short summary and a link. The team base stays the source of truth
+for team facts.
+
+**Skills follow the same split.** A vault's skills have the same audience as the vault: ask "who runs
+this?", not "what is it about?". Your vault keeps only skills you run. Team skills live only in the
+team's skills repo (for example a plugin marketplace) and are never copied in. A shared vault holds
+shared skills. One copy per skill means nothing to sync.
 
 ## License
 
