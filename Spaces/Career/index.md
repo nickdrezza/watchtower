@@ -4,9 +4,9 @@ status: active
 domain: system
 workspace: vault
 related:
-  - "[[README|Watchtower]]"
+  - "README.md"
 ---
 
 # Future Work Home
 
-Landing page for this space. [[README#Spaces|README → Spaces]] says what belongs here.
+Landing page for this space. [README → Spaces](../../README.md#Spaces) says what belongs here.

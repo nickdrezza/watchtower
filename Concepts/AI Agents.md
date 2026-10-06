@@ -4,8 +4,8 @@ status: "active"
 tags:
   - "topic/agents"
 related:
-  - "[[_Agents/memory/README|Agent Memory]]"
-  - "[[_Agents/README|Skills]]"
+  - "_Agents/memory/README.md"
+  - "_Agents/README.md"
 ---
 
 # AI Agents
@@ -39,17 +39,17 @@ Subagents still earn their place on large work — roughly one per feature or co
 a platform connects, where a credential lives, the gotcha that cost hours. Without it every chat
 re-derives the same things. The rule for *when* it gets written is in that folder's `README.md`; the
 short version is that a single durable fact goes in the moment it's learned, and everything larger
-waits for a reviewed pass. See [[_Agents/memory/README|Agent Memory]].
+waits for a reviewed pass. See [Agent Memory](../_Agents/memory/README.md).
 
 **Skills that live here, not in a tool.** `_Agents/skills/` is shared by every platform, so a
-capability written once works everywhere — no per-tool copies to drift apart. See [[_Agents/README|Skills]].
+capability written once works everywhere — no per-tool copies to drift apart. See [Skills](../_Agents/README.md).
 
 **Connectors for anything live.** The vault holds durable facts; the tracker, the warehouse, email,
 Drive, and the rest hold current state. Agents query those rather than trusting a number written down months ago.
 
 **Organization, which matters more than it looks.** The tag registry, the properties, the folder
 boundaries — that discipline is what lets a model fetch precisely instead of dragging in unrelated
-context. The bigger the vault gets, the more it matters. See [[tags|Tag Registry]].
+context. The bigger the vault gets, the more it matters. See [Tag Registry](../_Agents/tags.md).
 
 **Long context that survives.** Loading heavily used to degrade a thread after a few compactions. That
 stopped being true around Opus 4.6, which is why I now let chats consume a lot of input tokens without
@@ -63,8 +63,8 @@ What's private stays here; what's reusable is the scaffolding.
 
 ## Related
 - AI Prompts
-- [[_Agents/memory/README|Agent Memory]]
-- [[_Agents/README|Skills]]
-- [[tags|Tag Registry]]
+- [Agent Memory](../_Agents/memory/README.md)
+- [Skills](../_Agents/README.md)
+- [Tag Registry](../_Agents/tags.md)
 - Data Quality
 - Segmentation

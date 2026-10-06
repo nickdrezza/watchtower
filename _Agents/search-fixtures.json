@@ -5,5 +5,8 @@
   {"prompt": "fix the failing unit test in the parser", "expect": []},
   {"prompt": "where do the credentials for the warehouse live?", "expect": ["Spaces/Work/memory/credentials/", "Spaces/Work/memory/warehouse/"]},
   {"prompt": "write a diary entry about today", "expect": ["Spaces/Personal/skills/personal/references/diary.md"]},
-  {"prompt": "rotate the secrets for the crm connector", "expect": ["_Agents/skills/secrets/SKILL.md"]}
+  {"prompt": "rotate the secrets for the crm connector", "expect": ["_Agents/skills/secrets/SKILL.md"]},
+  {"prompt": "Continue", "expect": []},
+  {"prompt": "Can you use a fresh agent to review the plan, critically?", "expect": []},
+  {"prompt": "where does the crm connector keep its credentials?", "expect": ["Spaces/Work/memory/"], "never": ["Spaces/Personal/", "Spaces/Career/"]}
 ]
