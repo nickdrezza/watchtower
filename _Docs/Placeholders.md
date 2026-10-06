@@ -116,5 +116,5 @@ the pointer to `_Agents/memory/environment.md`.
 Once you're past setup, the rule that keeps this from recurring: a skill describes *how*;
 `_Agents/memory/` holds *what is true about this environment*. A literal path inside a skill breaks on
 your other machine and rots without telling you. `vault-doctor` has a `hardcoded-machine-path` check for
-exactly this — extend `USERS` in `_Agents/wt` to match your own home directory
+exactly this — add your account names to `users` in `_Agents/wt.json` to match your own home directory
 shapes, or it will only catch the ones the template shipped with.

@@ -5,6 +5,7 @@ on:
     branches: [main]
 permissions:
   contents: read
+  pull-requests: read  # gitleaks lists the PR's commits; private repos need this
 jobs:
   check:
     runs-on: ubuntu-latest

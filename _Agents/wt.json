@@ -1,0 +1,5 @@
+{
+  "triggers": ["vault", "warehouse", "crm", "github", "tracker", "tickets", "connector", "credentials",
+               "secrets", "deployment", "worktree", "meeting", "interview", "diary", "career"],
+  "users": ["alice", "bob"]
+}
