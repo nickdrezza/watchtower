@@ -37,11 +37,11 @@ full sync.
 | `README.md` | The index and the rules for writing memory. |
 | `environment.md` | **Start here.** How to tell which target you're on, what's true on all of them, and what must be looked up per-machine. |
 | `machines/` | One profile per target — paths, shells, installed tooling, and what's deliberately *not* installed. |
-| `Spaces/Work/memory/credentials.md` | The credential map — every key, token, and profile, what it authenticates, and **where it lives**. |
-| `Spaces/Work/memory/connectors.md` | The live systems — which connector is authoritative for what, the limit that will bite you, and where cross-chat session history lives. |
-| `Spaces/Work/memory/warehouse.md` | **The worked example of a platform file** — how to connect, the roles, the limit you'll hit, and the way around it. |
+| `Spaces/Work/memory/credentials/` | The credential map — every key, token, and profile, what it authenticates, and **where it lives**. |
+| `Spaces/Work/memory/connectors/` | The live systems — which connector is authoritative for what, the limit that will bite you, and where cross-chat session history lives. |
+| `Spaces/Work/memory/warehouse/` | **The worked example of a platform file** — how to connect, the roles, the limit you'll hit, and the way around it. |
 | `working-preferences.md` | Standing instructions — the PR rule, verify-don't-fabricate, comment-don't-edit. |
-| `Spaces/Work/memory/projects.md` | Active and recent work, one compact block each. |
+| `Spaces/Work/memory/projects/` | Active and recent work, one compact block each. |
 
 **Add one file per platform you actually work in**, named for it, and a `people.md` once more than a
 couple of names matter. `warehouse.md` is the shape to copy. The set ships small on purpose — a
