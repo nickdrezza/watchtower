@@ -35,7 +35,7 @@ SETTINGS = ROOT / "_Agents" / "wt.json"  # optional per-vault overrides: {"trigg
 # Agent folders that are not pages (system) but are searched.
 AGENT_SEARCH_ROOTS = ("_Agents/memory/", "_Agents/skills/", "_Agents/docs/")
 # Lower rank = shown first.
-RANK = (("_Agents/memory/", 0), ("_Agents/skills/", 1), ("_Agents/docs/", 3))
+RANK = (("memory/", 0), ("skills/", 1), ("_Agents/docs/", 3))  # matched as a path segment
 MAX_HITS = 5
 
 # Words in a prompt that start a hook search. Whole words only. Keep out words that occur in almost
@@ -54,6 +54,8 @@ except ValueError:
     _settings = {}
 TRIGGERS = tuple(_settings.get("triggers", TRIGGERS))
 USERS = "|".join(map(re.escape, _settings["users"])) if _settings.get("users") else USERS
+# Folder prefix -> tags that must not appear under it, e.g. {"Spaces/Personal/": ["ACME"]}.
+BOUNDARIES = _settings.get("boundaries", {})
 
 DESCRIPTION_MIN, DESCRIPTION_MAX = 100, 300
 MEMORY_MAX_LINES = 200
@@ -182,14 +184,23 @@ def anchors(rel):
 
 def search_roots(files, roles):
     return [f for f in files if f.endswith(".md") and
-            (f.startswith(AGENT_SEARCH_ROOTS) or role(f, roles) == "content")]
+            (f.startswith(AGENT_SEARCH_ROOTS) or is_skill_file(f) or role(f, roles) == "content")]
 
 
 def rank_of(rel):
-    for prefix, r in RANK:
-        if rel.startswith(prefix):
+    for seg, r in RANK:
+        if rel.startswith(seg) or "/" + seg in rel:
             return r
     return 2
+
+
+def is_memory(rel):
+    """Shared memory (_Agents/memory/) or a space's memory (Spaces/<Name>/memory/)."""
+    return rel.startswith("_Agents/memory/") or bool(re.match(r"Spaces/[^/]+/memory/", rel))
+
+
+def is_skill_file(rel):
+    return rel.startswith("_Agents/skills/") or bool(re.match(r"Spaces/[^/]+/skills/", rel))
 
 
 def search(terms, limit=MAX_HITS):
@@ -335,14 +346,20 @@ def check_pages(md, roles, f):
             f.add("untitled-file", p, "warning")
         if role(p, roles) == "content" and Path(p).stem not in TITLE_EXEMPT:
             titles[title_of(p).lower()].append(p)
-        if fm is None and not p.startswith(FRONTMATTER_EXEMPT) and name not in FRONTMATTER_EXEMPT_FILES:
+        if fm is None and not p.startswith(FRONTMATTER_EXEMPT) and not is_skill_file(p) \
+                and name not in FRONTMATTER_EXEMPT_FILES:
             f.add("missing-frontmatter", p)
-        if fm and allowed and not p.startswith("_Agents/"):
-            tags = fm_value(fm, "tags") or []
-            for t in ([tags] if isinstance(tags, str) else tags):
+        tags = fm_value(fm, "tags") or [] if fm else []
+        tags = [tags] if isinstance(tags, str) else tags
+        if allowed and not p.startswith("_Agents/") and not is_skill_file(p):
+            for t in tags:
                 if t and t not in allowed:
                     f.add("unregistered-tag", f"{p} -> {t}")
-        if p.startswith("_Agents/memory/"):
+        for prefix, banned in BOUNDARIES.items():
+            hit = [t for t in tags if t in banned]
+            if p.startswith(prefix) and hit:
+                f.add("boundary-leak", f"{p} carries {', '.join(hit)}, not allowed under {prefix}")
+        if is_memory(p):
             n = text.count("\n")
             if n > MEMORY_MAX_LINES:
                 f.add("oversized-file", f"{p} ({n} lines > {MEMORY_MAX_LINES})", "warning")
@@ -437,8 +454,16 @@ def fix_links(md, files):
     by_name = defaultdict(list)
     for p in files:
         by_name[Path(p).name].append(p)
-    stem_moves = {Path(o).stem: Path(n).stem for o, n in moved.items()
-                  if o.endswith(".md") and Path(o).stem != Path(n).stem}
+    stem_count = defaultdict(int)
+    for f_ in files:
+        if f_.endswith(".md"):
+            stem_count[Path(f_).stem] += 1
+    stem_moves = {}
+    for o, n in moved.items():
+        if o.endswith(".md") and Path(o).stem != Path(n).stem:
+            # A unique new stem links by name; otherwise link by path and keep the old name as the label.
+            unique = stem_count[Path(n).stem] == 1 and Path(n).stem not in TITLE_EXEMPT
+            stem_moves[Path(o).stem] = (Path(n).stem if unique else os.path.splitext(n)[0], Path(o).stem)
     changed = []
     for p in md:
         text = read(p)
@@ -466,7 +491,10 @@ def fix_links(md, files):
         def wiki(m):
             name, rest = m.group(1), m.group(2)
             if name in stem_moves and not any(Path(f).stem == name for f in files):
-                return f"[[{stem_moves[name]}{rest}]]"
+                target, label = stem_moves[name]
+                if "/" in target and "|" not in rest:
+                    rest = f"{rest}|{label}"
+                return f"[[{target}{rest}]]"
             return m.group(0)
 
         new = re.sub(r"\[\[([^\]|#]+)((?:#[^\]|]*)?(?:\|[^\]]*)?)\]\]", wiki, new)
