@@ -33,9 +33,9 @@ GLOBAL_TEXT = ROOT / "_Agents" / "global-instructions.md"
 SETTINGS = ROOT / "_Agents" / "wt.json"  # optional per-vault overrides: {"triggers": [...], "users": [...]}
 
 # Agent folders that are not pages (system) but are searched.
-AGENT_SEARCH_ROOTS = ("_Agents/memory/", "_Agents/skills/", "_Agents/docs/")
+AGENT_SEARCH_ROOTS = ("_Agents/memory/", "_Agents/skills/")
 # Lower rank = shown first.
-RANK = (("memory/", 0), ("skills/", 1), ("_Agents/docs/", 3))  # matched as a path segment
+RANK = (("memory/", 0), ("skills/", 1))  # matched as a path segment
 MAX_HITS = 5
 
 # Words in a prompt that start a hook search. Whole words only. Keep out words that occur in almost
@@ -56,6 +56,7 @@ TRIGGERS = tuple(_settings.get("triggers", TRIGGERS))
 USERS = "|".join(map(re.escape, _settings["users"])) if _settings.get("users") else USERS
 # Folder prefix -> tags that must not appear under it, e.g. {"Spaces/Personal/": ["ACME"]}.
 BOUNDARIES = _settings.get("boundaries", {})
+TAG_REGISTRY = ROOT / _settings.get("tag_registry", "Maps/Tag Registry.md")  # the allowed tags
 
 DESCRIPTION_MIN, DESCRIPTION_MAX = 100, 300
 MEMORY_MAX_LINES = 200
@@ -309,8 +310,9 @@ def check_links(md, files, f):
 
     for p in md:
         text = strip_code(read(p))
-        for m in re.finditer(r"\[[^\]]*\]\(<?([^)>]+)>?\)", text):
-            raw = m.group(1).strip().split(" ")[0] if " \"" in m.group(1) else m.group(1).strip()
+        for m in re.finditer(r"\[[^\]]*\]\((?:<([^>]+)>|([^)]+))\)", text):  # <dest> may hold ( )
+            dest = m.group(1) or m.group(2)
+            raw = dest.strip().split(" ")[0] if " \"" in dest else dest.strip()
             if not raw or raw.startswith(("http://", "https://", "mailto:", "obsidian://")) or "…" in raw:
                 continue
             target_s, _, anchor = raw.partition("#")
@@ -509,7 +511,7 @@ def fix_links(md, files):
             name, rest = m.group(1), m.group(2)
             if name in stem_moves and not any(Path(f).stem == name for f in files):
                 target, label = stem_moves[name]
-                if "/" in target and "|" not in rest:
+                if "|" not in rest:  # keep the old name as the visible label
                     rest = f"{rest}|{label}"
                 return f"[[{target}{rest}]]"
             return m.group(0)

@@ -3,10 +3,12 @@ type: index
 status: active
 domain: system
 workspace: vault
+title: "Tag Registry"
+description: "Every tag allowed in this vault and when to apply it; wt doctor reports any tag not listed here."
+updated: 2026-10-06
 related:
-  - "[[Home]]"
-  - "[[Concept Index]]"
-  - "[[Vault Architecture]]"
+  - "[[README|Watchtower]]"
+  - "[[Concepts/index|Concept Index]]"
 ---
 
 # Tag Registry
@@ -28,8 +30,7 @@ worse to work in, because every fetch drags unrelated material along with it.
 
 So the discipline is the point, not the bureaucracy: one tag per concept, a concept note behind every
 `topic/*`, and no tag that merely restates a property. See
-[`_Agents/docs/operating-model.md`](../_Agents/docs/operating-model.md) → *Structure exists to make
-retrieval cheap*.
+[*Structure exists to make retrieval cheap*](<memory/working-preferences/Structure makes retrieval cheap.md>).
 
 Live counts are in Obsidian's **Tags** pane; they're deliberately not duplicated here, so this page
 can't go stale on numbers alone.
@@ -45,7 +46,7 @@ can't go stale on numbers alone.
 ## Subject matter — `topic/*`
 
 One per note in `Concepts/`, and **a `topic/*` tag always rides along with a `[[link]]` to its concept**.
-Tag and link go in together or neither does. Full concept list: [[Concept Index]].
+Tag and link go in together or neither does. Full concept list: [[Concepts/index|Concept Index]].
 
 | Tag | Concept | What it marks |
 |---|---|---|
@@ -58,7 +59,7 @@ month — the systems you actually work in, one row each.
 Adding one is three steps in one commit, in this order:
 
 1. Write the concept note in `Concepts/`.
-2. List it in [[Concept Index]].
+2. Run `_Agents/wt index` so it shows in [[Concepts/index|Concept Index]].
 3. Add the row here.
 
 Do it in the other order and you get a tag with nothing behind it, which is the failure this registry
@@ -86,13 +87,13 @@ alone; don't add new ones without a reason this concrete.
 
 There is no `person/*` namespace, and there should not be one. A person is an **entity** with attributes
 — email, role, org, current or former — and a tag can hold none of them. People live in
-`Spaces/Work/People/`, indexed by [[People Index]], and are linked from a note's
+`Spaces/Work/People/`, indexed by [[Spaces/Work/People/index|People Index]], and are linked from a note's
 `people:` property. That gives real graph nodes and real backlinks: open a person, see every log and
 project that involved them. A tag would give a flat list and nothing else.
 
 ## What is deliberately untagged
 
-Infrastructure notes carry **no scope tags**: the `Maps/` indexes, `_Templates/`, and agent-layer
+Infrastructure notes carry **no scope tags**: `README.md`, `_Templates/`, and agent-layer
 documentation. Personal and work landing pages live inside their respective spaces and do carry
 their scope tag so Graph view can filter those spaces consistently. `type: index` notes still get no
 `topic/*` tags — they link to everything, so inherited topics are pure noise.
@@ -108,7 +109,7 @@ Adding a `topic/*` tag:
    covers it, stop — no tag.
 2. There must be a note in `Concepts/` behind it. No concept note → create the concept first, or don't
    add the tag. A `topic/*` with nothing to link to is a dead node in the graph.
-3. Register it here, add the concept to [[Concept Index]], and set the tag on the concept note itself.
+3. Register it here, check that the concept shows in [[Concepts/index|Concept Index]], and set the tag on the concept note itself.
    This page is the only place the tag-to-concept mapping is written down — keep it that way.
 4. Backfill it onto existing notes that already link the concept — derive it from the links, don't
    reclassify by hand.
@@ -119,14 +120,14 @@ Adding or changing a scope tag:
    both. Use `ACME` only when the material is employer-specific.
 2. Do not use a scope tag as a substitute for `type:`, `domain:`, or `workspace:` — it exists so
    Graph view can filter across folders.
-3. Update this registry and add a dated line to [[Vault Maintenance]] in the same commit.
+3. Update this registry in the same commit, and say so in the PR description.
 
 Renaming or retiring a tag:
 
 1. Update this page first, so the diff shows the intent.
 2. Sweep every note's frontmatter; confirm nothing is left with `grep -rn '<tag>' --include='*.md'`.
-3. Check `Dashboards/*.base` — Bases filter on `type ==` today, so a tag change shouldn't touch them.
+3. Check `Spaces/Work/Dashboards/*.base` — Bases filter on `type ==` today, so a tag change shouldn't touch them.
    If one ever does filter on a tag, fix it in the same commit.
-4. Add a dated line to [[Vault Maintenance]].
+4. Say so in the PR description.
 
-Full policy and rationale: root `AGENTS.md` and [[Vault Architecture]].
+Full policy and rationale: root `AGENTS.md` and the `watchtower` skill → *Tagging*.

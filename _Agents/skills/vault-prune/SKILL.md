@@ -62,7 +62,7 @@ duplicate that work here; if a memory file needs it, hand off.
    is lost. Rank worst-first, cap at ~15, and say what the cap left out.
 5. **Ask, per item.** Batched, before any write. Anything you inferred rather than read gets flagged as
    inferred.
-6. **Apply only approved rows**, following the verification preview for each write.
+6. **Apply only approved rows**, on a branch, in a PR (the diff is the preview).
 7. **Report** — counts by category, what was left alone and why, and gaps recorded as open questions
    rather than invented content.
 
@@ -71,7 +71,7 @@ duplicate that work here; if a memory file needs it, hand off.
 - [ ] Nothing deleted that wasn't explicitly approved, by path.
 - [ ] Every merge carries the original wording; nothing re-voiced.
 - [ ] Links and indexes updated for every move (`vault-edit` owns the mechanics).
-- [ ] `Maps/Tag Registry.md` updated in the same commit as any tag change.
+- [ ] `_Agents/tags.md` updated in the same commit as any tag change.
 - [ ] Re-ran `vault-doctor` — a prune pass breaks links if you let it.
 - [ ] Report says what you *didn't* sweep.
 
