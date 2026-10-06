@@ -73,14 +73,10 @@ Document any reliance on these in the body so a reader on another platform knows
 2. **Scaffold it.**
 
    ```bash
-   _Agents/scripts/new-skill.sh <skill-name>
+   cp -r _Agents/templates/skill-template _Agents/skills/<skill-name>
    ```
 
-   It's a portable bash script — `cp -r` plus a `sed`-to-temp-file (a bare `sed -i` is GNU-only and
-   fails on macOS, so don't reintroduce one). On the Mac, run it directly. On the Windows machine run
-   it from **WSL** (`wsl.exe -d ubuntu -e bash -lc '...'`, quoting the vault path) or from Git Bash — the
-   repo is on the Windows filesystem, so either can reach it. See
-   `_Agents/memory/machines/` for the target you're on.
+   Then set `name:` in the new `SKILL.md` to the folder name. `wt doctor` reports a mismatch.
 3. **Write it**, starting with the `description` — that field is the trigger. Then the body, per the
    sections above.
 4. **Register it in the index table.** `_Agents/README.md` → the Skills table is the one
@@ -88,14 +84,8 @@ Document any reliance on these in the body so a reader on another platform knows
    to a reader (and to an agent that didn't auto-discover it) until that row exists. The `watchtower`
    skill and `_Docs/Skills Repo.md` used to carry duplicate copies of this table and now point at it —
    don't reintroduce them.
-5. **Refresh the Claude Code mirror**, or Claude Code won't see the new skill — `.claude/skills/` is a
-   **copy**, not a live link:
-
-   ```bash
-   _Agents/scripts/install-skills.sh --here
-   ```
-
-   (Other harnesses read `_Agents/skills/` directly and need nothing.)
+5. **Link it:** run `_Agents/wt install`. It adds the link for the new skill. (In copy mode, run it
+   again after each edit.)
 6. **Run the checklist below, then branch + PR.** Never push to `main`.
 
 ## Checklist before committing a skill
@@ -116,4 +106,4 @@ Document any reliance on these in the body so a reader on another platform knows
       question set *before* the write, and state its understanding concretely enough to be
       contradicted. The `watchtower` skill → **Ask instead of assuming** is the rule; don't restate it, point
       at it and say what the questions are for this task.
-- [ ] Registered in `_Agents/README.md`'s Skills table (step 4 above), and the `.claude/skills/` mirror refreshed.
+- [ ] Registered in `_Agents/README.md`'s Skills table (step 4 above), and linked with `_Agents/wt install`.

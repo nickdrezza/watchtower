@@ -193,6 +193,6 @@ Skipped      <what you deliberately didn't sweep, and why>
   `shared-vault-promote` for the promotion judgement calls; this skill deliberately doesn't restate them.
 - `knowledge-router` — which base owns a thing at all, and the PII boundary.
 - `vault-sync` — ships everything this skill wrote on the vault side.
-- `vault-doctor` — run after an `in` adoption; it checks the skill index and the `.claude/skills/`
-  mirror, both of which an edited skill invalidates.
+- `vault-doctor` — run after an `in` adoption; it checks the skill index and the skill's
+  frontmatter, both of which an edited skill can break.
 - `_Agents/CONVENTIONS.md` — the authoring spec every exported skill still has to satisfy.

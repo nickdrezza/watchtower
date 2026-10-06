@@ -47,14 +47,14 @@ Never carry one of these across profiles from memory — look it up.
 
 - **A skill that hard-codes a path is a bug.** Skills describe *how*; the path belongs in a profile.
 - **Two machines means two states.** A credential migrated on one is not migrated on the other.
-- **Symlinks across a Windows↔WSL boundary are fragile.** Use `install-skills.sh --copy` there.
+- **Symlinks across a Windows↔WSL boundary are fragile.** Use `_Agents/wt install --copy` there.
 
 ## 5. Bringing a new target up
 
 1. Clone this repo; read root `README.md` → `AGENTS.md`.
-2. `_Agents/scripts/install-skills.sh` (or `--copy` across a WSL boundary).
-3. `_Agents/scripts/install-instructions.sh` — points each installed harness's *global* instruction
-   file at this repo, so agents load these rules outside the repo too. Idempotent.
+2. `_Agents/wt install` (or `--copy` across a WSL boundary): global instruction stubs, skill links,
+   the search hook, and the pre-commit hook. You can run it again at any time.
+3. `_Agents/wt doctor` — must report 0 errors.
 4. Authenticate your git CLI; set a per-repo `user.email` if the global one is personal.
 5. **Write a profile for it** in [`machines/`](machines/README.md) — including what is *not* installed.
    That list is as load-bearing as the paths.

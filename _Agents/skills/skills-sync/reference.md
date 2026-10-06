@@ -79,7 +79,7 @@ Run per skill, on `SKILL.md` **and** every reference, script, and asset that tra
       path — is documentation and may travel.
 - [ ] **No personal machine paths.** A home directory under any OS, a named WSL distro, a personal
       clone or worktree location. Replace with "ask the user for the path", and make the skill degrade
-      if there isn't one. `_Agents/scripts/check_vault.py` flags the common shapes.
+      if there isn't one. `_Agents/wt doctor` flags the common shapes.
 - [ ] **No Watchtower-relative references.** `_Agents/memory/*`, `machines/<target>.md`,
       `environment.md`, Obsidian-style double-bracket links, `_Docs/*`. The destination has no memory layer: either
       inline the fact or have the skill ask.

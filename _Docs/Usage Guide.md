@@ -107,7 +107,7 @@ read, which is the failure this whole setup exists to avoid.
 
 | Symptom | Usually |
 |---|---|
-| Agent asks you to re-explain known context | The global bridge missed that harness — re-run `install-instructions.sh` |
+| Agent asks you to re-explain known context | The global bridge missed that harness — re-run `_Agents/wt install` |
 | Agent says a skill is unavailable | It didn't auto-discover. `SKILL.md` is plain Markdown — tell it to read the file |
 | Agent states something confidently wrong | A stale memory fact. Fix the file, don't just correct the chat |
 | Agent asks permission for everything | It's over-applying *Ask instead of assuming* — see `AGENTS.md` → *Working model*: decide reversible details, ask about irreversible ones |

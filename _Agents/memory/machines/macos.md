@@ -24,6 +24,6 @@ run on this machine** — say so up front rather than discovering it mid-task.
 ## Notes
 
 - `~/.claude/CLAUDE.md` and `~/.codex/AGENTS.md` point at this repo, written by
-  `_Agents/scripts/install-instructions.sh`. Re-run it after a fresh install.
-- Skills are symlinked: `~/.claude/skills` → `~/.agents/skills` → this repo's `_Agents/skills`. Edits are
-  live immediately; never edit a mirror.
+  `_Agents/wt install`. Re-run it after a fresh install.
+- Skills are linked one per skill: `~/.claude/skills/<name>` and `~/.agents/skills/<name>` → this repo's
+  `_Agents/skills/<name>`. Edits are live immediately.
