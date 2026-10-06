@@ -31,11 +31,11 @@ Don't ask about anything the repo can answer.
 ## 1. Wire the harnesses
 
 ```bash
-_Agents/scripts/install-skills.sh          # or --copy across a Windows↔WSL boundary
-_Agents/scripts/install-instructions.sh    # global instruction bridge; idempotent
+_Agents/wt install          # or --copy across a Windows↔WSL boundary; safe to re-run
 ```
 
-The second one is the step people skip. Without it, agents only see these rules when opened *on* this
+It writes the global instruction stubs, links the skills, and adds the search and pre-commit hooks.
+The instruction stubs are the step people skip. Without it, agents only see these rules when opened *on* this
 repo — so the vault stops working the moment they're in a different project, which is most of the time.
 
 **Verify it took:** open a new chat in any harness, from a directory that is *not* this repo, and ask
@@ -82,7 +82,7 @@ Point at `_Docs/Usage Guide.md` and stop. Don't recite it.
 ## 6. Verify and report
 
 ```bash
-_Agents/scripts/check_vault.py
+_Agents/wt doctor
 ```
 
 Report: what's wired, what's still empty, and what they should do first. Their first real task is

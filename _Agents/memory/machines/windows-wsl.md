@@ -16,7 +16,7 @@ Example profile — replace with yours. **The two-shell split is the thing to ge
 - **Write commit messages and PR bodies to a file**, then use `-F` / `--body-file`. Inline `-m` through
   the wrapper mangles multi-line text and backticks. Custom shell vars get mangled too — use literal
   paths and `$HOME` only.
-- **Symlinks don't cross the boundary reliably.** Use `install-skills.sh --copy`, and re-run it after
+- **Symlinks don't cross the boundary reliably.** Use `_Agents/wt install --copy`, and re-run it after
   editing a skill.
 
 ## Deliberately not installed

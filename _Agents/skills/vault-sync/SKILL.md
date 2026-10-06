@@ -87,7 +87,7 @@ Both skills stop before committing. That's this skill's job.
   `*.env`, images, PDFs — if one is staged, unstage it.
 - **Stage only intended files.** Never `git add -A`. The tree routinely carries `.obsidian/app.json`
   churn and stray `Untitled*.canvas` files; both stay out.
-- **`.claude/skills/` is gitignored** — a generated mirror. If it appears, don't commit it.
+- **`.claude/skills/` is gitignored** — an old copy. If it appears, don't commit it.
 - Confirm `ACME` tags are set on new or edited employer-specific files.
 
 ## 5. Branch and commit

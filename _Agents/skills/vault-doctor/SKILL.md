@@ -4,7 +4,7 @@ description: >
   Runs the vault's mechanical integrity checks and reports what is objectively broken — dead relative
   and wiki links, tags missing from the Tag Registry, notes without frontmatter, skills missing from
   the hand-maintained index table, skill name/folder mismatches, thin skill descriptions, machine
-  paths hardcoded into skills, and a stale .claude/skills mirror. Use when the user says "check my
+  paths hardcoded into skills, possible secrets, and stale okf-view snapshots. Use when the user says "check my
   vault", "vault health", "is anything broken", "run the integrity checks", "did I break any links",
   "audit the skills", or before shipping a large structural change. Read-only and safe to run anytime.
   For quality judgement — bad notes, duplicates, notes to simplify — use vault-prune instead.
@@ -23,27 +23,34 @@ Keeping the two apart matters: this one can run unattended, that one cannot.
 ## Run it
 
 ```bash
-_Agents/scripts/check_vault.py                        # all checks, human-readable
-_Agents/scripts/check_vault.py --json                 # machine-readable
-_Agents/scripts/check_vault.py --only wiki-links,tags # a subset
+_Agents/wt doctor                 # all checks, human-readable
+_Agents/wt doctor --json          # machine-readable
+_Agents/wt doctor --errors-only   # what CI and the pre-commit hook run
+_Agents/wt doctor --fix           # repoint links after moves/renames, refresh okf-view snapshots
 ```
 
-Exit `0` clean, `1` findings, `2` couldn't run. Checks available: `relative-links`, `wiki-links`,
-`tags`, `frontmatter`, `skill-indexes`, `skill-descriptions`, `hardcoded-paths`, `mirror`.
+Exit `0` no errors, `1` errors, `2` could not run. Warnings never fail; errors fail CI and the
+pre-commit hook. Run `--fix` after any `git mv`, then run it again without `--fix`: merge only with 0
+broken links.
 
 ## What each finding means, and the fix
 
-| Finding | Why it matters | Fix |
+| Finding | Severity | Fix |
 |---|---|---|
-| `broken-relative-link` | A pointer an agent will follow and fail | Correct the path, or delete the link |
-| `broken-wiki-link` | Obsidian shows it dead; the graph loses a node | Create the note, fix the name, or drop the link. Wiki-links resolve by **note name**, not path |
-| `unregistered-tag` | Vocabulary drift — the thing that makes a big vault slow to search | Register it in `Maps/Tag Registry.md` **in the same commit**, or remove it |
-| `missing-frontmatter` | Dashboards filter on `type ==`, so the note is invisible to every view | Add frontmatter from `_Templates/` |
-| `skill-not-indexed` | Three index tables are hand-maintained; an unlisted skill is invisible to a reader | Add the row. |
-| `skill-name-mismatch` | Folder name must equal the `name:` field | Rename one to match |
-| `thin-skill-description` | **The description is the trigger.** Under ~200 chars it silently fails to load | Rewrite it with real phrases the user would type |
-| `hardcoded-machine-path` | `CONVENTIONS.md`: skills say *how*, memory says *what is true*. A baked path breaks on the other machine | Move the fact to `_Agents/memory/machines/` and point at it |
-| `stale-skills-mirror` | `.claude/skills/` is a copy, so Claude Code is running old text | `_Agents/scripts/install-skills.sh --here` |
+| `broken-link` | error | Wiki-links resolve by **note name**, markdown links by path. After a move or rename, `--fix` repoints them. Otherwise correct the target or remove the link |
+| `broken-anchor` | error | The heading is gone or renamed. Point at the heading that now holds the text |
+| `missing-frontmatter` | error | Add frontmatter from `_Templates/` |
+| `unregistered-tag` | error | Register it in `Maps/Tag Registry.md` **in the same commit**, or remove it |
+| `skill-name-mismatch` / `skill-no-name` | error | `name:` must equal the folder name |
+| `skill-not-indexed` | error | Add the row to `_Agents/README.md` |
+| `hardcoded-machine-path` | error | Move the fact to `_Agents/memory/machines/` and point at it |
+| `secret-pattern` | error | Remove the value, rotate it, and record only where it lives |
+| `stale-snapshot` | error | `_Agents/wt index` |
+| `skill-description-long` / `-short` | warning | The description is the trigger. Keep it 100–300 characters, so harnesses do not cut it from the skill list |
+| `duplicate-title` | warning | Two content pages with one title. Rename one (Isomorphic and Obsidian both resolve by title) |
+| `cross-space-link` | warning | A link between two spaces breaks when a space becomes its own brain. Link through a shared page |
+| `oversized-file` / `stale-memory` | warning | Split the memory file by concept; check the fact against its source and update `updated:` |
+| `empty-file` / `untitled-file` / `stray-folder` | warning | Remove it, or file it |
 
 ## Reporting
 
@@ -56,7 +63,7 @@ the script's `GENERIC_LINKS` instead of re-explaining it every run.
 
 ## Fixing what it finds
 
-Mechanical fixes (a typo'd path, a missing index row, refreshing the mirror) are yours to make — they
+Mechanical fixes (a typo'd path, a missing index row, `--fix` after a move) are yours to make — they
 are reversible and verifiable, which is exactly the `AGENTS.md` → *Working model* case (decide reversible details). Anything
 that deletes content, or that needs a judgement call about what a note *should* say, goes to
 `vault-prune` and its per-item approval.

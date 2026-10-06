@@ -14,14 +14,12 @@ universal path still resolves.)
                     ├── read in place, at project level, with zero setup
                     │   (Codex, Gemini CLI, Cursor, Antigravity, Copilot)
                     │
-                    ├── _Agents/scripts/install-skills.sh --here
-                    │   -> ./.claude/skills   (Claude Code, this repo)
-                    │
-                    └── _Agents/scripts/install-skills.sh
-                        -> ~/.agents/skills + ~/.claude/skills  (global, any project)
+                    └── _Agents/wt install
+                        -> one link per skill in ~/.agents/skills + ~/.claude/skills
+                           (global, any project, Claude Code included)
 ```
 
-We ship the universal format only. Claude Code reads `.claude/skills/`, so it gets a mirror — no
+We ship the universal format only. Claude Code reads `~/.claude/skills/`, so it gets one link per skill — no
 Claude-specific build step and no second copy of a skill's text.
 
 **Worst case is still fine:** a harness that discovers nothing can be told to read
@@ -33,7 +31,7 @@ didn't know how to connect here but did over there" can't happen.
 ### 1. Symlink (simplest, Unix/WSL-native)
 
 ```bash
-_Agents/scripts/install-skills.sh           # ~/.agents/skills + ~/.claude/skills
+_Agents/wt install          # one link per skill in ~/.agents/skills + ~/.claude/skills
 ```
 
 Edits to the repo are instantly live everywhere. **Caveat:** symlinks across the **Windows↔WSL
@@ -43,13 +41,12 @@ copy mode.
 
 ### 2. Copy (robust on Windows)
 
-`_Agents/scripts/install-skills.sh --copy` copies the tree instead of linking. You re-run it after
-changes, but it works regardless of OS boundary. This is the recommended default on this Windows/WSL
-machine — and `--here` always copies for the same reason.
+`_Agents/wt install --copy` copies each skill instead of linking it. You re-run it after
+changes, but it works across the OS boundary. Use it when a Windows-side app must read the skills.
 
 ## When to graduate to `rulesync`
 
-For just deploying skills, `install-skills.sh` is enough. Reach for
+For just deploying skills, `wt install` is enough. Reach for
 [`rulesync`](https://github.com/dyoshikawa/rulesync) when you want to:
 
 - Generate **per-tool frontmatter** variants from one source (e.g. inject Claude-only fields).
