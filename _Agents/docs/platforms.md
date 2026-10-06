@@ -7,7 +7,7 @@ Where each tool reads **skills** and **always-on instructions** from. Use this t
 
 | Tool | Global skills path | Project skills path | Notes |
 |---|---|---|---|
-| **Claude Code** | `~/.claude/skills/` | `.claude/skills/` | The holdout — does **not** read `.agents/skills/`. Bridge with a symlink or `install.sh`. |
+| **Claude Code** | `~/.claude/skills/` | `.claude/skills/` | The holdout — does **not** read `.agents/skills/`. Bridge with a symlink or `install-skills.sh`. |
 | **OpenAI Codex** | `~/.agents/skills/` | `.agents/skills/` | Universal location. |
 | **Gemini CLI** | `~/.agents/skills/` | `.agents/skills/` | `.agents/` preferred over `.gemini/skills/`. |
 | **Cursor** | `~/.agents/skills/` | `.agents/skills/` | Native SKILL.md support added 2026. |

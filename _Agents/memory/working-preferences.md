@@ -105,7 +105,7 @@ Applies to PR bodies, review comments, commit messages, and how work is reported
 - **Objectivity.** A note is a record, not a pitch. No evaluative adjectives about the work, no hedging
   frames, no enthusiasm.
 
-Hard rule 7 in root `AGENTS.md` carries the banned-patterns table and the test.
+Hard rule 7 in root `AGENTS.md` is the rule. The `watchtower` skill → *How to write here* has the two tests.
 
 ## Prod writes
 
