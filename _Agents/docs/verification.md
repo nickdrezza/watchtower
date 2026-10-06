@@ -30,7 +30,7 @@ it has gotten work rejected before.
 - **Prefer the real data shape.** Empty and single-row cases pass almost anything.
 - **Scale-only bugs slip past small supervised tests.** This is a lesson already paid for — the
   the enrichment vendor `personIds` cap only showed up above the tested batch size
-  ([`../memory/warehouse.md`](../memory/warehouse.md)). If behavior can change with volume,
+  ([`Spaces/Work/memory/warehouse.md`](../../Spaces/Work/memory/warehouse.md)). If behavior can change with volume,
   concurrency, or time, say so explicitly rather than implying the small run generalizes.
 - **Run it twice** when a script is meant to be idempotent or scheduled. Most re-run bugs are invisible
   on the first pass.
@@ -50,7 +50,7 @@ loading the page.
 
 The executable arm is the **`playwright-testing`** skill: reusable tests that live in the repo, not
 one-off manual clicks. Platform-specific auth and iframe constraints are in
-[`../memory/connectors.md`](../memory/connectors.md) — check it before concluding an app can't be tested.
+[`Spaces/Work/memory/connectors.md`](../../Spaces/Work/memory/connectors.md) — check it before concluding an app can't be tested.
 
 ## Before saying it's done
 

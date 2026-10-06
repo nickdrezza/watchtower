@@ -1,8 +1,8 @@
 ---
 name: vault-memory
 description: >
-  Refreshes _Agents/memory/ with durable facts from recent AI sessions, the tracker, email, GitHub,
-  and Drive. Use for "update my memory", "catch up my agent memory", "what did I learn this week", or
+  Refreshes _Agents/memory/ and space memory/ folders with durable facts from recent AI sessions,
+  the tracker, email, GitHub, and Drive. Use for "update my memory", "catch up my agent memory", "what did I learn this week", or
   as step 2 of vault-sync.
 user-invocable: true
 argument-hint: "update my memory"
@@ -19,7 +19,8 @@ Verbosity is the failure mode; a memory file nobody can scan is a memory file no
 
 ## Scope
 
-**In:** `_Agents/memory/*.md`. **Out:** vault notes, the weekly log, the shared vault. If something belongs
+**In:** `_Agents/memory/*.md` (true in every space) and `Spaces/<Name>/memory/*.md` (one space).
+**Out:** vault notes, the weekly log, the shared vault. If something belongs
 in a note rather than memory, say so and hand off — don't write it in both places.
 
 Memory holds **durable environment facts**. It is not a diary. The test for a candidate fact:
@@ -34,7 +35,7 @@ obvious from the code all fail that test.
 Default start = the last commit touching memory:
 
 ```bash
-git log -1 --format=%cI -- _Agents/memory/
+git log -1 --format=%cI -- _Agents/memory/ Spaces/*/memory/
 ```
 
 Use that, or the user's stated window. If nothing has ever been committed, ask how far back to go
@@ -72,8 +73,9 @@ One row per candidate fact. Present this **before writing anything**.
 | fact | target file | new / updates / contradicts | evidence | `#ACME`? |
 |---|---|---|---|---|
 
-- **target file** — one of the 16 in `_Agents/memory/`. If a fact fits nowhere, propose a new file and
-  say why; don't force it.
+- **target file** — a file in the space's `memory/` (for work, `Spaces/Work/memory/`), or in
+  `_Agents/memory/` when the fact is true in every space. If a fact fits nowhere, propose a new file
+  and say why; don't force it.
 - **contradicts** is the important column. Memory that disagrees with itself is worse than missing
   memory. Flag the conflict, say which side you believe and why, and let the user settle it.
 - Merge duplicates across sources into one row.
@@ -91,7 +93,7 @@ path is for a single fact captured mid-session in some other context; conditions
 [`../../memory/README.md`](../../memory/README.md) → *When to write memory*.)
 
 After the candidate facts are settled, follow the vault-wide verification preview. By default,
-show the exact proposed Markdown or diff for every `_Agents/memory/*.md` change here before writing.
+show the exact proposed Markdown or diff for every `_Agents/memory/*.md` and `Spaces/*/memory/*.md` change here before writing.
 An explicit current-request bypass such as `full perms`, `skip verification`, or `write it directly` skips that human preview and approval. The bypass does not allow
 invented facts or secret values; unresolved facts remain open questions.
 
@@ -109,8 +111,8 @@ invented facts or secret values; unresolved facts remain open questions.
 - **Prune while you're in there.** Delete facts now proven wrong, collapse duplicates, drop
   project blocks that closed. Growth without pruning is how this becomes unreadable.
 - Keep `projects.md` compact — a pointer plus what's needed to resume. Deep narrative belongs in
-  `Spaces/Work/Current Work/Projects/`.
-- Update `_Agents/memory/README.md` if you added or removed a file.
+  `Spaces/Work/Projects/`.
+- Update `_Agents/memory/README.md` if you added or removed a file in `_Agents/memory/` or a space `memory/` folder.
 
 ## 6. Report
 

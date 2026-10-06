@@ -28,23 +28,21 @@ Obsidian Vault/                            # = watchtower repo
 │   ├── Interview Index.md, Weekly Work Log Index.md, Visual Notes Index.md
 │   ├── AWS and DevOps Index.md, Vault Maintenance.md, Template Index.md
 ├── Spaces/
-│   ├── Work/Acme Analytics/
-│   │   ├── Current Work Home.md
+│   ├── Work/                              # the employer space (tag ACME)
+│   │   ├── index.md, AGENTS.md, memory/, skills/
 │   │   ├── Projects/2026/Q<n>/            # project notes (+ Archive/ for completed)
 │   │   ├── Meeting Notes/<year>/
 │   │   ├── Work Logs/2. Systems Dev Weekly Notes/<year>/Q<n>/MM-DD-YYYY.md
 │   │   ├── Reference/                     # Advisory Calls, AI Prompts, Data Requests, …
 │   │   ├── Training/, Interviews/, Visual Notes/
-│   ├── Work/Future Work/Future Work Home.md
-│   ├── Personal/Personal Home.md, Personal Vault Guide.md
+│   ├── Career/index.md
+│   ├── Personal/index.md, Personal Vault Guide.md, skills/
 │   │   ├── Diary/, Memories/, Reflections/, People/, Locations/, Literature/, Uncategorized/
-│   └── Shared/
 ├── _Templates/                            # Daily Note, Meeting Note, Project Note, Reference Note,
 │                                          #   Weekly Work Log, Interview Note, Raw Note Dump, …
 ├── _Docs/                                 # AI Note Intake Workflow, Vault Architecture,
 │                                          #   Private Repo Setup, Image Descriptions, Skills Repo
-├── Inbox/Raw Dumps/, Inbox/Processed/
-└── Daily Notes/
+└── Inbox/Raw Dumps/, Inbox/Processed/
 ```
 
 When unsure where something goes, prefer `Inbox/Processed/` over forcing it into the wrong space.
@@ -103,7 +101,7 @@ workspace: personal
 tags:
   - personal
 related:
-  - "[[Personal Home]]"
+  - "[[Spaces/Personal/index|Personal Home]]"
 ```
 
 Match existing notes in the destination folder if their frontmatter differs from the above —

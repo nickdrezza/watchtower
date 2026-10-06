@@ -50,7 +50,7 @@ the grep, not the table.
 | `README.md` | 1 |
 | `_Agents/README.md` | 1 |
 | `_Agents/memory/machines/macos.md` | 1 |
-| `_Agents/skills/shared-vault/SKILL.md` | 1 |
+| `Spaces/Work/skills/shared-vault/SKILL.md` | 1 |
 
 ## Employer scope — replace with your own employer tag and name
 
@@ -66,22 +66,22 @@ tag in [Tag Registry](../Maps/Tag%20Registry.md) in the same change** — it is 
 | `_Docs/Skills Repo.md` | 6 |
 | `_Agents/skills/vault-memory/SKILL.md` | 4 |
 | `_Docs/AI Note Intake Workflow.md` | 4 |
-| `_Agents/skills/shared-vault/SKILL.md` | 3 |
+| `Spaces/Work/skills/shared-vault/SKILL.md` | 3 |
 | `_Agents/skills/vault-sync/SKILL.md` | 3 |
 | `_Docs/Agent Memory.md` | 3 |
 | `_Docs/Vault Architecture.md` | 3 |
 | `_Agents/memory/README.md` | 2 |
-| `_Agents/memory/warehouse.md` | 2 |
+| `Spaces/Work/memory/warehouse.md` | 2 |
 | `_Agents/skills/vault-edit/SKILL.md` | 2 |
 | `_Templates/Weekly Work Log.md` | 2 |
 | `_Agents/README.md` | 1 |
-| `_Agents/memory/connectors.md` | 1 |
-| `_Agents/memory/credentials.md` | 1 |
-| `_Agents/memory/projects.md` | 1 |
+| `Spaces/Work/memory/connectors.md` | 1 |
+| `Spaces/Work/memory/credentials.md` | 1 |
+| `Spaces/Work/memory/projects.md` | 1 |
 | `_Agents/skills/bootstrap/SKILL.md` | 1 |
-| `_Agents/skills/personal/SKILL.md` | 1 |
-| `_Agents/skills/personal/references/diary.md` | 1 |
-| `_Agents/skills/personal/references/reflections.md` | 1 |
+| `Spaces/Personal/skills/personal/SKILL.md` | 1 |
+| `Spaces/Personal/skills/personal/references/diary.md` | 1 |
+| `Spaces/Personal/skills/personal/references/reflections.md` | 1 |
 | `_Agents/skills/vault-prune/SKILL.md` | 1 |
 
 If you have no employer scope to track — a purely personal vault — delete the tag and its rows instead
@@ -95,8 +95,8 @@ them:
 | File | What |
 |---|---|
 | `_Agents/memory/machines/macos.md` · `windows-wsl.md` | Whole profiles are examples. Paths, installed tooling, and the **deliberately not installed** list all need your values — that last list is load-bearing, it stops an agent burning turns on a tool you don't have. |
-| `_Agents/memory/warehouse.md` | Example platform memory. Rename it per system you actually use and shape the rest like it. |
-| `_Agents/memory/credentials.md` · `connectors.md` · `projects.md` | Example rows only. **Locations only, never values.** |
+| `Spaces/Work/memory/warehouse.md` | Example platform memory. Rename it per system you actually use and shape the rest like it. |
+| `Spaces/Work/memory/credentials.md` · `connectors.md` · `projects.md` | Example rows only. **Locations only, never values.** |
 | `_Docs/Skill Exports.md` | One example destination row (`your-org/skills-marketplace`). Replace it the first time you publish somewhere, or delete it. |
 
 ## Known gap

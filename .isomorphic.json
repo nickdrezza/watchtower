@@ -10,6 +10,10 @@
     ".claude/": "system",
     ".agents/": "system",
     "_Agents/": "system",
-    "_Templates/": "system"
+    "_Templates/": "system",
+    "Spaces/Work/skills/": "system",
+    "Spaces/Personal/skills/": "system",
+    "Spaces/Work/AGENTS.md": "system",
+    "Spaces/Work/CLAUDE.md": "system"
   }
 }
