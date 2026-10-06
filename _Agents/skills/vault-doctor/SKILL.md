@@ -44,6 +44,7 @@ broken links.
 | `stale-snapshot` | error | `_Agents/wt index` |
 | `skill-description-long` / `-short` | warning | The description is the trigger. Keep it 100–300 characters, so harnesses do not cut it from the skill list |
 | `duplicate-title` | warning | Two content pages with one title. Rename one (Isomorphic and Obsidian both resolve by title) |
+| `boundary-leak` | error | A tag that `_Agents/wt.json` → `boundaries` forbids under that folder (e.g. employer material in a personal space). Move the note to its space |
 | `cross-space-link` | warning | A link between two spaces breaks when a space becomes its own brain. Link through a shared page |
 | `oversized-file` / `stale-memory` | warning | Split the memory file by concept; check the fact against its source and update `updated:` |
 | `empty-file` / `untitled-file` / `stray-folder` | warning | Remove it, or file it |
