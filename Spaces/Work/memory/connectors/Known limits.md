@@ -12,7 +12,7 @@ tags:
 
 | Connector | Limit |
 |---|---|
-| Warehouse | **Read-only.** DDL goes through the console — see [`warehouse.md`](../warehouse/index.md) |
+| Warehouse | **Read-only.** DDL goes through the console — see [`warehouse/`](../warehouse/index.md) |
 | Tracker | Large multi-issue queries blow the token budget; request only the fields you need, in small batches |
 | Docs/Drive | Often cannot edit in place — each revision may be a new document and URL |
 | Spreadsheets | A sheet not shared with the service account fails in a way that looks like a code bug |

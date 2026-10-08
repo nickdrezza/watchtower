@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """wt: the one tool for this vault. Python 3.9+ standard library only.
 
-    wt search <terms...>     find pages about the terms; print pointers, never file bodies
+    wt search <terms...> [--space=Name]
+                             find pages about the terms; print pointers, never file bodies
     wt search --hook         Claude Code UserPromptSubmit hook (reads the prompt as JSON on stdin)
     wt search --test         run _Agents/search-fixtures.json
     wt doctor [--fix] [--json] [--errors-only]
@@ -23,6 +24,7 @@ import urllib.parse
 from collections import defaultdict
 from pathlib import Path
 
+VERSION = "2026.10.08"  # same file in every vault; doctor prints it so drift is visible
 ROOT = Path(__file__).resolve().parent.parent
 WT = ROOT / "_Agents" / "wt"
 CONFIG = ROOT / ".isomorphic.json"
@@ -55,6 +57,7 @@ except ValueError:
 EXTRA_TRIGGERS = tuple(_settings.get("triggers", ()))  # words the generated set cannot know
 # Space search scope. "dirs": a working directory under one of these selects the space.
 # "only_when": the space is searched only if the prompt has one of these words (or a dir selects it).
+# "words": search words that count only when the space is already in scope (e.g. "gold" for work).
 SPACES = _settings.get("spaces", {})
 USERS = "|".join(map(re.escape, _settings["users"])) if _settings.get("users") else USERS
 # Folder prefix -> tags that must not appear under it, e.g. {"Spaces/Personal/": ["ACME"]}.
@@ -90,9 +93,13 @@ def git(*args):
     return subprocess.run(["git", "-C", str(ROOT), *args], capture_output=True, text=True)
 
 
-def repo_files():
-    """Tracked files plus new files git does not ignore."""
-    out = git("ls-files", "-z", "--cached", "--others", "--exclude-standard").stdout
+TRACKED_ONLY = "--tracked" in sys.argv  # pre-commit and listings ignore files git does not track
+
+
+def repo_files(tracked=None):
+    """Tracked (and staged) files, plus new files git does not ignore unless tracked=True."""
+    tracked = TRACKED_ONLY if tracked is None else tracked
+    out = git("ls-files", "-z", "--cached", *(() if tracked else ("--others", "--exclude-standard"))).stdout
     return sorted({p for p in out.split("\0") if p and (ROOT / p).exists()})
 
 
@@ -124,6 +131,8 @@ def role(rel, roles):
 def frontmatter(text):
     if not text.startswith("---\n"):
         return None
+    if text.startswith("---\n---"):  # an empty block
+        return ""
     end = text.find("\n---", 4)
     return text[4:end] if end != -1 else None
 
@@ -210,11 +219,15 @@ def is_skill_file(rel):
 def search(terms, limit=MAX_HITS, exclude=()):
     files = [f for f in search_roots(repo_files(), path_roles()) if not f.startswith(tuple(exclude))]
     pats = {t: re.compile(r"(?<![\w-])" + re.escape(t) + r"(?![\w-])", re.I) for t in terms}
+    # In a path, - _ / and spaces separate words: "ec2" matches "aws-and-ec2/", "data mart" "data-mart/".
+    path_pats = {t: re.compile(r"(?<![a-z0-9])" + re.escape(t).replace(r"\ ", "[-_ ]") + r"(?![a-z0-9])", re.I)
+                 for t in terms}
     hits = []
     for f in files:
-        found = [t for t, p in pats.items() if p.search(f) or p.search(read(f))]
+        text = read(f)
+        found = [t for t in terms if path_pats[t].search(f) or pats[t].search(text)]
         if found:
-            in_path = sum(1 for t in found if pats[t].search(f))  # a page named for the topic first
+            in_path = sum(1 for t in found if path_pats[t].search(f))  # a page named for the topic first
             hits.append((-(len(found) + in_path), rank_of(f), f, found))
     hits.sort()
     return [(f, found) for _, _, f, found in hits[:limit]], len(hits)
@@ -239,50 +252,110 @@ STOP = {"and", "the", "apps", "app", "data", "work", "log", "logs", "notes", "no
         "workspace", "quality", "system", "testing", "tables"}
 
 
-def triggers():
-    """Search words: the vault's own names, plus wt.json "triggers". Whole words only.
+def _space_of(f):
+    m = re.match(r"(Spaces/[^/]+/)", f)
+    return m.group(1) if m else None
 
-    A memory topic, skill, or concept name gives its words ("aws-and-ec2" -> "aws", "ec2";
-    "data-mart" -> "data mart"). Words in STOP never start a search alone.
+
+def trigger_map():
+    """Search words -> the spaces whose own names produced them (empty set: shared or wt.json).
+
+    Words come from memory topic folders, skill folders, concept notes, registered topic tags
+    (`topic/x` in the tag registry), each space's "only_when" words, and wt.json "triggers".
+    A name gives its words: "aws-and-ec2" -> "aws", "ec2"; "data-mart" -> "data mart". One word of a
+    longer name counts only if it has 6 or more letters. Words in STOP never start a search alone.
     """
-    names = set()
+    words = defaultdict(set)
+    for w in (EXTRA_TRIGGERS if "triggers" in _settings else TRIGGERS):
+        words[w.lower()]
+    names = []
     for f in repo_files():
         parts = f.split("/")
         if is_memory(f) and len(parts) >= 3 and parts[-2] != "memory":
-            names.add(parts[-2])                                # memory topic folder
+            names.append((parts[-2], _space_of(f)))                     # memory topic folder
         elif is_skill_file(f) and f.endswith("/SKILL.md"):
-            names.add(parts[-2])                                # skill folder
+            names.append((parts[-2], _space_of(f)))                     # skill folder
         elif "/Concepts/" in f and f.endswith(".md") and parts[-1] != "index.md":
-            names.add(Path(f).stem.lower())                     # concept note
-    words = set(EXTRA_TRIGGERS) if "triggers" in _settings else set(TRIGGERS)
-    for n in names:
+            names.append((Path(f).stem.lower(), _space_of(f)))          # concept note
+    for t in set(re.findall(r"`topic/([a-z0-9-]+)`", read(str(TAG_REGISTRY.relative_to(ROOT))))):
+        names.append((t, None))                                         # registered topic tag
+    for n, space in names:
         n = n.replace("the-", "", 1)
-        chunks = re.split(r"-and-| and ", n)
-        for c in chunks:
+        whole = n.replace("-", " ").strip()
+        if (" and " in whole) and whole not in STOP:  # "matching and sorting" as one phrase
+            if space:
+                words[whole].add(space)
+            else:
+                words[whole]
+        for c in re.split(r"-and-| and ", n):
             phrase = c.replace("-", " ").strip()
-            if phrase and phrase not in STOP:
-                words.add(phrase)
+            found = [phrase] if phrase and phrase not in STOP else []
             if " " in phrase:  # one word of a longer name counts only if it is distinctive
-                words.update(w for w in phrase.split() if len(w) >= 6 and w not in STOP)
-    return sorted(words)
+                found += [w for w in phrase.split() if len(w) >= 6 and w not in STOP]
+            for w in found:
+                if space:
+                    words[w].add(space)
+                else:
+                    words[w]
+    for space, cfg in SPACES.items():
+        for w in cfg.get("only_when", []):
+            words[w.lower()].add(space)
+    return words
+
+
+def triggers():
+    return sorted(trigger_map())
+
+
+def _says(prompt, w):
+    return re.search(r"(?<![\w-])" + re.escape(w) + r"(?![\w-])", prompt, re.I)
 
 
 def prompt_terms(prompt):
-    return [t for t in triggers() if re.search(r"(?<![\w-])" + re.escape(t) + r"(?![\w-])", prompt, re.I)]
+    return [t for t in triggers() if _says(prompt, t)]
 
 
-def scope(prompt="", cwd=""):
-    """Space folders to leave out of a search, from the working directory and the prompt."""
+def search_plan(prompt, cwd=""):
+    """Terms and excluded spaces for a prompt. A space's "words" count only once that space is in scope."""
+    terms = prompt_terms(prompt)
+    exclude = scope(prompt, cwd, terms)
+    for sp, cfg in SPACES.items():
+        if sp not in exclude:
+            terms += [w for w in cfg.get("words", []) if w not in terms and _says(prompt, w)]
+    return terms, exclude
+
+
+def _under(path, base):
+    base = os.path.realpath(os.path.expanduser(base))
+    return path == base or path.startswith(base.rstrip("/") + "/")
+
+
+def scope(prompt="", cwd="", terms=None):
+    """Space folders to leave out of a search.
+
+    A working directory under a space's "dirs" (or inside the space) selects it. Otherwise a space is
+    searched when the prompt uses a word that comes from that space: one of its topic, skill, or
+    concept names, or one of its "only_when" words. A space with neither "dirs" nor "only_when" is
+    always searched. No space is searched by default.
+    """
     cwd = os.path.realpath(os.path.expanduser(cwd)) if cwd else ""
-    picked = [sp for sp, cfg in SPACES.items()
-              if any(cwd.startswith(os.path.realpath(os.path.expanduser(d))) for d in cfg.get("dirs", []))]
-    if cwd.startswith(str(ROOT) + "/Spaces/"):
-        picked.append("/".join(cwd[len(str(ROOT)) + 1:].split("/")[:2]) + "/")
-    spaces = {"/".join(f.split("/")[:2]) + "/" for f in repo_files() if f.startswith("Spaces/")}
-    if picked:  # a working directory selects one space: search it and the shared layer only
-        return sorted(spaces - set(picked))
-    said = lambda words: any(re.search(r"(?<![\w-])" + re.escape(w) + r"(?![\w-])", prompt, re.I) for w in words)
-    return sorted(sp for sp, cfg in SPACES.items() if cfg.get("only_when") and not said(cfg["only_when"]))
+    spaces = {f.split("/")[0] + "/" + f.split("/")[1] + "/" for f in repo_files() if f.startswith("Spaces/")}
+    picked = {sp for sp, cfg in SPACES.items() if cwd and any(_under(cwd, d) for d in cfg.get("dirs", []))}
+    if cwd and _under(cwd, str(ROOT / "Spaces")) and cwd != str(ROOT / "Spaces"):
+        picked.add("/".join(os.path.relpath(cwd, ROOT).split("/")[:2]) + "/")
+    tmap = trigger_map()
+    terms = prompt_terms(prompt) if terms is None else terms
+    named = {sp for t in terms for sp in tmap.get(t.lower(), ())}
+    said = {sp for sp, cfg in SPACES.items()
+            if any(re.search(r"(?<![\w-])" + re.escape(w) + r"(?![\w-])", prompt, re.I) for w in cfg.get("only_when", []))}
+    if picked:
+        keep = picked | said
+    elif cwd and _under(cwd, str(ROOT)):  # in the vault itself, any space can be the subject
+        keep = {sp for sp in spaces if not SPACES.get(sp, {}).get("only_when")} | said
+    else:
+        open_ = {sp for sp in spaces if not SPACES.get(sp, {}).get("dirs") and not SPACES.get(sp, {}).get("only_when")}
+        keep = named | said | open_
+    return sorted(spaces - keep)
 
 
 def cmd_search(args):
@@ -292,8 +365,8 @@ def cmd_search(args):
             prompt, cwd = event.get("prompt", ""), event.get("cwd", "")
         except (ValueError, AttributeError):
             return 0
-        terms = prompt_terms(prompt) if prompt else []
-        text = report(terms, exclude=scope(prompt, cwd)) if terms else ""
+        terms, exclude = search_plan(prompt, cwd) if prompt else ([], [])
+        text = report(terms, exclude=exclude) if terms else ""
         if text:
             print(json.dumps({"hookSpecificOutput": {"hookEventName": "UserPromptSubmit",
                                                      "additionalContext": text},
@@ -301,11 +374,19 @@ def cmd_search(args):
         return 0
     if "--test" in args:
         return search_test()
+    space = next((a.split("=", 1)[1] for a in args if a.startswith("--space=")), None)
     terms = [a for a in args if not a.startswith("--")]
     if not terms:
         print(__doc__.strip().split("\n\n")[1])
         return 2
-    print(report(terms) or f"No vault pages for: {' '.join(terms)}")
+    spaces = {f.split("/")[0] + "/" + f.split("/")[1] + "/" for f in repo_files() if f.startswith("Spaces/")}
+    if space:  # --space=Name: that space and _Agents/ only
+        exclude = sorted(spaces - {f"Spaces/{space.strip('/').split('/')[-1]}/"})
+    else:      # the working directory can select a space, as in the hook; otherwise search everything
+        cwd = os.path.realpath(os.getcwd())
+        sel = {sp for sp, cfg in SPACES.items() if any(_under(cwd, d) for d in cfg.get("dirs", []))}
+        exclude = sorted(spaces - sel) if sel else []
+    print(report(terms, exclude=exclude) or f"No vault pages for: {' '.join(terms)}")
     return 0
 
 
@@ -317,8 +398,8 @@ def search_test():
         return 2
     failed = 0
     for c in cases:
-        terms = prompt_terms(c["prompt"])
-        got = [f for f, _ in search(terms, exclude=scope(c["prompt"], c.get("cwd", "")))[0]] if terms else []
+        terms, exclude = search_plan(c["prompt"], c.get("cwd", ""))
+        got = [f for f, _ in search(terms, exclude=exclude)[0]] if terms else []
         want = c.get("expect", [])
         # A want ending in / is a folder: any hit inside it counts.
         ok = (not got) if not want else all(any(g == w or (w.endswith("/") and g.startswith(w)) for g in got) for w in want)
@@ -447,7 +528,7 @@ def check_pages(md, roles, f):
                 tgt = os.path.normpath(os.path.join(os.path.dirname(p), urllib.parse.unquote(link.group(1))))
                 other = re.match(r"Spaces/([^/]+)/", tgt)
                 if other and other.group(1) != m.group(1):
-                    f.add("cross-space-link", f"{p} -> {link.group(1)}", "warning")
+                    f.add("cross-space-link", f"{p} -> {link.group(1)} (link through a shared page in _Agents/)")
     for t, ps in titles.items():
         if len(ps) > 1:
             f.add("duplicate-title", f"'{t}': " + ", ".join(ps), "warning")
@@ -462,6 +543,12 @@ def skill_dirs():
 
 
 def check_skills(f):
+    seen = defaultdict(list)
+    for d in skill_dirs():
+        seen[d.name].append(d.relative_to(ROOT).as_posix())
+    for name, where in seen.items():
+        if len(where) > 1:  # wt install links one; the other is silently hidden
+            f.add("duplicate-skill", f"{name}: {', '.join(where)}")
     index = read(str(SKILL_INDEX.relative_to(ROOT)))
     for d in skill_dirs():
         rel = d.relative_to(ROOT).as_posix()
@@ -479,6 +566,30 @@ def check_skills(f):
             f.add("skill-description-long", f"{d.name} ({n} chars > {DESCRIPTION_MAX})", "warning")
         if index and not re.search(rf"`{re.escape(d.name)}`|\({re.escape(d.name)}/\)|skills/{re.escape(d.name)}/", index):
             f.add("skill-not-indexed", f"{SKILL_INDEX.relative_to(ROOT)} missing '{d.name}'")
+
+
+HISTORY = ("_Agents/archive/", "/source/", "Work Logs/")  # dated records: old names stay as written
+VAULT_PREFIXES = ("_Agents/", "Spaces/", "_Templates/", "Inbox/", "memory/", "machines/", "skills/")
+
+
+def check_paths(md, files, f):
+    """A file name in backticks (`x.md`, `memory/x.md`) that no file has: a stale pointer."""
+    names = {Path(x).name for x in files}
+    gone = {Path(x).name for x in git("log", "--diff-filter=DR", "--name-only", "--format=").stdout.split("\n")
+            if x.endswith(".md")} - names
+    for p in md:
+        if any(h in p for h in HISTORY):
+            continue
+        for m in re.finditer(r"`([^`\s<>*]+\.md)(?:#[^`]*)?`", read(p)):
+            t = m.group(1).lstrip("./")
+            if "{" in t or "<" in t or t.startswith(("http", "~")) or re.search(r"YYYY|MEMORY\.md$", t):
+                continue
+            if "/" in t:
+                if not t.startswith(VAULT_PREFIXES) or any(x == t or x.endswith("/" + t) for x in files):
+                    continue  # a path in another repo, or one that exists
+            elif t in names or t not in gone:
+                continue      # a bare name is stale only if this vault once had it and lost it
+            f.add("stale-path", f"{p} -> `{m.group(1)}`", "warning")
 
 
 def check_files(files, f):
@@ -519,6 +630,12 @@ def rel_href(from_file, to_file, encode):
     return urllib.parse.quote(href) if encode else href
 
 
+def outside_code(text, fn):
+    """Apply fn to the text outside fenced code blocks."""
+    parts = re.split(r"(?ms)(^(?:```|~~~).*?^(?:```|~~~)[^\n]*$)", text)
+    return "".join(fn(x) if i % 2 == 0 else x for i, x in enumerate(parts))
+
+
 def fix_links(md, files, roles):
     """Repoint links after moves and renames. Only rewrites a link that is broken today."""
     moved = renames()
@@ -555,6 +672,8 @@ def fix_links(md, files, roles):
 
         def md_link(m):
             label, raw = m.group(1), m.group(2)
+            angled = raw.startswith("<")
+            raw = raw.strip("<>")
             target_s, hash_, anchor = raw.partition("#")
             if not target_s or target_s.startswith(("http://", "https://", "mailto:")):
                 return m.group(0)
@@ -571,9 +690,10 @@ def fix_links(md, files, roles):
                 return m.group(0)
             encode = "%" in target_s
             href = rel_href(p, dest, encode) + ("/" if target_s.endswith("/") else "")
-            return f"[{label}]({href}{hash_}{anchor})"
+            dest_s = f"{href}{hash_}{anchor}"
+            return f"[{label}](<{dest_s}>)" if angled or re.search(r"[ ()]", dest_s) else f"[{label}]({dest_s})"
 
-        new = re.sub(r"\[([^\]]*)\]\(([^)<>\s]+)\)", md_link, new)
+        new = outside_code(new, lambda t: re.sub(r"\[([^\]]*)\]\((<[^>]+>|[^)<>\s]+)\)", md_link, t))
 
         def wiki(m):
             name, rest = m.group(1), m.group(2)
@@ -584,7 +704,7 @@ def fix_links(md, files, roles):
                 return f"[[{target}{rest}]]"
             return m.group(0)
 
-        new = re.sub(r"\[\[([^\]|#]+)((?:#[^\]|]*)?(?:\|[^\]]*)?)\]\]", wiki, new)
+        new = outside_code(new, lambda t: re.sub(r"\[\[([^\]|#]+)((?:#[^\]|]*)?(?:\|[^\]]*)?)\]\]", wiki, t))
 
         def non_page(m):
             name, anchor, label = m.group(1).strip(), (m.group(2) or ""), (m.group(3) or "")[1:]
@@ -608,7 +728,7 @@ def fix_links(md, files, roles):
         in_frontmatter = True
         head = re.sub(pat, non_page, new[:cut])
         in_frontmatter = False
-        new = head + re.sub(pat, non_page, new[cut:])
+        new = head + outside_code(new[cut:], lambda t: re.sub(pat, non_page, t))
         if new != text:
             (ROOT / p).write_text(new, encoding="utf-8")
             changed.append(p)
@@ -627,6 +747,7 @@ def cmd_doctor(args):
     check_links(md, files, f, roles)
     check_pages(md, roles, f)
     check_skills(f)
+    check_paths(md, files, f)
     check_files(files, f)
     for p in index_views(check=True, quiet=True):
         f.add("stale-snapshot", f"{p} (run `_Agents/wt index`)")
@@ -637,7 +758,7 @@ def cmd_doctor(args):
     else:
         shown = {k: [(s, t) for s, t in v if s == "error" or not errors_only] for k, v in f.items.items()}
         shown = {k: v for k, v in shown.items() if v}
-        print(f"wt doctor: {len(md)} markdown files, {len(files)} files")
+        print(f"wt doctor {VERSION}: {len(md)} markdown files, {len(files)} files")
         for k in sorted(shown, key=lambda k: (shown[k][0][0] != "error", k)):
             v = shown[k]
             print(f"\n{v[0][0]}  {k}  ({len(v)})")
@@ -708,7 +829,7 @@ def render_view(spec, page, content_pages, all_pages=()):
 def index_views(check=False, quiet=False):
     """Write (or, with check, list stale) okf-view snapshots. Returns the pages that changed."""
     roles = path_roles()
-    files = repo_files()
+    files = repo_files(tracked=True)  # a local draft never enters a listing; `git add` it first
     content = [p for p in files if p.endswith(".md") and role(p, roles) == "content"]
     fence = re.compile(r"(?ms)^```okf-view\n(.*?)^```\n(?:\n*" + re.escape(SNAP_BEGIN) + r"\n.*?"
                        + re.escape(SNAP_END) + r"\n)?")
@@ -852,7 +973,7 @@ class Installer:
         hooks_dir = Path(git("rev-parse", "--git-path", "hooks").stdout.strip() or ".git/hooks")
         hooks_dir = hooks_dir if hooks_dir.is_absolute() else ROOT / hooks_dir
         target = hooks_dir / "pre-commit"
-        body = f'#!/bin/sh\n{PRECOMMIT_MARK}\nexec python3 "{WT}" doctor --errors-only\n'
+        body = f'#!/bin/sh\n{PRECOMMIT_MARK}\nexec python3 "{WT}" doctor --errors-only --tracked\n'
         if target.exists() and PRECOMMIT_MARK not in target.read_text():
             print(f"skip     {target} (a different pre-commit hook exists)")
             return
@@ -864,12 +985,40 @@ class Installer:
             self.do(f"hook     {target} (wt doctor --errors-only)", write)
 
 
+PREPUSH_MARK = "# generated by _Agents/wt install (pre-push)"
+
+
+def prepush_hook(self):
+    """Refuse a push to main from this machine. PRs merge on GitHub, which this hook does not see."""
+    hooks_dir = Path(git("rev-parse", "--git-path", "hooks").stdout.strip() or ".git/hooks")
+    hooks_dir = hooks_dir if hooks_dir.is_absolute() else ROOT / hooks_dir
+    target = hooks_dir / "pre-push"
+    body = (f"#!/bin/sh\n{PREPUSH_MARK}\n"
+            "while read local_ref local_sha remote_ref remote_sha; do\n"
+            "  if [ \"$remote_ref\" = refs/heads/main ]; then\n"
+            "    echo 'wt: never push to main. Push a branch and open a PR (AGENTS.md hard rule 5).' >&2\n"
+            "    exit 1\n  fi\ndone\nexit 0\n")
+    if target.exists() and PREPUSH_MARK not in target.read_text():
+        print(f"skip     {target} (a different pre-push hook exists)")
+        return
+    if not target.exists() or target.read_text() != body:
+        def write():
+            hooks_dir.mkdir(parents=True, exist_ok=True)
+            target.write_text(body)
+            target.chmod(0o755)
+        self.do(f"hook     {target} (refuse pushes to main)", write)
+
+
+Installer.prepush = prepush_hook
+
+
 def cmd_install(args):
     i = Installer(dry="--dry-run" in args, copy="--copy" in args, force="--force" in args)
     i.instructions()
     i.skills()
     i.hook()
     i.precommit()
+    i.prepush()
     print("done")
     return 0
 

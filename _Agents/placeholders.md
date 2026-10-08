@@ -58,7 +58,7 @@ change** — the registry is the tag authority, and `wt doctor` checks notes aga
 
 | File | Count |
 |---|---|
-| `_Agents/skills/watchtower/SKILL.md` | 11 |
+| `_Agents/skills/watchtower/SKILL.md` | 13 |
 | `_Agents/skills/watchtower/reference.md` | 11 |
 | `_Agents/tags.md` | 8 |
 | `Spaces/Work/memory/connectors/` | 6 |
@@ -99,12 +99,7 @@ them:
 | `Spaces/Work/memory/warehouse/` | Example platform memory. Rename it per system you actually use and shape the rest like it. |
 | `Spaces/Work/memory/credentials/` · `connectors/` · `projects/` | Example rows only. **Locations only, never values.** |
 | `_Agents/archive/Skill Exports.md` | One example destination row (`your-org/skills-marketplace`), kept as history. |
-
-## Known gap
-
-The `shared-vault` skill points at `_Agents/memory/git-and-tickets.md`, which this template does not
-ship. Either create that memory file for your git host and tracker, or change the pointer to
-`_Agents/memory/machines/index.md`.
+| `_Agents/wt.json` → `spaces` → `Spaces/Work/` | Example search scope. Set `dirs` to the folders where you do this work (`~/Work/` is an example). Set `words` to the jargon of your work (`staging`, `marts` come from the example warehouse). Update the matching cases in `_Agents/search-fixtures.json`. |
 
 ## Machine paths never belong in a skill
 

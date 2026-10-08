@@ -46,12 +46,13 @@ How the user wants agents to work — evidence, decide vs ask, reporting, testin
 
 - **The PR diff is the preview.** Write on a branch, commit, and open a PR to this repo. The user
   reviews and merges it. You do not need a chat preview first. Show the diff in chat only when the user
-  asks.
+  asks. One exception: `vault-sync` merges its own PR only when every changed file is in a memory
+  folder or a work log and CI is green. A local pre-push hook refuses any push to `main`.
 - Load `watchtower` before a vault write, and `vault-edit` before a move, rename, merge, or delete.
 - Moves use `git mv`, then `_Agents/wt doctor --fix`. Merge only with 0 errors from `wt doctor`.
 - Write a durable fact to memory when you learn it. `_Agents/memory/README.md` says where.
-- Tags must be in `_Agents/tags.md`. Employer material carries the employer tag (`ACME` in this
-  template).
+- Tags must be in `_Agents/tags.md`. Use `topic/*` tags to connect notes across folders and spaces.
+  The folder says which space a note is in, so a scope tag (`ACME`, `work`, `personal`) is optional.
 
 ## Spaces
 

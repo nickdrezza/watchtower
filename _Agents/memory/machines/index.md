@@ -32,7 +32,7 @@ Add a profile per target you actually use. **Read the profile; don't assume the 
 ## 2. True on every target
 
 - **Never push straight to `main`.** Branch → commit → PR, on every repo.
-- **Locations, never values.** Where a credential lives goes in `credentials.md`; the value goes nowhere.
+- **Locations, never values.** Where a credential lives goes in `Spaces/Work/memory/credentials/`; the value goes nowhere.
 - **Use the harness's session scratchpad**, not `/tmp`, for working files that aren't deliverables.
 - **Python is per-repo.** Activate the repo's own venv; never assume a package is present.
 - **Verify before asserting.** Environment facts here are stable; anything about code or data drifts.

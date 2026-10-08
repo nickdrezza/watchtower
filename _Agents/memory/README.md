@@ -30,7 +30,7 @@ one-line description, so open the index, then only the files you need.
 | [`Spaces/Work/memory/projects/`](../../Spaces/Work/memory/projects/index.md) | Active work, one compact block each. |
 
 **Add one file per platform you use**, in the `memory/` folder of the space that uses it — the CRM, the tracker, the orchestration tool, the cloud account.
-`warehouse.md` is the template for what a good one looks like: how to connect, what the limits are, and
+`Spaces/Work/memory/warehouse/` is the template for what a good one looks like: how to connect, what the limits are, and
 the gotchas that have cost hours.
 
 ## When to write memory
@@ -84,7 +84,7 @@ Anything only meaningful **while you're at this employer** carries a short emplo
 frontmatter `tags:` — this template uses `ACME`; rename it to yours. One query can then archive the
 non-reusable material if you change jobs, and the rest of the vault survives.
 
-**Tagged:** the platform files, `credentials.md`, `connectors.md`, `projects.md` (all in `Spaces/Work/memory/`).
+**Tagged:** the platform folders, `credentials/`, `connectors/`, `projects/` (all in `Spaces/Work/memory/`).
 **Untagged (portable):** this README, `machines/` (the environment page and the profiles), `working-preferences/`.
 
 ## Rules

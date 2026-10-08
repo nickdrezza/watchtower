@@ -91,8 +91,10 @@ compressing into jargon is the second.
 **`_Agents/tags.md` is the authority** — every allowed tag with when to apply it. Read it before
 tagging; **update it in the same commit as any tag change.** A tag not in the registry shouldn't exist.
 
-Tags carry graph scope, employer scope, and subject matter. `personal` and `work` are deliberate
-graph-filter flags; the full policy is in `_Agents/tags.md`.
+**Topic tags (`topic/*`) are the graph:** they connect notes across folders and spaces, and `wt search`
+uses each registered topic as a search word. **Scope tags (`personal`, `work`, `ACME`) are optional on
+new notes:** the folder already says which space a note is in. Keep them on existing notes (Obsidian
+graph filters use them); `wt doctor` still flags an `ACME` tag under Personal or Career.
 
 | Namespace | Meaning |
 |---|---|

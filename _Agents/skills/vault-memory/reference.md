@@ -63,7 +63,7 @@ Code-style sqlite with undocumented, brittle schemas. If the user wants one, tre
 
 ## 3. The tracker
 
-Whatever issue tracker `connectors.md` names as authoritative, via its MCP.
+Whatever issue tracker `connectors/` names as authoritative, via its MCP.
 
 ```
 assignee = currentUser() AND updated >= "YYYY-MM-DD" ORDER BY updated DESC
@@ -97,9 +97,9 @@ gh search prs --author @me --state open --json repository,title,url
 gh api "repos/<owner>/<repo>/commits?author=<login>&since=YYYY-MM-DDT00:00:00Z" --jq '.[].commit.message'
 ```
 
-Merged PRs are the strongest evidence of what shipped. Map each to its project block in `projects.md`.
+Merged PRs are the strongest evidence of what shipped. Map each to its project block in `projects/`.
 A PR that changed a **gotcha** — a rebase that fixed CI, a grain fix — belongs in the relevant topic
-file too, not just `projects.md`.
+file too, not just `projects/`.
 
 **Fallback:** `git log` in the local repos the machine profile lists.
 
@@ -123,13 +123,13 @@ create one, tell the user which older ids to trash.
 |---|---|
 | This machine, shells, paths, venvs, runner scripts | the matching `machines/` profile |
 | What's true on every target, and how to tell them apart | `machines/index.md` |
-| Where a credential lives, or a rotation obligation | `credentials.md` |
-| Which connector owns a question, and where each one lies | `connectors.md` |
-| Warehouse connection, roles, object topology, modelling gotchas | `warehouse.md` |
-| A standing instruction from the user | `working-preferences.md` |
-| Project status, tickets, what's next | `projects.md` |
+| Where a credential lives, or a rotation obligation | `credentials/` |
+| Which connector owns a question, and where each one lies | `connectors/` |
+| Warehouse connection, roles, object topology, modelling gotchas | `warehouse/` |
+| A standing instruction from the user | `working-preferences/` |
+| Project status, tickets, what's next | `projects/` |
 
-Add a topic file per platform you actually work in — one per system, named for it. A fact that fits two
+Add a topic folder per platform you actually work in — one per system, named for it. A fact that fits two
 files goes in the more specific one, with a one-line pointer from the other. **Never duplicate the
 body.**
 

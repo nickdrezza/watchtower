@@ -1,9 +1,9 @@
 ---
 name: vault-sync
 description: >
-  Syncs the vault to GitHub: pulls main, runs weekly-work-log and vault-memory, then commits on a
-  branch, opens a PR, and merges it. Use for "sync my vault", "push my vault", "back up the vault", or
-  "commit my vault".
+  Pulls main, runs weekly-work-log and vault-memory, commits on a branch, and opens a PR. Merges it
+  only when it changes just memory and work logs and CI is green. Use for "sync my vault", "push my
+  vault", "back up the vault", or "commit my vault".
 user-invocable: true
 argument-hint: "sync my vault"
 ---
@@ -13,7 +13,7 @@ argument-hint: "sync my vault"
 Get the vault current and onto `main` through a PR. This skill **orchestrates**; it doesn't author.
 Writing rules and the `#ACME` convention come from `watchtower`.
 
-Default flow: **pull → weekly-work-log → vault-memory → commit → PR → merge → summarize.**
+Default flow: **pull → weekly-work-log → vault-memory → commit → PR → merge (routine sync only) → summarize.**
 
 Skip steps 2–3 for a plumbing-only sync ("just push what I've got"). If that's ambiguous and there are
 already uncommitted edits, ask which they want.
@@ -59,8 +59,9 @@ content. If the tree is dirty, leave `main` alone — step 5 branches off `origi
 
 ## 2. Weekly work log
 
-Hand off to **`weekly-work-log`**. It gathers the week's real activity, asks about anything uncertain,
-and writes the log in the house format.
+Hand off to **`weekly-work-log`** (in `Spaces/Work/skills/`) if that skill is installed. It gathers
+the week's real activity, asks about anything uncertain, and writes the log in the house format. If it
+is not installed (for example after the Work space is archived), skip this step.
 
 If this week's log already exists and is complete, say so and move on — don't rewrite it.
 
@@ -111,11 +112,17 @@ versions and ask, then `git rebase --continue`.
 ```bash
 git push -u origin content/<slug>
 gh pr create --base main --title "<title>" --body-file <bodyfile>
-gh pr merge <branch> --merge --delete-branch
 ```
 
-Solo repo — self-merging is expected. **Always go through a PR**; never push straight to `main`.
-`--delete-branch` cleans local + remote and returns you to `main`.
+**Merge only a routine sync.** Merge it yourself only when both are true:
+
+1. Every changed file is in a memory folder (`_Agents/memory/`, `Spaces/*/memory/`) or a work log
+   (`Spaces/*/Work Logs/`): `git diff --name-only origin/main...HEAD`.
+2. CI on the PR is green: `gh pr checks <branch> --watch`.
+
+Then `gh pr merge <branch> --merge --delete-branch`. Any other change (notes, skills, rules, `wt`,
+moves) stays open for the user to review and merge. Say so in the report. Never push straight to
+`main`; the pre-push hook refuses it.
 
 ## 8. Verify and report
 
@@ -123,13 +130,13 @@ Solo repo — self-merging is expected. **Always go through a PR**; never push s
 git fetch --prune
 ```
 
-Confirm the PR is `MERGED`, the tree is back on a clean `main`, the change is on `main`, and no stray
-branch remains (`git branch -a`).
+If step 7 merged the PR, confirm the PR is `MERGED`, the tree is back on a clean `main`, the change is
+on `main`, and no stray branch remains (`git branch -a`). If the PR stays open, confirm it is open.
 
 Then report — **concise, no step-by-step narration**:
 
 ```
-Synced. PR #<n> merged.
+Synced. PR #<n> merged (or: open for review).
 
 Work log   week of <Mon D–Fri D> — <n> projects
 Memory     <n> added, <n> updated, <n> pruned — <files touched>

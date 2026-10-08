@@ -42,7 +42,7 @@ Where each credential lives is recorded in [`Spaces/Work/memory/credentials/`](.
 
 1. **Decide where it belongs** — the secret manager for anything shared or rotated; `~/.ssh` for keys;
    an untracked local env file only for machine-scoped throwaways.
-2. **Record the location** in `credentials.md`: what it authenticates, where it lives, and any rotation
+2. **Record the location** in `Spaces/Work/memory/credentials/`: what it authenticates, where it lives, and any rotation
    obligation. **Never the value.**
 3. **Never commit it.** `.gitignore` covers the usual extensions, but the check is extension-based and
    misses an inline paste — you are the backstop. Secret-scan the diff before committing.
@@ -52,7 +52,7 @@ Where each credential lives is recorded in [`Spaces/Work/memory/credentials/`](.
 1. Create the new credential; capture it straight into its destination.
 2. Update every consumer — grep for the env-var name, not the value.
 3. Verify with a real call, then revoke the old one.
-4. Update the rotation date in `credentials.md`.
+4. Update the rotation date in `Spaces/Work/memory/credentials/`.
 
 **If a secret was ever pushed, it is compromised.** Rotate it; don't just remove it from the tree. Say
 so plainly rather than quietly deleting the line.

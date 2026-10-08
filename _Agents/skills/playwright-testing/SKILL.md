@@ -85,7 +85,7 @@ Report what journeys passed and any browser, codec, authentication, or platform 
 ## the vendor platform applications
 
 Vendor-hosted data apps build on this workflow but cannot use an ordinary standalone localhost page.
-Before testing one, read `_Agents/memory/vendor-platform.md` and the app host’s `tests/README.md`.
+Before testing one, read the memory folder for that platform in `Spaces/Work/memory/` and the app host’s `tests/README.md`.
 
 The vendor-platform layer adds:
 
