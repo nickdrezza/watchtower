@@ -24,7 +24,7 @@ a link to that doc ("point, don't copy").
 | This repo's rules (secrets, wording, `#ACME`, how to write) | `watchtower` skill — **load first, always** |
 | Which knowledge base a thing belongs to at all | `watchtower` skill → *Which knowledge base* |
 | shared-vault **format, folders, template, changelog, commit mechanics** | The **live shared-vault repo** — `README.md`, `CLAUDE.md`, `_template.md`, the folder `README.md`, `systems/registry.yml`. Re-read them every time; the `shared-vault-read` skill has the per-type recipe. |
-| Where the repo is, which identity pushes | `_Agents/memory/git-and-tickets.md` and `_Agents/memory/machines/index.md` |
+| Where the repo is, which identity pushes | `_Agents/memory/machines/index.md` and the profile for this machine in `_Agents/memory/machines/` |
 | Deciding *what* to promote, and asking before you do | This skill |
 
 **Never rely on your memory of the wiki's layout.** Conventions drift, folders get added. Pull the
@@ -54,8 +54,8 @@ the repo instead of filing it in the wiki anyway.
 
 ## Access and shipping
 
-The wiki is a normal clone on this machine — path, identity, and the PR flow are in
-`_Agents/memory/git-and-tickets.md`. Two standing rules:
+The wiki is a normal clone on this machine — path, identity, and the PR flow are in the profile for
+this machine in `_Agents/memory/machines/`. Two standing rules:
 
 - **Branch → commit → push → `gh pr create`. Never commit to `main`**, not even a one-line changelog
   fix. The team works PR-per-change and the merge notification depends on it.
@@ -98,7 +98,7 @@ candidates worth reading, not to pre-filter aggressively or to dump the whole va
 
 1. **Gather evidence; don't write from recall.** The vault note, the merged PRs, the ticket, the code,
    this session's own transcript. Every mechanism you state must trace to one of those or to
-   your own words — see `working-preferences.md` on verify-never-fabricate.
+   your own words — see `_Agents/memory/working-preferences/` → *Evidence and verification*.
 2. **Run the understanding check before drafting** (below). This is where the skill earns its keep:
    restating the mechanism wrongly in a team-visible wiki is worse than not documenting it.
 3. **Classify by document type** — rule vs task vs system vs break-glass vs lookup vs decision vs
@@ -153,6 +153,6 @@ should just be *updated* instead.
 
 - `watchtower` — this repo's rules. First, always.
 - `shared-vault-read` — the team-managed skill: reading the wiki, and the per-type authoring recipe.
-  Its token pre-flight is wrong for this machine; `_Agents/memory/git-and-tickets.md` has the working
-  access path.
+  Its token pre-flight is wrong for this machine; the machine profile in `_Agents/memory/machines/` has
+  the working access path.
 - `weekly-work-log` — the same verify-and-ask discipline applied to the personal log.

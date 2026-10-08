@@ -106,11 +106,10 @@ facts or secret values; unresolved facts stay open questions.
 - **Locations, never values** — the hard rule. Recording that a token lives in
   `events-api/env/.env` as `HS_PROSPECT_SYNC_TOKEN` is the goal; the token itself never lands here.
 - **Tag `#ACME`** on employer-specific files and sections, per `watchtower`. Portable files
-  (`machines/index.md`, `credentials.md`'s non-Acme rows, `git-and-tickets.md`'s tooling half,
-  `working-preferences.md`) stay untagged.
+  (`machines/index.md`, `credentials/`'s non-Acme rows, `working-preferences/`) stay untagged.
 - **Prune while you're in there.** Delete facts now proven wrong, collapse duplicates, drop
   project blocks that closed. Growth without pruning is how this becomes unreadable.
-- Keep `projects.md` compact — a pointer plus what's needed to resume. Deep narrative belongs in
+- Keep `projects/` compact — a pointer plus what's needed to resume. Deep narrative belongs in
   `Spaces/Work/Projects/`.
 - Update `_Agents/memory/README.md` if you added or removed a file in `_Agents/memory/` or a space `memory/` folder.
 

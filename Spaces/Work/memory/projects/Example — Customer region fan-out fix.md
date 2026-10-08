@@ -15,7 +15,7 @@ tags:
 - **Problem:** `DIM_CUSTOMER` is one row per customer *per region*; three downstream marts join it
   without the region key and inflate their counts.
 - **Decision:** fix the grain at the dimension, not with `DISTINCT` downstream — a structural fix, not
-  a patch. See [`warehouse.md`](../warehouse/index.md).
+  a patch. See [`warehouse/`](../warehouse/index.md).
 - **Next:** the third mart still needs the join corrected; the first two are merged.
 - **Open question:** whether the legacy export keys on the old hash or the resolved id. Unresolved —
   do not assume either.

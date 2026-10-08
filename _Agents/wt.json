@@ -22,6 +22,15 @@
   },
   "tag_registry": "_Agents/tags.md",
   "spaces": {
+    "Spaces/Work/": {
+      "dirs": [
+        "~/Work/"
+      ],
+      "words": [
+        "staging",
+        "marts"
+      ]
+    },
     "Spaces/Personal/": {
       "only_when": [
         "diary",

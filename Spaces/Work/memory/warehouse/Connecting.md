@@ -17,4 +17,4 @@ tags:
 | Write role | `LOADER_RW` — deliberate, not the default |
 | Warehouse | `WH_ANALYST_XS` for queries, `WH_LOAD_M` for loads |
 | Production database | `ANALYTICS` |
-| Auth | Key pair. Location in [`credentials.md`](../credentials/index.md) — never the key itself |
+| Auth | Key pair. Location in [`credentials/`](../credentials/index.md) — never the key itself |

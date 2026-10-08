@@ -9,6 +9,6 @@ updated: 2026-10-06
 
 Spend input tokens deliberately. Start from the prompt, search for precise terms, and open only the
 matching skill, memory file, note, or prior-session evidence. `machines/index.md` plus one machine profile
-is required only for machine-dependent actions; `credentials.md` is required only for authentication,
+is required only for machine-dependent actions; `credentials/` is required only for authentication,
 secret-location, profile, or connection work. Retrieval should expand when evidence points outward,
 not because a file is adjacent or linked.

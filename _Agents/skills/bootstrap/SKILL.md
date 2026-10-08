@@ -49,9 +49,9 @@ Then add it to the profile table in `_Agents/memory/machines/index.md`.
 
 ## 3. Seed the maps
 
-- **`credentials.md`** — every credential, what it authenticates, **where it lives**. Never a value.
-- **`connectors.md`** — which live system is authoritative for what, and each one's limit.
-- **One file per platform they named.** `warehouse.md` is the worked example: how to connect, the
+- **`Spaces/Work/memory/credentials/`** — every credential, what it authenticates, **where it lives**. Never a value.
+- **`Spaces/Work/memory/connectors/`** — which live system is authoritative for what, and each one's limit.
+- **One folder per platform they named.** `Spaces/Work/memory/warehouse/` is the worked example: how to connect, the
   limits, and the gotchas. Copy its shape; delete it once they have their own.
 
 Don't invent facts to fill these. An empty row is honest; a guessed account id is the failure this repo
@@ -62,7 +62,7 @@ cares most about.
 - **`_Agents/memory/working-preferences/`** — replace the examples with how *they* want agents to work. This file
   earns its keep by recording corrections so they only get made once.
 - **`_Agents/tags.md`** — rename the example `topic/*` tags to their subjects. Register before use.
-- **Delete the example content** — `warehouse.md`, the example project block, the sample notes. Say what
+- **Delete the example content** — `warehouse/`, the example project block, the sample notes. Say what
   you deleted.
 - **`README.md`, `LICENSE`** — their name, their description.
 - **Placeholders** — replace each stand-in value listed in `_Agents/placeholders.md`, then delete that
