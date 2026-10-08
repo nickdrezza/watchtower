@@ -398,7 +398,10 @@ def search_test():
         return 2
     failed = 0
     for c in cases:
-        terms, exclude = search_plan(c["prompt"], c.get("cwd", ""))
+        cwd = c.get("cwd", "")
+        if cwd == "." or cwd.startswith("./"):  # "." is the vault itself, wherever it is checked out
+            cwd = str(ROOT / cwd)
+        terms, exclude = search_plan(c["prompt"], cwd)
         got = [f for f, _ in search(terms, exclude=exclude)[0]] if terms else []
         want = c.get("expect", [])
         # A want ending in / is a folder: any hit inside it counts.
