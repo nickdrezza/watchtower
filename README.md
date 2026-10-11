@@ -145,7 +145,7 @@ The full index, which `wt doctor` checks, is [`_Agents/README.md`](_Agents/READM
 vault are yours. Team skills live only in the team's skills repo and are never copied in. A team wiki is
 a separate repo; the `shared-vault` skill moves material there as a rewrite, never a paste.
 
-MIT licensed. Built on the open [`AGENTS.md`](https://agents.md) and
+Built on the open [`AGENTS.md`](https://agents.md) and
 [`SKILL.md`](https://agentskills.io/specification) standards, so nothing here is locked to one vendor.
 
 ## Moving to Isomorphic
@@ -159,3 +159,15 @@ reports 0 broken links (checked against Isomorphic `a99ae2c`).
   are already in place. `_Agents/` becomes shared through cross-brain search.
 - `.isomorphic.json` sets which folders are content, source, and system. `wt doctor` reports the links
   Isomorphic cannot follow (`ambiguous-link`, `link-to-non-page`); `--fix` repairs them.
+
+## License
+
+This project is licensed under [GNU AGPLv3 only](LICENSE) (`AGPL-3.0-only`).
+See [NOTICE](NOTICE) for copyright information.
+
+You can use, change, and sell copies under the license terms.
+If you distribute covered code, provide its source under the same license.
+If you change the project and let users access it over a network,
+offer those users the source of your version.
+
+Earlier releases keep the license terms that applied to them.
