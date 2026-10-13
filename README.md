@@ -1,7 +1,7 @@
 ---
 type: documentation
 title: Watchtower
-description: "The guide for a new user: what this vault template is, how to set it up, and how to use it each day."
+description: A Markdown vault template for notes, skills, and agent memory.
 updated: 2026-10-13
 ---
 
