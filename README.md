@@ -1,20 +1,88 @@
 ---
 type: documentation
 title: Watchtower
-description: "The guide for a new user: what this vault template is, how to set it up, and how to use it each day."
-updated: 2026-10-06
+description: A Markdown vault template for notes, skills, and agent memory.
+updated: 2026-10-13
 ---
 
 # Watchtower
 
-> **A shared brain for your AI agents.** One plain-Markdown vault that every agent reads as memory, so
-> your chats become disposable and nothing gets explained twice.
+**New chat. Same memory.**
 
-This is a **template** for a private, text-first Obsidian vault: your notes for work, personal life,
-and career, and the memory for each AI agent that works with you. Claude Code, Codex, Cursor, Gemini
-CLI, Copilot, and Antigravity read the same skills and memory, so they operate the same way. There is
-no manager agent: a chat can stop at any time, because the durable facts are in the vault. Agents read
-[`AGENTS.md`](AGENTS.md); this page is for people. **Keep your copy private.**
+One Markdown vault for your notes, skills, and agent memory.
+Claude Code, Codex, Cursor, Gemini CLI, Copilot, and Antigravity can read the same files.
+Save the context once, then let the next chat find it.
+
+[**Use the template →**](https://github.com/nickdrezza/watchtower/generate)
+· [Set up](#set-up)
+· [Agent rules](AGENTS.md)
+
+```mermaid
+flowchart LR
+    N["Your notes"] --> V["One Markdown vault"]
+    V --> A["Your AI agents"]
+    A --> V
+    style V fill:#fff1dd,stroke:#b87930,color:#332a1d
+```
+
+Your notes stay in plain text and version control. A skill tells an agent how to do a task.
+Memory tells it what is true about your work and tools. Obsidian is optional.
+
+This public repo is a template. **Keep your own vault private.**
+Agents start with [AGENTS.md](AGENTS.md); this guide is for people.
+
+## Set up
+
+1. Make your own private repo from the template, then clone it. Any path is correct; record it in the
+   machine profile (step 5).
+   ```bash
+   gh repo create my-vault --template nickdrezza/watchtower --private --clone
+   ```
+2. **Fast path:** open the repo in any agent and say "set me up". The
+   [`bootstrap`](_Agents/skills/bootstrap/SKILL.md) skill does steps 3–7 with you, removes the example
+   content, and teaches the operating model.
+
+<details>
+<summary>Manual setup and platform notes</summary>
+
+3. Run `_Agents/wt install --dry-run` to see the changes, then `_Agents/wt install` (safe to run
+   again). It writes the stub `_Agents/global-instructions.md` into each harness's global instruction
+   file (`~/.claude/CLAUDE.md`, `~/.codex/AGENTS.md`, `~/.gemini/GEMINI.md`, `~/.cursor/AGENTS.md`;
+   a hand-written file is kept unless you add `--force`), links each skill into `~/.agents/skills/`
+   and `~/.claude/skills/`, adds the Claude Code search hook (`wt search --hook` on each prompt), and
+   adds a git pre-commit hook that runs `wt doctor --errors-only`.
+4. Test it. Open a new chat in a folder that is not this repo, and ask: "What are the hard rules of my
+   vault, and where is my agent memory?" If the agent does not know, the install did not reach that
+   harness. Make sure that its config folder exists, then run `wt install` again.
+5. Copy the nearest profile in `_Agents/memory/machines/`: paths, shell, CLIs installed and not
+   installed, `gh` identity, git author email. Add it to `_Agents/memory/machines/index.md`.
+6. Record where each credential is in `Spaces/Work/memory/credentials/`, never the value.
+7. Connect your MCP connectors; record which one owns which data in `Spaces/Work/memory/connectors/`.
+8. Replace the placeholders: your handle and vault name, then the employer tag `ACME`. The list and the
+   grep checks are in [`_Agents/placeholders.md`](_Agents/placeholders.md). Add your account names to
+   `users` in `_Agents/wt.json`.
+9. Optional: open the repo as an Obsidian vault. Nothing needs Obsidian.
+
+Where each harness reads skills and instructions:
+
+| Harness | Skills | Instructions |
+|---|---|---|
+| Claude Code | `~/.claude/skills/`, `.claude/skills/` | `CLAUDE.md` (stub); it also reads `AGENTS.md` |
+| Codex, Cursor, Copilot | `~/.agents/skills/`, `.agents/skills/` | `AGENTS.md`; Copilot also reads `.github/copilot-instructions.md` (stub) |
+| Gemini CLI, Antigravity | `~/.agents/skills/`, `.agents/skills/` | `AGENTS.md` and `GEMINI.md` (stub; `GEMINI.md` wins on a conflict) |
+| Old Cursor, Windsurf | — | `.cursor/rules/`, `.windsurf/rules/`; new versions read `AGENTS.md` |
+
+`.agents` is a committed symlink to `_Agents/` (Obsidian hides dot-folders). If a harness does not
+find a skill, tell the agent to read `_Agents/skills/<name>/SKILL.md`. It is plain Markdown.
+
+**Windows and WSL:** a WSL symlink does not resolve for a Windows app (Cursor.exe, Antigravity.exe).
+For those, use `_Agents/wt install --copy`, and run it again after each skill change. For
+tool-specific variants of skills, rules, or MCP configs from one source, look at `rulesync`.
+
+</details>
+
+<details>
+<summary>Vault layout and spaces</summary>
 
 ## Layout
 
@@ -52,49 +120,7 @@ does the job of memory.
 
 Work material stays in `Spaces/Work/`. Material with no clear home goes to `Inbox/Processed/`.
 
-## Set up
-
-1. Make your own private repo from the template, then clone it. Any path is correct; record it in the
-   machine profile (step 5).
-   ```bash
-   gh repo create my-vault --template <you>/watchtower --private --clone
-   ```
-2. **Fast path:** open the repo in any agent and say "set me up". The
-   [`bootstrap`](_Agents/skills/bootstrap/SKILL.md) skill does steps 3–7 with you, removes the example
-   content, and teaches the operating model.
-3. Run `_Agents/wt install --dry-run` to see the changes, then `_Agents/wt install` (safe to run
-   again). It writes the stub `_Agents/global-instructions.md` into each harness's global instruction
-   file (`~/.claude/CLAUDE.md`, `~/.codex/AGENTS.md`, `~/.gemini/GEMINI.md`, `~/.cursor/AGENTS.md`;
-   a hand-written file is kept unless you add `--force`), links each skill into `~/.agents/skills/`
-   and `~/.claude/skills/`, adds the Claude Code search hook (`wt search --hook` on each prompt), and
-   adds a git pre-commit hook that runs `wt doctor --errors-only`.
-4. Test it. Open a new chat in a folder that is not this repo, and ask: "What are the hard rules of my
-   vault, and where is my agent memory?" If the agent does not know, the install did not reach that
-   harness. Make sure that its config folder exists, then run `wt install` again.
-5. Copy the nearest profile in `_Agents/memory/machines/`: paths, shell, CLIs installed and not
-   installed, `gh` identity, git author email. Add it to `_Agents/memory/machines/index.md`.
-6. Record where each credential is in `Spaces/Work/memory/credentials/`, never the value.
-7. Connect your MCP connectors; record which one owns which data in `Spaces/Work/memory/connectors/`.
-8. Replace the placeholders: your handle and vault name, then the employer tag `ACME`. The list and the
-   grep checks are in [`_Agents/placeholders.md`](_Agents/placeholders.md). Add your account names to
-   `users` in `_Agents/wt.json`.
-9. Optional: open the repo as an Obsidian vault. Nothing needs Obsidian.
-
-Where each harness reads skills and instructions:
-
-| Harness | Skills | Instructions |
-|---|---|---|
-| Claude Code | `~/.claude/skills/`, `.claude/skills/` | `CLAUDE.md` (stub); it also reads `AGENTS.md` |
-| Codex, Cursor, Copilot | `~/.agents/skills/`, `.agents/skills/` | `AGENTS.md`; Copilot also reads `.github/copilot-instructions.md` (stub) |
-| Gemini CLI, Antigravity | `~/.agents/skills/`, `.agents/skills/` | `AGENTS.md` and `GEMINI.md` (stub; `GEMINI.md` wins on a conflict) |
-| Old Cursor, Windsurf | — | `.cursor/rules/`, `.windsurf/rules/`; new versions read `AGENTS.md` |
-
-`.agents` is a committed symlink to `_Agents/` (Obsidian hides dot-folders). If a harness does not
-find a skill, tell the agent to read `_Agents/skills/<name>/SKILL.md`. It is plain Markdown.
-
-**Windows and WSL:** a WSL symlink does not resolve for a Windows app (Cursor.exe, Antigravity.exe).
-For those, use `_Agents/wt install --copy`, and run it again after each skill change. For
-tool-specific variants of skills, rules, or MCP configs from one source, look at `rulesync`.
+</details>
 
 ## Daily use
 
